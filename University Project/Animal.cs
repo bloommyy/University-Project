@@ -30,7 +30,6 @@ namespace University_Project
 
     public abstract class Animal
     {
-        public string test;
         public string Name { get; set; }
         public int Age { get; set; }
         public double Weight { get; set; }
