@@ -1,0 +1,9 @@
+C:\Users\User\source\repos\University Project\University Project\bin\Debug\University Project.exe.config
+C:\Users\User\source\repos\University Project\University Project\bin\Debug\University Project.exe
+C:\Users\User\source\repos\University Project\University Project\bin\Debug\University Project.pdb
+C:\Users\User\source\repos\University Project\University Project\obj\Debug\University Project.csprojAssemblyReference.cache
+C:\Users\User\source\repos\University Project\University Project\obj\Debug\University_Project.Properties.Resources.resources
+C:\Users\User\source\repos\University Project\University Project\obj\Debug\University Project.csproj.GenerateResource.cache
+C:\Users\User\source\repos\University Project\University Project\obj\Debug\University Project.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\University Project\University Project\obj\Debug\University Project.exe
+C:\Users\User\source\repos\University Project\University Project\obj\Debug\University Project.pdb
