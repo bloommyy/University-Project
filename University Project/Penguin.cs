@@ -7,19 +7,29 @@ using System.Threading.Tasks;
 
 namespace University_Project
 {
+    /// <summary>
+    /// Class Penguin that inherits class Animal.
+    /// </summary>
     class Penguin : Animal
     {
         private readonly int swimmingSpeed = 2;
         private bool isSwimming;
 
+        /// <summary>
+        /// Checks if the object is swimming.
+        /// </summary>
+        /// <returns>Result according to the animalImage's location.</returns>
         private bool CheckIfSwimming()
         {
-            if (base.animalImage.Location.Y >= 150) // Checks if in water
+            if (base.animalImage.Location.Y >= 150) // Checks if in water (hard coded when forms are added)
                 return true;
             else
                 return false;
         }
 
+        /// <summary>
+        /// Method that changes the animalImage's location according to the swimming or walking speed.
+        /// </summary>
         public override void Move()
         {
             isSwimming = CheckIfSwimming();
@@ -27,19 +37,25 @@ namespace University_Project
                 base.Move();
             else
             {
-                Directions mask =base.GenerateMask(base.animalImage.Location);
-                Directions dir = base.GenerateValidDirection(mask);
-                if ((dir & Directions.North) == Directions.North)
+                Direction mask =base.GenerateMask(base.animalImage.Location);
+                Direction dir = base.GenerateValidDirection(mask);
+                if ((dir & Direction.North) == Direction.North)
                     animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - swimmingSpeed);
-                if ((dir & Directions.East) == Directions.East)
+                if ((dir & Direction.East) == Direction.East)
                     animalImage.Location = new Point(animalImage.Location.X + swimmingSpeed, animalImage.Location.Y);
-                if ((dir & Directions.South) == Directions.South)
+                if ((dir & Direction.South) == Direction.South)
                     animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - swimmingSpeed);
-                if ((dir & Directions.West) == Directions.West)
+                if ((dir & Direction.West) == Direction.West)
                     animalImage.Location = new Point(animalImage.Location.X - swimmingSpeed, animalImage.Location.Y);
             }
         }
 
+        /// <summary>
+        /// Constructor for Penguin.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="weight"></param>
         public Penguin(string name, int age, double weight)
         {
             base.Name = name;

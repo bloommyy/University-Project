@@ -7,31 +7,37 @@ using System.Threading.Tasks;
 
 namespace University_Project
 {
+    /// <summary>
+    /// Base class of AnimalImage.
+    /// </summary>
     public abstract class AnimalImage
     {
         public Point Location { get; set; }
         public double Size { get; set; }
 
-        protected virtual void DrawBody()
-        {
-            // Draws body
-        }
+        /// <summary>
+        /// Draws the body of the animal.
+        /// </summary>
+        protected abstract void DrawBody();
 
-        protected virtual void DrawHead()
-        {
-            // Draws head
-        }
+        /// <summary>
+        /// Draws the head of the animal.
+        /// </summary>
+        protected abstract void DrawHead();
 
-        protected virtual void DrawLegs()
-        {
-            // Draws legs
-        }
+        /// <summary>
+        /// Draws the legs of the animal.
+        /// </summary>
+        protected abstract void DrawLegs();
 
-        protected virtual void DrawSpecials()
-        {
-            // Draws special features
-        }
+        /// <summary>
+        /// Draws the special features of the animal.
+        /// </summary>
+        protected abstract void DrawSpecials();
 
+        /// <summary>
+        /// Draws the Animal using Graphics.Draw.
+        /// </summary>
         public void DrawAnimal()
         {
             DrawBody();
