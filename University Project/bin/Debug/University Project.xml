@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>University Project</name>
+    </assembly>
+    <members>
+        <member name="T:University_Project.Animal">
+            <summary>
+            This is the base class of Animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.Animal.Eat(University_Project.FodderState)">
+            <summary>
+            Method Eat that lowers the given FodderState by one, if Empty - it does nothing.
+            </summary>
+            <param name="fodder"></param>
+            <returns>FodderState</returns>
+        </member>
+        <member name="M:University_Project.Animal.GenerateMask(System.Drawing.Point)">
+            <summary>
+            Returns a mask with the available directions according to the given Point by using bitwise OR and AND.
+            </summary>
+            <param name="location"></param>
+            <returns>Direction</returns>
+        </member>
+        <member name="M:University_Project.Animal.GenerateValidDirection(University_Project.Direction)">
+            <summary>
+            Returns a random Direction that is validated by the given mask.
+            </summary>
+            <param name="mask"></param>
+            <returns>Direction</returns>
+        </member>
+        <member name="M:University_Project.Animal.Move">
+            <summary>
+            Moves animalImage using its location.
+            </summary>
+        </member>
+        <member name="T:University_Project.AnimalCage">
+            <summary>
+            Class AnimalCage, holding a list of objects from type Animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.AnimalCage.AddAnimal(University_Project.Animal)">
+            <summary>
+            Adds an Animal to the list of animals.
+            </summary>
+            <param name="animal"></param>
+        </member>
+        <member name="M:University_Project.AnimalCage.RemoveAnimal(University_Project.Animal)">
+            <summary>
+            Removes an Animal from the list of animals.
+            </summary>
+            <param name="animal"></param>
+        </member>
+        <member name="T:University_Project.AnimalImage">
+            <summary>
+            Base class of AnimalImage.
+            </summary>
+        </member>
+        <member name="M:University_Project.AnimalImage.DrawBody">
+            <summary>
+            Draws the body of the animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.AnimalImage.DrawHead">
+            <summary>
+            Draws the head of the animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.AnimalImage.DrawLegs">
+            <summary>
+            Draws the legs of the animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.AnimalImage.DrawSpecials">
+            <summary>
+            Draws the special features of the animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.AnimalImage.DrawAnimal">
+            <summary>
+            Draws the Animal using Graphics.Draw.
+            </summary>
+        </member>
+        <member name="T:University_Project.Elephant">
+            <summary>
+            Class Elephant that inherits class Animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.Elephant.Move">
+            <summary>
+            Moves animalImage using its location.
+            </summary>
+        </member>
+        <member name="M:University_Project.Elephant.#ctor(System.String,System.Int32,System.Double)">
+            <summary>
+            Constructor for Elephant.
+            </summary>
+            <param name="name"></param>
+            <param name="age"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="T:University_Project.ElephantImage">
+            <summary>
+            Image for Elephant, inherits AnimalImage.
+            </summary>
+        </member>
+        <member name="M:University_Project.ElephantImage.DrawBody">
+            <summary>
+            Draws the body of Elephant.
+            </summary>
+        </member>
+        <member name="M:University_Project.ElephantImage.DrawHead">
+            <summary>
+            Draws the head of Elephant.
+            </summary>
+        </member>
+        <member name="M:University_Project.ElephantImage.DrawLegs">
+            <summary>
+            Draws the legs of Elephant.
+            </summary>
+        </member>
+        <member name="M:University_Project.ElephantImage.DrawSpecials">
+            <summary>
+            Draws the special features of Elephant.
+            </summary>
+        </member>
+        <member name="F:University_Project.Form1.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:University_Project.Form1.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:University_Project.Form1.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:University_Project.Penguin">
+            <summary>
+            Class Penguin that inherits class Animal.
+            </summary>
+        </member>
+        <member name="M:University_Project.Penguin.CheckIfSwimming">
+            <summary>
+            Checks if the object is swimming.
+            </summary>
+            <returns>Result according to the animalImage's location.</returns>
+        </member>
+        <member name="M:University_Project.Penguin.Move">
+            <summary>
+            Method that changes the animalImage's location according to the swimming or walking speed.
+            </summary>
+        </member>
+        <member name="M:University_Project.Penguin.#ctor(System.String,System.Int32,System.Double)">
+            <summary>
+            Constructor for Penguin.
+            </summary>
+            <param name="name"></param>
+            <param name="age"></param>
+            <param name="weight"></param>
+        </member>
+        <member name="T:University_Project.PenguinImage">
+            <summary>
+            Image for Penguin, inherits AnimalImage.
+            </summary>
+        </member>
+        <member name="M:University_Project.PenguinImage.DrawBody">
+            <summary>
+            Draws the body of Penguin.
+            </summary>
+        </member>
+        <member name="M:University_Project.PenguinImage.DrawHead">
+            <summary>
+            Draws the head of Penguin.
+            </summary>
+        </member>
+        <member name="M:University_Project.PenguinImage.DrawLegs">
+            <summary>
+            Draws the legs of Penguin.
+            </summary>
+        </member>
+        <member name="M:University_Project.PenguinImage.DrawSpecials">
+            <summary>
+            Draws the special features of Penguin.
+            </summary>
+        </member>
+        <member name="M:University_Project.Program.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:University_Project.Zoo">
+            <summary>
+            Gamesave, holding all the data for one zoo.
+            </summary>
+        </member>
+        <member name="M:University_Project.Zoo.AddCage(University_Project.AnimalCage)">
+            <summary>
+            Adds an AnimalCage to the Zoo.
+            </summary>
+            <param name="ac"></param>
+        </member>
+        <member name="M:University_Project.Zoo.RemoveCage(University_Project.AnimalCage)">
+            <summary>
+            Removes an AnimalCage from the Zoo.
+            </summary>
+            <param name="ac"></param>
+        </member>
+        <member name="M:University_Project.Zoo.SaveGame">
+            <summary>
+            Saves the game.
+            </summary>
+        </member>
+        <member name="M:University_Project.Zoo.NextDay">
+            <summary>
+            Ends the day and starts a new one.
+            </summary>
+        </member>
+        <member name="T:University_Project.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:University_Project.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:University_Project.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+    </members>
+</doc>

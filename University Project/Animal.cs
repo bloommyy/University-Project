@@ -39,6 +39,7 @@ namespace University_Project
         protected AnimalComfort comfort;
         protected int walkingSpeed;
         protected AnimalImage animalImage;
+        protected Direction direction;
 
         /// <summary>
         /// Method Eat that lowers the given FodderState by one, if Empty - it does nothing.
@@ -94,10 +95,11 @@ namespace University_Project
         /// <summary>
         /// Returns a random Direction that is validated by the given mask.
         /// </summary>
-        /// <param name="mask"></param>
+        /// <param name="location"></param>
         /// <returns>Direction</returns>
-        protected Direction GenerateValidDirection(Direction mask)
+        protected void GenerateValidDirection(Point location)
         {
+            Direction mask = GenerateMask(location);
             Random rnd = new Random();
             int randomDirection = rnd.Next(18); // Gets random number, 8 base ones + 10 for idling (Increasing % for idling)
             Direction dir = new Direction();
@@ -131,10 +133,10 @@ namespace University_Project
 
             if(dir != 0) // Checking if not idle 
                 if((dir & mask) == 0) // Preventing idling if chosen a way                  
-                    GenerateValidDirection(mask); // (lowering chances of idling if we have generated a Direction but the it's invalid)
+                    GenerateValidDirection(location); // (lowering chances of idling if we have generated a Direction but the it's invalid)
 
             // Returns the validated Direction
-            return dir & mask; 
+            direction = dir & mask; 
         }
 
         /// <summary>
@@ -142,23 +144,14 @@ namespace University_Project
         /// </summary>
         public virtual void Move()
         {
-            Direction mask = GenerateMask(animalImage.Location); // Generates a validator for the Direction
-            Direction dir = GenerateValidDirection(mask); // Generates a valid Direction for the image to move to
             // Using bitwise AND on North only to check if Direction holds North
-            if((dir & Direction.North) == Direction.North)
-                // Moves the image up according to the speed
+            if((direction & Direction.North) == Direction.North)
                 animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - walkingSpeed);
-            // Using bitwise AND on East only to check if Direction holds East
-            if ((dir & Direction.East) == Direction.East)
-                // Moves the image to the  right according to the speed
+            if ((direction & Direction.East) == Direction.East)
                 animalImage.Location = new Point(animalImage.Location.X + walkingSpeed, animalImage.Location.Y);
-            // Using bitwise AND on South only to check if Direction holds South
-            if ((dir & Direction.South) == Direction.South)
-                // Moves the image down according to the speed
+            if ((direction & Direction.South) == Direction.South)
                 animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - walkingSpeed);
-            // Using bitwise AND on West only to check if Direction holds West
-            if ((dir & Direction.West) == Direction.West)
-                // Moves the image to the left according to the speed
+            if ((direction & Direction.West) == Direction.West)
                 animalImage.Location = new Point(animalImage.Location.X - walkingSpeed, animalImage.Location.Y);
         }
     }
