@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace University_Project
 {
+    /// <summary>
+    /// Enum for the comfort of the animal.
+    /// </summary>
     public enum AnimalComfort
     {
         Uncomfortable = 0,
@@ -19,6 +22,9 @@ namespace University_Project
         Comfortable = 4
     }
 
+    /// <summary>
+    /// Enum for the Direction the animal is going in.
+    /// </summary>
     public enum Direction
     {
         North = 1,
@@ -97,7 +103,7 @@ namespace University_Project
         /// </summary>
         /// <param name="location"></param>
         /// <returns>Direction</returns>
-        protected void GenerateValidDirection(Point location)
+        public void ChangeDirection(Point location)
         {
             Direction mask = GenerateMask(location);
             Random rnd = new Random();
@@ -133,7 +139,7 @@ namespace University_Project
 
             if(dir != 0) // Checking if not idle 
                 if((dir & mask) == 0) // Preventing idling if chosen a way                  
-                    GenerateValidDirection(location); // (lowering chances of idling if we have generated a Direction but the it's invalid)
+                    ChangeDirection(location); // (lowering chances of idling if we have generated a Direction but the it's invalid)
 
             // Returns the validated Direction
             direction = dir & mask; 

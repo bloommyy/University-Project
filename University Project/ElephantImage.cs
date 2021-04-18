@@ -42,5 +42,13 @@ namespace University_Project
         {
             // Draws elephant special features - will be added when Forms are added.
         }
+
+        /// <summary>
+        /// Constructor for ElephantImage.
+        /// </summary>
+        public ElephantImage()
+        {
+            base.DrawAnimal();
+        }
     }
 }

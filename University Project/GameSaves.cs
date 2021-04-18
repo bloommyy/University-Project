@@ -10,9 +10,12 @@ namespace University_Project
     {
         private List<Zoo> gameSaves = new List<Zoo>();
 
+        /// <summary>
+        /// Saves the progress.
+        /// </summary>
         public void SaveGames()
         {
-            // Saves game
+            // Saves game by writing in a file using Serialization - 3rd Phase
         }
 
         public void AddGame(Zoo zoo)

@@ -37,15 +37,13 @@ namespace University_Project
                 base.Move();
             else
             {
-                Direction mask =base.GenerateMask(base.animalImage.Location);
-                Direction dir = base.GenerateValidDirection(mask);
-                if ((dir & Direction.North) == Direction.North)
+                if ((base.direction & Direction.North) == Direction.North)
                     animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - swimmingSpeed);
-                if ((dir & Direction.East) == Direction.East)
+                if ((base.direction & Direction.East) == Direction.East)
                     animalImage.Location = new Point(animalImage.Location.X + swimmingSpeed, animalImage.Location.Y);
-                if ((dir & Direction.South) == Direction.South)
+                if ((base.direction & Direction.South) == Direction.South)
                     animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - swimmingSpeed);
-                if ((dir & Direction.West) == Direction.West)
+                if ((base.direction & Direction.West) == Direction.West)
                     animalImage.Location = new Point(animalImage.Location.X - swimmingSpeed, animalImage.Location.Y);
             }
         }

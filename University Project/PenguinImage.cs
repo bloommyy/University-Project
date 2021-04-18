@@ -42,5 +42,13 @@ namespace University_Project
         {
             // Draws penguin special features
         }
+
+        /// <summary>
+        /// Constructor for PeinguinImage.
+        /// </summary>
+        public PenguinImage()
+        {
+            base.DrawAnimal();
+        }
     }
 }

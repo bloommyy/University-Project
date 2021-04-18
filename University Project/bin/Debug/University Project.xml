@@ -23,11 +23,11 @@
             <param name="location"></param>
             <returns>Direction</returns>
         </member>
-        <member name="M:University_Project.Animal.GenerateValidDirection(University_Project.Direction)">
+        <member name="M:University_Project.Animal.ChangeDirection(System.Drawing.Point)">
             <summary>
             Returns a random Direction that is validated by the given mask.
             </summary>
-            <param name="mask"></param>
+            <param name="location"></param>
             <returns>Direction</returns>
         </member>
         <member name="M:University_Project.Animal.Move">
@@ -125,6 +125,11 @@
             Draws the special features of Elephant.
             </summary>
         </member>
+        <member name="M:University_Project.ElephantImage.#ctor">
+            <summary>
+            Constructor for ElephantImage.
+            </summary>
+        </member>
         <member name="F:University_Project.Form1.components">
             <summary>
             Required designer variable.
@@ -189,6 +194,11 @@
         <member name="M:University_Project.PenguinImage.DrawSpecials">
             <summary>
             Draws the special features of Penguin.
+            </summary>
+        </member>
+        <member name="M:University_Project.PenguinImage.#ctor">
+            <summary>
+            Constructor for PeinguinImage.
             </summary>
         </member>
         <member name="M:University_Project.Program.Main">
