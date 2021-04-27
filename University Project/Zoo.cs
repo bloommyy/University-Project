@@ -9,7 +9,7 @@ namespace University_Project
     /// <summary>
     /// Gamesave, holding all the data for one zoo.
     /// </summary>
-    class Zoo
+    public class Zoo
     {
         private List<AnimalCage> _cages = new List<AnimalCage>();
         public int Day { get; set; }
@@ -44,6 +44,22 @@ namespace University_Project
             Hour = 9;
             Minute = 0;
             Money += 300;
+        }
+
+        /// <summary>
+        /// Constructor for zoo.
+        /// </summary>
+        public Zoo()
+        {
+            Day = 0;
+            Hour = 9;
+            Minute = 0;
+            Money = 800;
+        }
+
+         void DrawZoo()
+        {
+
         }
     }
 }

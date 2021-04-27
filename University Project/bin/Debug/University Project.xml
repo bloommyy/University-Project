@@ -4,6 +4,16 @@
         <name>University Project</name>
     </assembly>
     <members>
+        <member name="T:University_Project.AnimalComfort">
+            <summary>
+            Enum for the comfort of the animal.
+            </summary>
+        </member>
+        <member name="T:University_Project.Direction">
+            <summary>
+            Enum for the Direction the animal is going in.
+            </summary>
+        </member>
         <member name="T:University_Project.Animal">
             <summary>
             This is the base class of Animal.
@@ -130,21 +140,79 @@
             Constructor for ElephantImage.
             </summary>
         </member>
-        <member name="F:University_Project.Form1.components">
+        <member name="F:University_Project.MainForm.components">
             <summary>
             Required designer variable.
             </summary>
         </member>
-        <member name="M:University_Project.Form1.Dispose(System.Boolean)">
+        <member name="M:University_Project.MainForm.Dispose(System.Boolean)">
             <summary>
             Clean up any resources being used.
             </summary>
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
-        <member name="M:University_Project.Form1.InitializeComponent">
+        <member name="M:University_Project.MainForm.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="T:University_Project.StartMenuForm">
+            <summary>
+            Form for choosing which save to load or create a new one.
+            </summary>
+        </member>
+        <member name="M:University_Project.StartMenuForm.#ctor">
+            <summary>
+            Constructor for StartMenuForm.
+            </summary>
+        </member>
+        <member name="M:University_Project.StartMenuForm.buttonCreateNewGame_Click(System.Object,System.EventArgs)">
+            <summary>
+            Adds a new gamesave to the list.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.StartMenuForm.buttonPlay_Click(System.Object,System.EventArgs)">
+            <summary>
+            Loads chosen gamesave.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.StartMenuForm.buttonDelete_Click(System.Object,System.EventArgs)">
+            <summary>
+            Deletes chosen gamesave.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.StartMenuForm.RefreshListBoxGames">
+            <summary>
+            Refreshes the listBoxGames
+            </summary>
+        </member>
+        <member name="F:University_Project.StartMenuForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:University_Project.StartMenuForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:University_Project.StartMenuForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:University_Project.GameSaves.SaveGames">
+            <summary>
+            Saves the progress.
             </summary>
         </member>
         <member name="T:University_Project.Penguin">
@@ -223,14 +291,14 @@
             </summary>
             <param name="ac"></param>
         </member>
-        <member name="M:University_Project.Zoo.SaveGame">
-            <summary>
-            Saves the game.
-            </summary>
-        </member>
         <member name="M:University_Project.Zoo.NextDay">
             <summary>
             Ends the day and starts a new one.
+            </summary>
+        </member>
+        <member name="M:University_Project.Zoo.#ctor">
+            <summary>
+            Constructor for zoo.
             </summary>
         </member>
         <member name="T:University_Project.Properties.Resources">

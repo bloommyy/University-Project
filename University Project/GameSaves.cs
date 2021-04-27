@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace University_Project
 {
-    class GameSaves
+    public class GameSaves
     {
         private List<Zoo> gameSaves = new List<Zoo>();
 
@@ -26,6 +26,11 @@ namespace University_Project
         public void DeleteGame(Zoo zoo)
         {
             gameSaves.Remove(zoo);
+        }
+
+        public List<Zoo> GetZoos()
+        {
+            return gameSaves;
         }
     }
 }
