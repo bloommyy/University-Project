@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace University_Project
 {
@@ -16,14 +18,24 @@ namespace University_Project
         public int Hour { get; set; }
         public int Minute { get; set; }
         public int Money { get; set; }
+        public Graphics Graphics { get; set; }
 
         /// <summary>
         /// Adds an AnimalCage to the Zoo.
         /// </summary>
         /// <param name="ac"></param>
-        public void AddCage(AnimalCage ac)
+        public void AddCage(Rectangle formBounds)
         {
-            _cages.Add(ac);
+            CagePosition cagePos = CagePosition.Left;
+            // Checks if one of the cages is there, if it's there, put the other one as "needed".
+            foreach(var cage in _cages)
+            {
+                if (cage.cageImage.cagePos == CagePosition.Left)
+                    cagePos = CagePosition.Right;
+                else if (cage.cageImage.cagePos == CagePosition.Right)
+                    cagePos = CagePosition.Left;
+            }
+            _cages.Add(new AnimalCage(Graphics, formBounds, cagePos));
         }
 
         /// <summary>
@@ -57,9 +69,13 @@ namespace University_Project
             Money = 800;
         }
 
-         void DrawZoo()
+        /// <summary>
+        /// Returns the cages.
+        /// </summary>
+        /// <returns></returns>
+        public List<AnimalCage> GetCages()
         {
-
+            return _cages;
         }
     }
 }

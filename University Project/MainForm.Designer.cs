@@ -30,6 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelUserInfo = new System.Windows.Forms.Panel();
+            this.labelTasksDone = new System.Windows.Forms.Label();
+            this.labelTasksDoneText = new System.Windows.Forms.Label();
+            this.buttonSellCage = new System.Windows.Forms.Button();
+            this.buttonBuyCage = new System.Windows.Forms.Button();
             this.labelMinutes = new System.Windows.Forms.Label();
             this.labelHour = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
@@ -38,16 +42,18 @@
             this.labelMoney = new System.Windows.Forms.Label();
             this.labelMoneyText = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.labelError = new System.Windows.Forms.Label();
             this.panelUserInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUserInfo
             // 
             this.panelUserInfo.BackColor = System.Drawing.Color.Silver;
-            this.panelUserInfo.Controls.Add(this.button2);
-            this.panelUserInfo.Controls.Add(this.button1);
+            this.panelUserInfo.Controls.Add(this.labelError);
+            this.panelUserInfo.Controls.Add(this.labelTasksDone);
+            this.panelUserInfo.Controls.Add(this.labelTasksDoneText);
+            this.panelUserInfo.Controls.Add(this.buttonSellCage);
+            this.panelUserInfo.Controls.Add(this.buttonBuyCage);
             this.panelUserInfo.Controls.Add(this.labelMinutes);
             this.panelUserInfo.Controls.Add(this.labelHour);
             this.panelUserInfo.Controls.Add(this.labelTime);
@@ -60,6 +66,44 @@
             this.panelUserInfo.Name = "panelUserInfo";
             this.panelUserInfo.Size = new System.Drawing.Size(1264, 100);
             this.panelUserInfo.TabIndex = 0;
+            // 
+            // labelTasksDone
+            // 
+            this.labelTasksDone.AutoSize = true;
+            this.labelTasksDone.Location = new System.Drawing.Point(191, 39);
+            this.labelTasksDone.Name = "labelTasksDone";
+            this.labelTasksDone.Size = new System.Drawing.Size(99, 13);
+            this.labelTasksDone.TabIndex = 8;
+            this.labelTasksDone.Text = "label for tasks done";
+            // 
+            // labelTasksDoneText
+            // 
+            this.labelTasksDoneText.AutoSize = true;
+            this.labelTasksDoneText.Location = new System.Drawing.Point(116, 39);
+            this.labelTasksDoneText.Name = "labelTasksDoneText";
+            this.labelTasksDoneText.Size = new System.Drawing.Size(59, 13);
+            this.labelTasksDoneText.TabIndex = 1;
+            this.labelTasksDoneText.Text = "Tasks left :";
+            // 
+            // buttonSellCage
+            // 
+            this.buttonSellCage.Location = new System.Drawing.Point(1150, 41);
+            this.buttonSellCage.Name = "buttonSellCage";
+            this.buttonSellCage.Size = new System.Drawing.Size(102, 23);
+            this.buttonSellCage.TabIndex = 7;
+            this.buttonSellCage.Text = "Sell Cage +200";
+            this.buttonSellCage.UseVisualStyleBackColor = true;
+            this.buttonSellCage.Click += new System.EventHandler(this.buttonSellCage_Click);
+            // 
+            // buttonBuyCage
+            // 
+            this.buttonBuyCage.Location = new System.Drawing.Point(1150, 12);
+            this.buttonBuyCage.Name = "buttonBuyCage";
+            this.buttonBuyCage.Size = new System.Drawing.Size(102, 23);
+            this.buttonBuyCage.TabIndex = 1;
+            this.buttonBuyCage.Text = "Buy Cage -400";
+            this.buttonBuyCage.UseVisualStyleBackColor = true;
+            this.buttonBuyCage.Click += new System.EventHandler(this.buttonBuyCage_Click);
             // 
             // labelMinutes
             // 
@@ -130,23 +174,16 @@
             this.timerTime.Interval = 200;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
             // 
-            // button1
+            // labelError
             // 
-            this.button1.Location = new System.Drawing.Point(1177, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Buy Cage";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(1096, 12);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Sell Cage";
-            this.button2.UseVisualStyleBackColor = true;
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(490, 63);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 37);
+            this.labelError.TabIndex = 1;
+            this.labelError.Visible = false;
             // 
             // MainForm
             // 
@@ -160,6 +197,8 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseClick);
+            this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDoubleClick);
             this.panelUserInfo.ResumeLayout(false);
             this.panelUserInfo.PerformLayout();
             this.ResumeLayout(false);
@@ -177,7 +216,10 @@
         private System.Windows.Forms.Label labelTime;
         private System.Windows.Forms.Label labelMinutes;
         private System.Windows.Forms.Timer timerTime;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonSellCage;
+        private System.Windows.Forms.Button buttonBuyCage;
+        private System.Windows.Forms.Label labelTasksDone;
+        private System.Windows.Forms.Label labelTasksDoneText;
+        private System.Windows.Forms.Label labelError;
     }
 }

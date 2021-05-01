@@ -19,3 +19,4 @@ D:\Projects\University Project\University Project\obj\Debug\University Project.e
 D:\Projects\University Project\University Project\obj\Debug\University Project.pdb
 D:\Projects\University Project\University Project\obj\Debug\University_Project.StartMenuForm.resources
 D:\Projects\University Project\University Project\obj\Debug\University_Project.MainForm.resources
+D:\Projects\University Project\University Project\obj\Debug\University_Project.CageForm.resources

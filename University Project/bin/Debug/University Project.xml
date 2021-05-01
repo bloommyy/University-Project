@@ -62,6 +62,42 @@
             </summary>
             <param name="animal"></param>
         </member>
+        <member name="M:University_Project.AnimalCage.#ctor(System.Drawing.Graphics,System.Drawing.Rectangle,University_Project.CagePosition)">
+            <summary>
+            Constructor for AnimalCage.
+            </summary>
+            <param name="formBounds"></param>
+        </member>
+        <member name="T:University_Project.AnimalCageImage">
+            <summary>
+            Class for the outlook of the cage in Zoo.
+            </summary>
+        </member>
+        <member name="F:University_Project.AnimalCageImage.cageOffset">
+            <summary>
+            Used for x offset on first cage and for y offset on both cages.
+            </summary>
+        </member>
+        <member name="M:University_Project.AnimalCageImage.DrawCage(System.Drawing.Graphics)">
+            <summary>
+            Draws first or second cage - 2/5ths of the width of the screen. 
+            </summary>
+            <param name="g"></param>
+        </member>
+        <member name="M:University_Project.AnimalCageImage.Contains(System.Drawing.Point)">
+            <summary>
+            Detemines if the point is in either of the cages.
+            </summary>
+            <param name="p">Location of mouse.</param>
+            <returns></returns>
+        </member>
+        <member name="M:University_Project.AnimalCageImage.#ctor(System.Drawing.Graphics,System.Drawing.Rectangle,University_Project.CagePosition)">
+            <summary>
+            Constructor for AnimalCageImage that sets the size of the Image of the cage calculated by the proportions of the form.
+            </summary>
+            <param name="formBounds">The bounds of the form.</param>
+            <param name="_cagePos">The position of the cage.</param>
+        </member>
         <member name="T:University_Project.AnimalImage">
             <summary>
             Base class of AnimalImage.
@@ -90,6 +126,23 @@
         <member name="M:University_Project.AnimalImage.DrawAnimal">
             <summary>
             Draws the Animal using Graphics.Draw.
+            </summary>
+        </member>
+        <member name="F:University_Project.CageForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:University_Project.CageForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:University_Project.CageForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
             </summary>
         </member>
         <member name="T:University_Project.Elephant">
@@ -139,6 +192,30 @@
             <summary>
             Constructor for ElephantImage.
             </summary>
+        </member>
+        <member name="M:University_Project.MainForm.#ctor">
+            <summary>
+            Constructor of MainForm.
+            </summary>
+        </member>
+        <member name="M:University_Project.MainForm.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Method that re-draws the whole form.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.MainForm.timerTime_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Method for one tick of the timer.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.MainForm.DrawZoo(System.Drawing.Graphics)">
+            <summary>
+            Method drawing the zoo cages.
+            </summary>
+            <param name="g"></param>
         </member>
         <member name="F:University_Project.MainForm.components">
             <summary>
@@ -279,7 +356,7 @@
             Gamesave, holding all the data for one zoo.
             </summary>
         </member>
-        <member name="M:University_Project.Zoo.AddCage(University_Project.AnimalCage)">
+        <member name="M:University_Project.Zoo.AddCage(System.Drawing.Rectangle)">
             <summary>
             Adds an AnimalCage to the Zoo.
             </summary>
@@ -300,6 +377,12 @@
             <summary>
             Constructor for zoo.
             </summary>
+        </member>
+        <member name="M:University_Project.Zoo.GetCages">
+            <summary>
+            Returns the cages.
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:University_Project.Properties.Resources">
             <summary>

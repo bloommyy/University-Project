@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -19,8 +21,10 @@ namespace University_Project
     public class AnimalCage
     {
         private List<Animal> _animals = new List<Animal>();
-        private bool isTaskDone;
+        public bool isTaskDone;
         public FodderState FodderState;
+        public AnimalCageImage cageImage;
+        private Label cageLabel;
 
         /// <summary>
         /// Adds an Animal to the list of animals.
@@ -38,6 +42,17 @@ namespace University_Project
         public void RemoveAnimal(Animal animal)
         {
             _animals.Remove(animal);
+        }
+
+        /// <summary>
+        /// Constructor for AnimalCage.
+        /// </summary>
+        /// <param name="formBounds"></param>
+        public AnimalCage(Graphics g, Rectangle formBounds, CagePosition cagePos)
+        {
+            cageImage = new AnimalCageImage(g, formBounds, cagePos);  
+            isTaskDone = false;
+            FodderState = FodderState.HalfFull;
         }
     }
 }

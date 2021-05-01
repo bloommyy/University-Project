@@ -34,7 +34,12 @@ namespace University_Project
             labelHour.Text = zoo.Hour.ToString();
             labelMinutes.Text = zoo.Minute.ToString();
             labelMoney.Text = zoo.Money.ToString();
-            DrawCages(e.Graphics);
+            DrawZoo(e.Graphics);
+            labelTasksDone.Text = zoo.GetCages()
+                                    .Select(cage => cage.isTaskDone)
+                                    .Where(task => task == false)
+                                    .Count().ToString();
+
         }
 
         /// <summary>
@@ -59,24 +64,81 @@ namespace University_Project
         /// Method drawing the zoo cages.
         /// </summary>
         /// <param name="g"></param>
-        public void DrawCages(Graphics g) // Maybe put that Rectangles in AnimalCage and drawing using foreach on cagelist on zoo.
+        public void DrawZoo(Graphics g)
         {
-            // Fence
-            using (var pen = new Pen(Color.Brown, 10))
+            zoo.Graphics = g;
+            // Goes through cages and draws them.
+            foreach(var cage in zoo.GetCages())
             {
-                g.DrawRectangle(pen, 5, 5, 2 * (float)(this.Bounds.Width / 5), 570);
-                g.DrawRectangle(pen, 5 + 3* (float)(this.Bounds.Width / 5), 5, 2 * (float)(this.Bounds.Width / 5), 570);
+                cage.cageImage.DrawCage(g);
             }
-            // Mud
-            using(var brush = new SolidBrush(Color.SandyBrown))
-            {
-                g.FillRectangle(brush, 5, 5, 2 * (float)(this.Bounds.Width / 5), 570);
-                g.FillRectangle(brush, 5 + 3 * (float)(this.Bounds.Width / 5), 5, 2 * (float)(this.Bounds.Width / 5), 570);
-            }
+            
             // Path
             using(var brush = new SolidBrush(Color.DimGray))
             {
                 g.FillRectangle(brush, 15 + 2 * (float)(this.Bounds.Width / 5), 0, (float)(this.Bounds.Width / 5) - 20, 580);
+            }
+        }
+
+        private void buttonBuyCage_Click(object sender, EventArgs e)
+        {
+            if(zoo.Money < 400) // Checks if user has enough money
+            {
+                labelError.Text = "Not enough money!";
+                labelError.Visible = true;
+                return;
+            }
+            if(zoo.GetCages().Count == 2) // Checks if user already has 2 cages
+            {
+                labelError.Text = "Cannot buy more than 2 cages!";
+                labelError.Visible = true;
+                return;
+            }
+            zoo.AddCage(this.Bounds);
+            zoo.Money -= 400;
+        }
+
+        private void buttonSellCage_Click(object sender, EventArgs e)
+        {
+            var zooCages = zoo.GetCages();
+            for(int i = 0; i < zooCages.Count; i++)
+            {
+                if (zooCages[i].cageImage.Color == Color.Black)
+                {
+                    zoo.RemoveCage(zooCages[i]);
+                    zoo.Money += 200;
+                }        
+            } 
+        }
+
+        private void MainForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            labelError.Visible = false;
+            foreach(var cage in zoo.GetCages())
+            {
+                cage.cageImage.Color = Color.Brown;
+                if (cage.cageImage.Contains(e.Location))
+                {
+                    cage.cageImage.Color = Color.Black;
+                }
+            }
+        }
+
+        private void MainForm_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            foreach(var cage in zoo.GetCages())
+            {
+                if(cage.cageImage.Color == Color.Black)
+                {
+                    CageForm cf = new CageForm()
+                    {
+                        animalCage = cage
+                    };
+                    
+                    cf.Show();
+                    this.Hide();
+                    cf.FormClosed += (s, args) => this.Show();
+                }
             }
         }
     }
