@@ -34,7 +34,11 @@ namespace University_Project
         /// <param name="e"></param>
         private void buttonCreateNewGame_Click(object sender, EventArgs e)
         {
-            gameSaves.AddGame(new Zoo());
+            CreateGameForm cgf = new CreateGameForm();
+            if(cgf.ShowDialog() == DialogResult.OK)
+            {
+                gameSaves.AddGame(new Zoo(cgf.Name, cgf.Date));
+            }
             RefreshListBoxGames();
         }
 
@@ -72,7 +76,7 @@ namespace University_Project
         }
 
         /// <summary>
-        /// Refreshes the listBoxGames
+        /// Refreshes the listBoxGames.
         /// </summary>
         private void RefreshListBoxGames()
         {
@@ -83,7 +87,27 @@ namespace University_Project
             }
         }
 
+        /// <summary>
+        /// Opens CreateGameForm, so user can change the name of the save.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBoxGames_DoubleClick(object sender, EventArgs e)
+        {
+            if (listBoxGames.SelectedItem == null)
+                return;
 
-
+            Zoo item = (Zoo)listBoxGames.SelectedItem;
+            CreateGameForm cgf = new CreateGameForm();
+            cgf.Name = item.Name;
+            cgf.Date = item.Date;
+            if(cgf.ShowDialog() == DialogResult.OK)
+            {
+                var save = gameSaves.GetZoos().Single(zoo => zoo == item);
+                save.Name = cgf.Name;
+                save.Date = cgf.Date;
+            }
+            RefreshListBoxGames();
+        }
     }
 }

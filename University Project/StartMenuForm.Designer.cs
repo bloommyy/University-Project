@@ -75,6 +75,7 @@
             this.listBoxGames.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.listBoxGames.Size = new System.Drawing.Size(760, 403);
             this.listBoxGames.TabIndex = 3;
+            this.listBoxGames.DoubleClick += new System.EventHandler(this.listBoxGames_DoubleClick);
             // 
             // StartMenuForm
             // 

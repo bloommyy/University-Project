@@ -128,6 +128,11 @@
             Draws the Animal using Graphics.Draw.
             </summary>
         </member>
+        <member name="M:University_Project.CageForm.#ctor">
+            <summary>
+            Constructor for CageForm.
+            </summary>
+        </member>
         <member name="F:University_Project.CageForm.components">
             <summary>
             Required designer variable.
@@ -140,6 +145,23 @@
             <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         </member>
         <member name="M:University_Project.CageForm.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="F:University_Project.CreateGameForm.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:University_Project.CreateGameForm.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:University_Project.CreateGameForm.InitializeComponent">
             <summary>
             Required method for Designer support - do not modify
             the contents of this method with the code editor.
@@ -216,6 +238,34 @@
             Method drawing the zoo cages.
             </summary>
             <param name="g"></param>
+        </member>
+        <member name="M:University_Project.MainForm.buttonBuyCage_Click(System.Object,System.EventArgs)">
+            <summary>
+            Method for when buttonBuyCage is clicked. Adds a new cage to the zoo.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.MainForm.buttonSellCage_Click(System.Object,System.EventArgs)">
+            <summary>
+            Method for when buttonSellCage is clicked. Removes the selected cage from the zoo.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.MainForm.MainForm_MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Method for when the left mouse button is clicked. Checks if any of the cages are clicked.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.MainForm.MainForm_MouseDoubleClick(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Method for when the left mouse button is clicked twice. Opens a CageForm based on the selected cage.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="F:University_Project.MainForm.components">
             <summary>
@@ -373,7 +423,7 @@
             Ends the day and starts a new one.
             </summary>
         </member>
-        <member name="M:University_Project.Zoo.#ctor">
+        <member name="M:University_Project.Zoo.#ctor(System.String,System.DateTime)">
             <summary>
             Constructor for zoo.
             </summary>
@@ -381,6 +431,12 @@
         <member name="M:University_Project.Zoo.GetCages">
             <summary>
             Returns the cages.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:University_Project.Zoo.ToString">
+            <summary>
+            Shows the name of the zoo.
             </summary>
             <returns></returns>
         </member>

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace University_Project
 {
+    /// <summary>
+    /// Enum for the state of the fodder.
+    /// </summary>
     public enum FodderState
     {
         Empty = 0,
@@ -47,7 +50,9 @@ namespace University_Project
         /// <summary>
         /// Constructor for AnimalCage.
         /// </summary>
-        /// <param name="formBounds"></param>
+        /// <param name="g">Graphics used for drawing.</param>
+        /// <param name="cagePos">Position of the cage.</param>
+        /// <param name="formBounds">Bounds of the Form.</param>
         public AnimalCage(Graphics g, Rectangle formBounds, CagePosition cagePos)
         {
             cageImage = new AnimalCageImage(g, formBounds, cagePos);  

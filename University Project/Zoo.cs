@@ -14,6 +14,8 @@ namespace University_Project
     public class Zoo
     {
         private List<AnimalCage> _cages = new List<AnimalCage>();
+        public string Name { get; set; }
+        public DateTime Date { get; set; }
         public int Day { get; set; }
         public int Hour { get; set; }
         public int Minute { get; set; }
@@ -23,7 +25,7 @@ namespace University_Project
         /// <summary>
         /// Adds an AnimalCage to the Zoo.
         /// </summary>
-        /// <param name="ac"></param>
+        /// <param name="formBounds"></param>
         public void AddCage(Rectangle formBounds)
         {
             CagePosition cagePos = CagePosition.Left;
@@ -61,8 +63,10 @@ namespace University_Project
         /// <summary>
         /// Constructor for zoo.
         /// </summary>
-        public Zoo()
+        public Zoo(string name, DateTime date)
         {
+            Name = name;
+            Date = date;
             Day = 0;
             Hour = 9;
             Minute = 0;
@@ -76,6 +80,15 @@ namespace University_Project
         public List<AnimalCage> GetCages()
         {
             return _cages;
+        }
+
+        /// <summary>
+        /// Shows the name of the zoo(gamesave) and the date it was created.
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            return $"{Name} - {Date}";
         }
     }
 }

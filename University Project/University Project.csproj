@@ -57,6 +57,12 @@
     <Compile Include="CageForm.Designer.cs">
       <DependentUpon>CageForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CreateGameForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreateGameForm.Designer.cs">
+      <DependentUpon>CreateGameForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Elephant.cs" />
     <Compile Include="ElephantImage.cs" />
     <Compile Include="MainForm.cs">
@@ -79,6 +85,9 @@
     <Compile Include="Zoo.cs" />
     <EmbeddedResource Include="CageForm.resx">
       <DependentUpon>CageForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CreateGameForm.resx">
+      <DependentUpon>CreateGameForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>

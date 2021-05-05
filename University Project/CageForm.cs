@@ -14,6 +14,9 @@ namespace University_Project
     {
         public AnimalCage animalCage;
 
+        /// <summary>
+        /// Constructor for CageForm.
+        /// </summary>
         public CageForm()
         {
             InitializeComponent();

@@ -10,9 +10,12 @@ using System.Windows.Forms;
 
 namespace University_Project
 {
+    /// <summary>
+    /// MainForm class - the form for zoo.
+    /// </summary>
     public partial class MainForm : Form
     {
-        public Zoo zoo = new Zoo();
+        public Zoo zoo = new Zoo("doesn't matter", DateTime.Now);
 
         /// <summary>
         /// Constructor of MainForm.
@@ -80,6 +83,11 @@ namespace University_Project
             }
         }
 
+        /// <summary>
+        /// Method for when buttonBuyCage is clicked. Adds a new cage to the zoo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonBuyCage_Click(object sender, EventArgs e)
         {
             if(zoo.Money < 400) // Checks if user has enough money
@@ -98,12 +106,17 @@ namespace University_Project
             zoo.Money -= 400;
         }
 
+        /// <summary>
+        /// Method for when buttonSellCage is clicked. Removes the selected cage from the zoo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSellCage_Click(object sender, EventArgs e)
         {
             var zooCages = zoo.GetCages();
             for(int i = 0; i < zooCages.Count; i++)
             {
-                if (zooCages[i].cageImage.Color == Color.Black)
+                if (zooCages[i].cageImage.fenceColor == Color.Black)
                 {
                     zoo.RemoveCage(zooCages[i]);
                     zoo.Money += 200;
@@ -111,24 +124,34 @@ namespace University_Project
             } 
         }
 
+        /// <summary>
+        /// Method for when the left mouse button is clicked. Checks if any of the cages are clicked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             labelError.Visible = false;
             foreach(var cage in zoo.GetCages())
             {
-                cage.cageImage.Color = Color.Brown;
+                cage.cageImage.fenceColor = Color.Brown;
                 if (cage.cageImage.Contains(e.Location))
                 {
-                    cage.cageImage.Color = Color.Black;
+                    cage.cageImage.fenceColor = Color.Black;
                 }
             }
         }
 
+        /// <summary>
+        /// Method for when the left mouse button is clicked twice. Opens a CageForm based on the selected cage.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             foreach(var cage in zoo.GetCages())
             {
-                if(cage.cageImage.Color == Color.Black)
+                if(cage.cageImage.fenceColor == Color.Black)
                 {
                     CageForm cf = new CageForm()
                     {

@@ -9,10 +9,18 @@ using System.Windows.Forms;
 
 namespace University_Project
 {
-
+    /// <summary>
+    /// Enum showing which side the cage is on.
+    /// </summary>
     public enum CagePosition
     {
+        /// <summary>
+        /// Left side of the screen.
+        /// </summary>
         Left = 0,
+        /// <summary>
+        /// Right side of the screen.
+        /// </summary>
         Right = 1
     }
 
@@ -25,11 +33,17 @@ namespace University_Project
         private readonly int cageHeight = 570;
 
         /// <summary>
-        /// Used for x offset on first cage and for y offset on both cages.
+        /// Used for x and y offset on both cages.
         /// </summary>
         private readonly int cageOffset = 5;
-        public Color Color;
+        /// <summary>
+        /// The color of the fence. Black = selected.
+        /// </summary>
+        public Color fenceColor;
         private Rectangle cageImage;
+        /// <summary>
+        /// The position of the cage. Can be Left or Right.
+        /// </summary>
         public CagePosition cagePos;
         
 
@@ -40,7 +54,7 @@ namespace University_Project
         /// <param name="g"></param>
         public void DrawCage(Graphics g) // Should find a way to improve for multiple cages.
         {
-            using(var pen = new Pen(Color, 10))
+            using(var pen = new Pen(fenceColor, 10))
             {
                 g.DrawRectangle(pen, cageImage);
             }
@@ -63,11 +77,12 @@ namespace University_Project
         /// <summary>
         /// Constructor for AnimalCageImage that sets the size of the Image of the cage calculated by the proportions of the form.
         /// </summary>
+        /// <param name="g">Graphics used for drawing.</param>
         /// <param name="formBounds">The bounds of the form.</param>
         /// <param name="_cagePos">The position of the cage.</param>
         public AnimalCageImage(Graphics g, Rectangle formBounds, CagePosition _cagePos)
         {
-            Color = Color.Brown;
+            fenceColor = Color.Brown;
             cagePos = _cagePos;
             cageWidth = 2 * (formBounds.Width / 5);
             cageImage = new Rectangle(((int)(cagePos) * 3 * (formBounds.Width / 5) + cageOffset), cageOffset, cageWidth, cageHeight);
