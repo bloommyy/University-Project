@@ -25,8 +25,9 @@ namespace University_Project
         /// <summary>
         /// Adds an AnimalCage to the Zoo.
         /// </summary>
-        /// <param name="formBounds"></param>
-        public void AddCage(Rectangle formBounds)
+        /// <param name="formBounds">Bounds of the form.</param>
+        /// <param name="ct">The type of the cage.</param>
+        public void AddCage(Rectangle formBounds, CageType ct)
         {
             CagePosition cagePos = CagePosition.Left;
             // Checks if one of the cages is there, if it's there, put the other one as "needed".
@@ -37,7 +38,7 @@ namespace University_Project
                 else if (cage.cageImage.cagePos == CagePosition.Right)
                     cagePos = CagePosition.Left;
             }
-            _cages.Add(new AnimalCage(Graphics, formBounds, cagePos));
+            _cages.Add(new AnimalCage(Graphics, formBounds, cagePos, ct));
         }
 
         /// <summary>
@@ -89,6 +90,17 @@ namespace University_Project
         public override string ToString()
         {
             return $"{Name} - {Date}";
+        }
+
+        /// <summary>
+        /// Shows the amount of tasks left.
+        /// </summary>
+        /// <returns>A string of a number </returns>
+        public string GetTasksLeft()
+        {
+             return _cages.Select(cage => cage.isTaskDone)
+                                    .Where(task => task == false)
+                                    .Count().ToString();
         }
     }
 }

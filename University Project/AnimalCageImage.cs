@@ -58,7 +58,7 @@ namespace University_Project
             {
                 g.DrawRectangle(pen, cageImage);
             }
-            using (var brush = new SolidBrush(Color.SandyBrown))
+            using (var brush = new SolidBrush(Color.LimeGreen))
             {
                 g.FillRectangle(brush, cageImage);
             }

@@ -21,3 +21,4 @@ D:\Projects\University Project\University Project\obj\Debug\University_Project.S
 D:\Projects\University Project\University Project\obj\Debug\University_Project.MainForm.resources
 D:\Projects\University Project\University Project\obj\Debug\University_Project.CageForm.resources
 D:\Projects\University Project\University Project\obj\Debug\University_Project.CreateGameForm.resources
+D:\Projects\University Project\University Project\obj\Debug\University_Project.BuyCageForm.resources

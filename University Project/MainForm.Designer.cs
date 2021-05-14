@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelUserInfo = new System.Windows.Forms.Panel();
+            this.labelError = new System.Windows.Forms.Label();
             this.labelTasksDone = new System.Windows.Forms.Label();
             this.labelTasksDoneText = new System.Windows.Forms.Label();
             this.buttonSellCage = new System.Windows.Forms.Button();
@@ -42,7 +43,6 @@
             this.labelMoney = new System.Windows.Forms.Label();
             this.labelMoneyText = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
-            this.labelError = new System.Windows.Forms.Label();
             this.panelUserInfo.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,17 @@
             this.panelUserInfo.Size = new System.Drawing.Size(1264, 100);
             this.panelUserInfo.TabIndex = 0;
             // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(490, 63);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 37);
+            this.labelError.TabIndex = 1;
+            this.labelError.Visible = false;
+            // 
             // labelTasksDone
             // 
             this.labelTasksDone.AutoSize = true;
@@ -87,9 +98,9 @@
             // 
             // buttonSellCage
             // 
-            this.buttonSellCage.Location = new System.Drawing.Point(1150, 41);
+            this.buttonSellCage.Location = new System.Drawing.Point(1136, 41);
             this.buttonSellCage.Name = "buttonSellCage";
-            this.buttonSellCage.Size = new System.Drawing.Size(102, 23);
+            this.buttonSellCage.Size = new System.Drawing.Size(115, 23);
             this.buttonSellCage.TabIndex = 7;
             this.buttonSellCage.Text = "Sell Cage +200";
             this.buttonSellCage.UseVisualStyleBackColor = true;
@@ -97,9 +108,9 @@
             // 
             // buttonBuyCage
             // 
-            this.buttonBuyCage.Location = new System.Drawing.Point(1150, 12);
+            this.buttonBuyCage.Location = new System.Drawing.Point(1136, 12);
             this.buttonBuyCage.Name = "buttonBuyCage";
-            this.buttonBuyCage.Size = new System.Drawing.Size(102, 23);
+            this.buttonBuyCage.Size = new System.Drawing.Size(115, 23);
             this.buttonBuyCage.TabIndex = 1;
             this.buttonBuyCage.Text = "Buy Cage -400";
             this.buttonBuyCage.UseVisualStyleBackColor = true;
@@ -173,17 +184,6 @@
             this.timerTime.Enabled = true;
             this.timerTime.Interval = 200;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
-            // 
-            // labelError
-            // 
-            this.labelError.AutoSize = true;
-            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(490, 63);
-            this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(0, 37);
-            this.labelError.TabIndex = 1;
-            this.labelError.Visible = false;
             // 
             // MainForm
             // 

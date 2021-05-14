@@ -12,8 +12,21 @@ namespace University_Project
     /// </summary>
     public abstract class AnimalImage
     {
-        public Point Location { get; set; }
-        public double Size { get; set; }
+        private Point _location;
+        public Point Location { 
+            get
+            {
+                return _location;
+            }
+            set
+            {
+                _location = value;
+            }
+        }
+        public float Width { get; set; }
+        public float Height { get; set; }
+        protected Graphics graphics;
+
 
         /// <summary>
         /// Draws the body of the animal.
@@ -38,8 +51,9 @@ namespace University_Project
         /// <summary>
         /// Draws the Animal using Graphics.Draw.
         /// </summary>
-        public void DrawAnimal()
+        public void DrawAnimal(Graphics g)
         {
+            graphics = g;
             DrawBody();
             DrawHead();
             DrawLegs();

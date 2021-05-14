@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Text;
 using System.Linq;
@@ -44,8 +45,9 @@ namespace University_Project
 
         protected AnimalComfort comfort;
         protected int walkingSpeed;
-        protected AnimalImage animalImage;
+        public AnimalImage animalImage;
         protected Direction direction;
+        private static Random rnd = new Random();
 
         /// <summary>
         /// Method Eat that lowers the given FodderState by one, if Empty - it does nothing.
@@ -67,6 +69,7 @@ namespace University_Project
         /// <returns>Direction</returns>
         protected Direction GenerateMask(Point location)
         {
+
             // Making a mask with all directions available
             Direction mask = Direction.East | Direction.North | Direction.South | Direction.West;
 
@@ -77,7 +80,7 @@ namespace University_Project
             }
 
             // Removing East from possibilities
-            if (location.X >= 350) // right side of form - hard coded when Forms are added.
+            if (location.X >= 1200) // right side of form - hard coded when Forms are added.
             {
                 mask &= (Direction.West | Direction.North | Direction.South);
             }
@@ -89,7 +92,7 @@ namespace University_Project
             }
 
             // Removing South from possibilities
-            if (location.Y >= 350) // bottom side of form - hard coded when Forms are added.
+            if (location.Y >= 600) // bottom side of form - hard coded when Forms are added.
             {
                 mask &= (Direction.East | Direction.North | Direction.West);
             }
@@ -101,45 +104,46 @@ namespace University_Project
         /// <summary>
         /// Returns a random Direction that is validated by the given mask.
         /// </summary>
-        /// <param name="location"></param>
-        /// <returns>Direction</returns>
-        public void ChangeDirection(Point location)
+        /// <returns></returns>
+        public void ChangeDirection()
         {
+            Point location = animalImage.Location;
             Direction mask = GenerateMask(location);
-            Random rnd = new Random();
-            int randomDirection = rnd.Next(18); // Gets random number, 8 base ones + 10 for idling (Increasing % for idling)
-            Direction dir = new Direction();
-            switch (randomDirection) // Assigning direction
+            Direction dir;
+            do
             {
-                case 0:
-                    dir = Direction.North;
-                    break;
-                case 1:
-                    dir = Direction.North | Direction.East;
-                    break;
-                case 2:
-                    dir = Direction.East;
-                    break;
-                case 3:
-                    dir = Direction.East | Direction.South;
-                    break;
-                case 4:
-                    dir = Direction.South;
-                    break;
-                case 5:
-                    dir = Direction.South | Direction.West;
-                    break;
-                case 6:
-                    dir = Direction.West;
-                    break;
-                case 7:
-                    dir = Direction.West | Direction.North;
-                    break;
-            }
-
-            if(dir != 0) // Checking if not idle 
-                if((dir & mask) == 0) // Preventing idling if chosen a way                  
-                    ChangeDirection(location); // (lowering chances of idling if we have generated a Direction but the it's invalid)
+                int randomDirection = rnd.Next(18); // Gets random number, 8 base ones + 10 for idling (Increasing % for idling)
+                switch (randomDirection) // Assigning direction
+                {
+                    case 0:
+                        dir = Direction.North;
+                        break;
+                    case 1:
+                        dir = Direction.North | Direction.East;
+                        break;
+                    case 2:
+                        dir = Direction.East;
+                        break;
+                    case 3:
+                        dir = Direction.East | Direction.South;
+                        break;
+                    case 4:
+                        dir = Direction.South;
+                        break;
+                    case 5:
+                        dir = Direction.South | Direction.West;
+                        break;
+                    case 6:
+                        dir = Direction.West;
+                        break;
+                    case 7:
+                        dir = Direction.West | Direction.North;
+                        break;
+                    default:
+                        dir = 0;
+                        break;
+                }
+            } while ((dir != 0) && (dir & mask) == 0);
 
             // Returns the validated Direction
             direction = dir & mask; 
@@ -150,15 +154,17 @@ namespace University_Project
         /// </summary>
         public virtual void Move()
         {
-            // Using bitwise AND on North only to check if Direction holds North
-            if((direction & Direction.North) == Direction.North)
-                animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - walkingSpeed);
+            int X = animalImage.Location.X;
+            int Y = animalImage.Location.Y;
+            // Using bitwise AND to check which Direction to go in
+            if ((direction & Direction.North) == Direction.North)
+                animalImage.Location = new Point(X, Y - walkingSpeed); Y--;
             if ((direction & Direction.East) == Direction.East)
-                animalImage.Location = new Point(animalImage.Location.X + walkingSpeed, animalImage.Location.Y);
+                animalImage.Location = new Point(X + walkingSpeed, Y); X++;
             if ((direction & Direction.South) == Direction.South)
-                animalImage.Location = new Point(animalImage.Location.X, animalImage.Location.Y - walkingSpeed);
+                animalImage.Location = new Point(X, Y + walkingSpeed); Y++;
             if ((direction & Direction.West) == Direction.West)
-                animalImage.Location = new Point(animalImage.Location.X - walkingSpeed, animalImage.Location.Y);
+                animalImage.Location = new Point(X - walkingSpeed, Y); X--;
         }
     }
 }

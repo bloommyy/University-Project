@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,7 +49,9 @@ namespace University_Project
         /// </summary>
         public PenguinImage()
         {
-            base.DrawAnimal();
+            base.Location = new Point(400, 400);
+            base.Width = 150;
+            base.Height = 100;
         }
     }
 }

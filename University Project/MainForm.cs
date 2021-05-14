@@ -38,10 +38,8 @@ namespace University_Project
             labelMinutes.Text = zoo.Minute.ToString();
             labelMoney.Text = zoo.Money.ToString();
             DrawZoo(e.Graphics);
-            labelTasksDone.Text = zoo.GetCages()
-                                    .Select(cage => cage.isTaskDone)
-                                    .Where(task => task == false)
-                                    .Count().ToString();
+            labelTasksDone.Text = zoo.GetTasksLeft();
+                                    
 
         }
 
@@ -53,10 +51,10 @@ namespace University_Project
         private void timerTime_Tick(object sender, EventArgs e)
         {
             zoo.Minute++;
-            if (zoo.Minute == 60)
+            if (zoo.Minute >= 60)
             {
                 zoo.Hour++;
-                if (zoo.Hour == 21)
+                if (zoo.Hour >= 21)
                     zoo.NextDay();
                 zoo.Minute = 0;
             }  
@@ -102,8 +100,13 @@ namespace University_Project
                 labelError.Visible = true;
                 return;
             }
-            zoo.AddCage(this.Bounds);
-            zoo.Money -= 400;
+            BuyCageForm bcf = new BuyCageForm();
+            if(bcf.ShowDialog() == DialogResult.OK)
+            {
+                var choice = (bcf.choice == "Elephant") ? CageType.Elephant : CageType.Penguin;
+                zoo.AddCage(this.Bounds, choice);
+                zoo.Money -= 400;
+            } 
         }
 
         /// <summary>
@@ -153,14 +156,16 @@ namespace University_Project
             {
                 if(cage.cageImage.fenceColor == Color.Black)
                 {
-                    CageForm cf = new CageForm()
+                    CageForm cf = new CageForm(cage.cageType)
                     {
-                        animalCage = cage
+                        animalCage = cage,
+                        zoo = zoo
                     };
                     
                     cf.Show();
+                    timerTime.Enabled = false;
                     this.Hide();
-                    cf.FormClosed += (s, args) => this.Show();
+                    cf.FormClosed += (s, args) => { this.Show(); timerTime.Enabled = true; };
                 }
             }
         }
