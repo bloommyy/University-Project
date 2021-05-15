@@ -43,7 +43,7 @@ namespace University_Project
         public int Age { get; set; }
         public double Weight { get; set; }
 
-        protected AnimalComfort comfort;
+        public AnimalComfort comfort;
         protected int walkingSpeed;
         public AnimalImage animalImage;
         protected Direction direction;

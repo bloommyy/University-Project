@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelUserInfo = new System.Windows.Forms.Panel();
+            this.labelTaskDone = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
             this.labelTasksDoneText = new System.Windows.Forms.Label();
             this.buttonSellAnimal = new System.Windows.Forms.Button();
@@ -42,15 +43,30 @@
             this.labelMoney = new System.Windows.Forms.Label();
             this.labelMoneyText = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
-            this.labelTaskDone = new System.Windows.Forms.Label();
             this.timerMove = new System.Windows.Forms.Timer(this.components);
             this.timerChangeDirection = new System.Windows.Forms.Timer(this.components);
+            this.labelNameText = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelAgeText = new System.Windows.Forms.Label();
+            this.labelAge = new System.Windows.Forms.Label();
+            this.labelWeightText = new System.Windows.Forms.Label();
+            this.labelWeight = new System.Windows.Forms.Label();
+            this.labelComfortText = new System.Windows.Forms.Label();
+            this.labelComfort = new System.Windows.Forms.Label();
             this.panelUserInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUserInfo
             // 
             this.panelUserInfo.BackColor = System.Drawing.Color.Silver;
+            this.panelUserInfo.Controls.Add(this.labelComfort);
+            this.panelUserInfo.Controls.Add(this.labelComfortText);
+            this.panelUserInfo.Controls.Add(this.labelWeight);
+            this.panelUserInfo.Controls.Add(this.labelWeightText);
+            this.panelUserInfo.Controls.Add(this.labelAge);
+            this.panelUserInfo.Controls.Add(this.labelAgeText);
+            this.panelUserInfo.Controls.Add(this.labelName);
+            this.panelUserInfo.Controls.Add(this.labelNameText);
             this.panelUserInfo.Controls.Add(this.labelTaskDone);
             this.panelUserInfo.Controls.Add(this.labelError);
             this.panelUserInfo.Controls.Add(this.labelTasksDoneText);
@@ -68,6 +84,14 @@
             this.panelUserInfo.Name = "panelUserInfo";
             this.panelUserInfo.Size = new System.Drawing.Size(1264, 100);
             this.panelUserInfo.TabIndex = 1;
+            // 
+            // labelTaskDone
+            // 
+            this.labelTaskDone.AutoSize = true;
+            this.labelTaskDone.Location = new System.Drawing.Point(157, 39);
+            this.labelTaskDone.Name = "labelTaskDone";
+            this.labelTaskDone.Size = new System.Drawing.Size(0, 13);
+            this.labelTaskDone.TabIndex = 8;
             // 
             // labelError
             // 
@@ -139,7 +163,7 @@
             // labelDay
             // 
             this.labelDay.AutoSize = true;
-            this.labelDay.Location = new System.Drawing.Point(44, 52);
+            this.labelDay.Location = new System.Drawing.Point(44, 39);
             this.labelDay.Name = "labelDay";
             this.labelDay.Size = new System.Drawing.Size(13, 13);
             this.labelDay.TabIndex = 3;
@@ -148,7 +172,7 @@
             // labelDayText
             // 
             this.labelDayText.AutoSize = true;
-            this.labelDayText.Location = new System.Drawing.Point(12, 52);
+            this.labelDayText.Location = new System.Drawing.Point(12, 39);
             this.labelDayText.Name = "labelDayText";
             this.labelDayText.Size = new System.Drawing.Size(32, 13);
             this.labelDayText.TabIndex = 2;
@@ -178,14 +202,6 @@
             this.timerTime.Interval = 200;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
             // 
-            // labelTaskDone
-            // 
-            this.labelTaskDone.AutoSize = true;
-            this.labelTaskDone.Location = new System.Drawing.Point(157, 39);
-            this.labelTaskDone.Name = "labelTaskDone";
-            this.labelTaskDone.Size = new System.Drawing.Size(0, 13);
-            this.labelTaskDone.TabIndex = 8;
-            // 
             // timerMove
             // 
             this.timerMove.Enabled = true;
@@ -198,6 +214,74 @@
             this.timerChangeDirection.Interval = 4000;
             this.timerChangeDirection.Tick += new System.EventHandler(this.timerChangeDirection_Tick);
             // 
+            // labelNameText
+            // 
+            this.labelNameText.AutoSize = true;
+            this.labelNameText.Location = new System.Drawing.Point(219, 12);
+            this.labelNameText.Name = "labelNameText";
+            this.labelNameText.Size = new System.Drawing.Size(41, 13);
+            this.labelNameText.TabIndex = 2;
+            this.labelNameText.Text = "Name :";
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(257, 12);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(0, 13);
+            this.labelName.TabIndex = 9;
+            // 
+            // labelAgeText
+            // 
+            this.labelAgeText.AutoSize = true;
+            this.labelAgeText.Location = new System.Drawing.Point(219, 39);
+            this.labelAgeText.Name = "labelAgeText";
+            this.labelAgeText.Size = new System.Drawing.Size(32, 13);
+            this.labelAgeText.TabIndex = 10;
+            this.labelAgeText.Text = "Age :";
+            // 
+            // labelAge
+            // 
+            this.labelAge.AutoSize = true;
+            this.labelAge.Location = new System.Drawing.Point(248, 39);
+            this.labelAge.Name = "labelAge";
+            this.labelAge.Size = new System.Drawing.Size(0, 13);
+            this.labelAge.TabIndex = 11;
+            // 
+            // labelWeightText
+            // 
+            this.labelWeightText.AutoSize = true;
+            this.labelWeightText.Location = new System.Drawing.Point(347, 39);
+            this.labelWeightText.Name = "labelWeightText";
+            this.labelWeightText.Size = new System.Drawing.Size(47, 13);
+            this.labelWeightText.TabIndex = 12;
+            this.labelWeightText.Text = "Weight :";
+            // 
+            // labelWeight
+            // 
+            this.labelWeight.AutoSize = true;
+            this.labelWeight.Location = new System.Drawing.Point(393, 39);
+            this.labelWeight.Name = "labelWeight";
+            this.labelWeight.Size = new System.Drawing.Size(0, 13);
+            this.labelWeight.TabIndex = 13;
+            // 
+            // labelComfortText
+            // 
+            this.labelComfortText.AutoSize = true;
+            this.labelComfortText.Location = new System.Drawing.Point(347, 12);
+            this.labelComfortText.Name = "labelComfortText";
+            this.labelComfortText.Size = new System.Drawing.Size(49, 13);
+            this.labelComfortText.TabIndex = 14;
+            this.labelComfortText.Text = "Comfort :";
+            // 
+            // labelComfort
+            // 
+            this.labelComfort.AutoSize = true;
+            this.labelComfort.Location = new System.Drawing.Point(392, 12);
+            this.labelComfort.Name = "labelComfort";
+            this.labelComfort.Size = new System.Drawing.Size(0, 13);
+            this.labelComfort.TabIndex = 15;
+            // 
             // CageForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -209,6 +293,7 @@
             this.Name = "CageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CageForm";
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CageForm_MouseClick);
             this.panelUserInfo.ResumeLayout(false);
             this.panelUserInfo.PerformLayout();
             this.ResumeLayout(false);
@@ -233,5 +318,13 @@
         private System.Windows.Forms.Label labelTaskDone;
         private System.Windows.Forms.Timer timerMove;
         private System.Windows.Forms.Timer timerChangeDirection;
+        private System.Windows.Forms.Label labelComfort;
+        private System.Windows.Forms.Label labelComfortText;
+        private System.Windows.Forms.Label labelWeight;
+        private System.Windows.Forms.Label labelWeightText;
+        private System.Windows.Forms.Label labelAge;
+        private System.Windows.Forms.Label labelAgeText;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelNameText;
     }
 }

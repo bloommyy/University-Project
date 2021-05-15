@@ -14,7 +14,6 @@ namespace University_Project
     {
         public AnimalCage animalCage;
         public Zoo zoo;
-        private Queue<string> q = new Queue<string>();
 
         /// <summary>
         /// Constructor for CageForm.
@@ -26,7 +25,6 @@ namespace University_Project
             Text = cageType + " Cage";
             buttonBuyAnimal.Text = (cageType == CageType.Elephant) ? "Buy Elephant -300" : "Buy Penguin -300";
             buttonSellAnimal.Text = (cageType == CageType.Elephant) ? "Sell Elephant +100" : "Sell Penguin +100";
-            //Invalidate();
         }
 
         /// <summary>
@@ -41,28 +39,25 @@ namespace University_Project
             labelTaskDone.Text = animalCage.isTaskDone ? "Done" : "Not done";
         }
 
+        /// <summary>
+        /// Redraws the form.
+        /// </summary>
+        /// <param name="e"></param>
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
             SetLabels();
-
-            if (q.Count >= 1)
-            {
-                if(q.Dequeue() == "Elephant")
-                {
-                    animalCage.AddAnimal(new Elephant("Harry", 17, 8600));
-                }else if(q.Dequeue() == "Penguin")
-                {
-                    animalCage.AddAnimal(new Penguin("Pengu", 5, 20));
-                }
-            }
-
             foreach(var animal in animalCage.GetAnimals())
             {
                 animal.animalImage.DrawAnimal(e.Graphics);
             }
         }
 
+        /// <summary>
+        /// Method that simulates a clock using the timer's tick.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerTime_Tick(object sender, EventArgs e)
         {
             zoo.Minute++;
@@ -76,27 +71,51 @@ namespace University_Project
             Invalidate();
         }
 
+        /// <summary>
+        /// Buying an animal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonBuyAnimal_Click(object sender, EventArgs e)
         {
             if (zoo.Money < 300)
-                return;
-
+                return; labelError.Text = "Not enough money.";
 
             if(animalCage.cageType == CageType.Elephant)
             {
-                q.Enqueue("Elephant");
-                
-            }else if(animalCage.cageType == CageType.Penguin)
-            {
-                q.Enqueue("Penguin");
+                animalCage.AddAnimal(new Elephant("Harry", 17, 8600));
             }
+            else if(animalCage.cageType == CageType.Penguin)
+            {
+                animalCage.AddAnimal(new Penguin("Pengu", 5, 20));
+            }
+            zoo.Money -= 300;
         }
 
+        /// <summary>
+        /// Selling a selected animal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonSellAnimal_Click(object sender, EventArgs e)
         {
-
+            var animals = animalCage.GetAnimals();
+            for(int i = animals.Count - 1; i >= 0; i--)
+            {
+                if (animals[i].animalImage.outlineSize == 6)
+                {
+                    animalCage.RemoveAnimal(animals[i]);
+                    zoo.Money += 100;
+                }
+            }
+            UpdateAnimalInfoLabels();
         }
 
+        /// <summary>
+        /// Moves the animals' position on every tick.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerMove_Tick(object sender, EventArgs e)
         {
             foreach (var animal in animalCage.GetAnimals())
@@ -106,12 +125,59 @@ namespace University_Project
             Invalidate();
         }
 
+        /// <summary>
+        /// Changes the direction of the animals on every tick.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void timerChangeDirection_Tick(object sender, EventArgs e)
         {
             foreach (var animal in animalCage.GetAnimals())
             {
                 animal.ChangeDirection();
             }
+        }
+
+        /// <summary>
+        /// Checks if user has clicked on an animal.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CageForm_MouseClick(object sender, MouseEventArgs e)
+        {
+            UpdateAnimalInfoLabels();
+            foreach (var animal in animalCage.GetAnimals())
+            {
+                animal.animalImage.outlineSize = 3;
+                if (animal.animalImage.Contains(e.Location))
+                {
+                    animal.animalImage.outlineSize = 6;
+                    UpdateAnimalInfoLabels(animal);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Changes the values of the labels about animal info.
+        /// </summary>
+        /// <param name="animal"></param>
+        private void UpdateAnimalInfoLabels(Animal animal = null)
+        {
+            if(animal != null)
+            {
+                labelName.Text = animal.Name;
+                labelAge.Text = animal.Age.ToString();
+                labelWeight.Text = animal.Weight.ToString();
+                labelComfort.Text = animal.comfort.ToString();
+            }
+            else
+            {
+                labelName.Text = "";
+                labelAge.Text = "";
+                labelWeight.Text = "";
+                labelComfort.Text = "";
+            }
+            
         }
     }
 }

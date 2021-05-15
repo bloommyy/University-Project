@@ -38,7 +38,7 @@ namespace University_Project
             labelMinutes.Text = zoo.Minute.ToString();
             labelMoney.Text = zoo.Money.ToString();
             DrawZoo(e.Graphics);
-            labelTasksDone.Text = zoo.GetTasksLeft();
+            labelTasksDone.Text = "Will be added in 3rd Phase - LINQ";
                                     
 
         }

@@ -171,6 +171,13 @@
             Draws the Animal using Graphics.Draw.
             </summary>
         </member>
+        <member name="M:University_Project.AnimalImage.Contains(System.Drawing.Point)">
+            <summary>
+             Method for checking if the cursor is over the animalImage.
+            </summary>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
         <member name="F:University_Project.BuyCageForm.choice">
             <summary>
             User's choice from the combo box.
@@ -214,6 +221,60 @@
             <summary>
             Sets the value of the Minute, Hour, Day, Money and Task.
             </summary>
+        </member>
+        <member name="M:University_Project.CageForm.OnPaint(System.Windows.Forms.PaintEventArgs)">
+            <summary>
+            Redraws the form.
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.CageForm.timerTime_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Method that simulates a clock using the timer's tick.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.CageForm.buttonBuyAnimal_Click(System.Object,System.EventArgs)">
+            <summary>
+            Buying an animal.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.CageForm.buttonSellAnimal_Click(System.Object,System.EventArgs)">
+            <summary>
+            Selling a selected animal.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.CageForm.timerMove_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Moves the animals' position on every tick.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.CageForm.timerChangeDirection_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Changes the direction of the animals on every tick.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.CageForm.CageForm_MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
+            <summary>
+            Checks if user has clicked on an animal.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:University_Project.CageForm.UpdateAnimalInfoLabels(University_Project.Animal)">
+            <summary>
+            Changes the values of the labels about animal info.
+            </summary>
+            <param name="animal"></param>
         </member>
         <member name="F:University_Project.CageForm.components">
             <summary>
@@ -318,6 +379,13 @@
             <summary>
             Constructor for ElephantImage.
             </summary>
+        </member>
+        <member name="M:University_Project.ElephantImage.Contains(System.Drawing.Point)">
+            <summary>
+            Method for checking if the cursor is over the animalImage.
+            </summary>
+            <param name="point"></param>
+            <returns></returns>
         </member>
         <member name="T:University_Project.MainForm">
             <summary>
@@ -535,6 +603,19 @@
             Constructor for PeinguinImage.
             </summary>
         </member>
+        <member name="M:University_Project.PenguinImage.DrawAnimal(System.Drawing.Graphics)">
+            <summary>
+            Draws the animal.
+            </summary>
+            <param name="g"></param>
+        </member>
+        <member name="M:University_Project.PenguinImage.Contains(System.Drawing.Point)">
+            <summary>
+            Checks if user has clicked on the penguin.
+            </summary>
+            <param name="point"></param>
+            <returns></returns>
+        </member>
         <member name="M:University_Project.Program.Main">
             <summary>
             The main entry point for the application.
@@ -579,12 +660,6 @@
             Shows the name of the zoo(gamesave) and the date it was created.
             </summary>
             <returns></returns>
-        </member>
-        <member name="M:University_Project.Zoo.GetTasksLeft">
-            <summary>
-            Shows the amount of tasks left.
-            </summary>
-            <returns>A string of a number </returns>
         </member>
         <member name="T:University_Project.Properties.Resources">
             <summary>

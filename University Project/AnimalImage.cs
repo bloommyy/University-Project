@@ -13,19 +13,19 @@ namespace University_Project
     public abstract class AnimalImage
     {
         private Point _location;
-        public Point Location { 
-            get
-            {
-                return _location;
-            }
-            set
-            {
-                _location = value;
-            }
+        public Point Location {
+            get { return _location; }
+            set { _location = value; }
         }
-        public float Width { get; set; }
-        public float Height { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
         protected Graphics graphics;
+        private int _outlineSize = 3;
+        public int outlineSize
+        {
+            get { return _outlineSize; }
+            set { _outlineSize = value; }
+        }
 
 
         /// <summary>
@@ -51,13 +51,20 @@ namespace University_Project
         /// <summary>
         /// Draws the Animal using Graphics.Draw.
         /// </summary>
-        public void DrawAnimal(Graphics g)
+        public virtual void DrawAnimal(Graphics g)
         {
             graphics = g;
+            DrawLegs();
             DrawBody();
             DrawHead();
-            DrawLegs();
             DrawSpecials();
         }
+
+        /// <summary>
+        ///  Method for checking if the cursor is over the animalImage.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <returns></returns>
+        public abstract bool Contains(Point point);
     }
 }

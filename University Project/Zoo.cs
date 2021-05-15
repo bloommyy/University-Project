@@ -96,11 +96,9 @@ namespace University_Project
         /// Shows the amount of tasks left.
         /// </summary>
         /// <returns>A string of a number </returns>
-        public string GetTasksLeft()
-        {
-             return _cages.Select(cage => cage.isTaskDone)
-                                    .Where(task => task == false)
-                                    .Count().ToString();
-        }
+        //public string GetTasksLeft()
+        //{
+            // Will be added in 3rd phase - LINQ
+        //}
     }
 }
