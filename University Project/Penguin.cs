@@ -21,7 +21,7 @@ namespace University_Project
         /// <returns>Result according to the animalImage's location.</returns>
         private bool CheckIfSwimming()
         {
-            if (base.animalImage.Location.X >= 700) // Checks if in water (hard coded when forms are added)
+            if (base.animalImage.Location.X >= base.cageFormBounds.Width / 2) // Checks if in water (hard coded when forms are added)
                 return true;
 
             return false;
@@ -40,13 +40,25 @@ namespace University_Project
                 int X = base.animalImage.Location.X;
                 int Y = base.animalImage.Location.Y;
                 if ((base.direction & Direction.North) == Direction.North)
-                    animalImage.Location = new Point(X, Y - swimmingSpeed); Y -= swimmingSpeed;
+                {
+                    animalImage.Location = new Point(X, Y - swimmingSpeed); 
+                    Y -= swimmingSpeed;
+                }
                 if ((base.direction & Direction.East) == Direction.East)
-                    animalImage.Location = new Point(X + swimmingSpeed, Y); X += swimmingSpeed;
+                {
+                    animalImage.Location = new Point(X + swimmingSpeed, Y);
+                    X += swimmingSpeed;
+                }
                 if ((base.direction & Direction.South) == Direction.South)
-                    animalImage.Location = new Point(X, Y + swimmingSpeed); Y += swimmingSpeed;
+                {
+                    animalImage.Location = new Point(X, Y + swimmingSpeed);
+                    Y += swimmingSpeed;
+                }   
                 if ((base.direction & Direction.West) == Direction.West)
-                    animalImage.Location = new Point(X - swimmingSpeed, Y); X -= swimmingSpeed;
+                {
+                    animalImage.Location = new Point(X - swimmingSpeed, Y); 
+                    X -= swimmingSpeed;
+                }    
             }
         }
 

@@ -14,12 +14,40 @@ namespace University_Project
     public class Zoo
     {
         private List<AnimalCage> _cages = new List<AnimalCage>();
+
+        /// <summary>
+        /// The name of the save/zoo.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// The date of the save/zoo.
+        /// </summary>
         public DateTime Date { get; set; }
+
+        /// <summary>
+        /// The ingame day.
+        /// </summary>
         public int Day { get; set; }
+
+        /// <summary>
+        /// The ingame hour.
+        /// </summary>
         public int Hour { get; set; }
+
+        /// <summary>
+        /// The ingame minutes.
+        /// </summary>
         public int Minute { get; set; }
+
+        /// <summary>
+        /// The ingame money.
+        /// </summary>
         public int Money { get; set; }
+
+        /// <summary>
+        /// The graphics used to draw the cages.
+        /// </summary>
         public Graphics Graphics { get; set; }
 
         /// <summary>
@@ -29,16 +57,16 @@ namespace University_Project
         /// <param name="ct">The type of the cage.</param>
         public void AddCage(Rectangle formBounds, CageType ct)
         {
-            CagePosition cagePos = CagePosition.Left;
-            // Checks if one of the cages is there, if it's there, put the other one as "needed".
+            CagePosition availableCagePos = CagePosition.Left;
+            // Checks if one of the cages is there, if it's there, put the other one as "available".
             foreach(var cage in _cages)
             {
                 if (cage.cageImage.cagePos == CagePosition.Left)
-                    cagePos = CagePosition.Right;
+                    availableCagePos = CagePosition.Right;
                 else if (cage.cageImage.cagePos == CagePosition.Right)
-                    cagePos = CagePosition.Left;
+                    availableCagePos = CagePosition.Left;
             }
-            _cages.Add(new AnimalCage(Graphics, formBounds, cagePos, ct));
+            _cages.Add(new AnimalCage(Graphics, formBounds, availableCagePos, ct));
         }
 
         /// <summary>
@@ -59,6 +87,26 @@ namespace University_Project
             Hour = 9;
             Minute = 0;
             Money += 300;
+            foreach (var cage in _cages)
+            {
+                foreach(var animal in cage.GetAnimals())
+                {
+                    Money += 200; // Gives 200 money for each animal.
+                }
+
+                if (!cage.isTaskDone)
+                {
+                    foreach(var animal in cage.GetAnimals())
+                    {
+                        animal.LowerComfort(); // If task isn't done, lower comfort on each animal in the cage.
+                    }
+                }
+                else
+                {
+                    Money += 200;
+                    cage.isTaskDone = false;
+                } 
+            }
         }
 
         /// <summary>
@@ -96,9 +144,9 @@ namespace University_Project
         /// Shows the amount of tasks left.
         /// </summary>
         /// <returns>A string of a number </returns>
-        //public string GetTasksLeft()
-        //{
-            // Will be added in 3rd phase - LINQ
-        //}
+        public string GetTasksLeft()
+        {
+            return "Will be added in 3rd phase - LINQ";
+        }
     }
 }

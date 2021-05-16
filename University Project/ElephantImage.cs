@@ -12,8 +12,8 @@ namespace University_Project
     /// </summary>
     class ElephantImage : AnimalImage
     {
-        private int legWidth = 20;
-        private int legHeight = 100;
+        private readonly int legWidth = 20; // Will be made scalable maybe
+        private readonly int legHeight = 100; // Will be made scalable maybe
         private Rectangle[] legs;
         private Rectangle bodyRectangle;
         private Rectangle headRectangle;
@@ -23,7 +23,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawBody()
         {
-            bodyRectangle = new Rectangle(Location.X, Location.Y, Width, Height);
+            bodyRectangle = new Rectangle(Location.X, Location.Y, BodyWidth, BodyHeight);
             using (var pen = new Pen(Color.Black, base.outlineSize))
             {
                 base.graphics.DrawEllipse(pen, bodyRectangle);
@@ -39,7 +39,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawHead()
         {
-            headRectangle = new Rectangle(Location.X + 120, Location.Y - 10, Width - 90, Height - 40);
+            headRectangle = new Rectangle(Location.X + 120, Location.Y - 10, BodyWidth - 90, BodyHeight - 40);
             using (var pen = new Pen(Color.Black, base.outlineSize))
             {
                 base.graphics.DrawEllipse(pen, headRectangle);
@@ -112,8 +112,9 @@ namespace University_Project
         public ElephantImage()
         {
             base.Location = new Point(400, 400);
-            base.Width = 150;
-            base.Height = 100;
+            base.BodyWidth = 150;
+            base.BodyHeight = 100;
+            base.ActualHeight = BodyHeight + legHeight;
         }
 
         /// <summary>

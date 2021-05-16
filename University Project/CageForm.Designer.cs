@@ -30,6 +30,18 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelUserInfo = new System.Windows.Forms.Panel();
+            this.buttonDoTask = new System.Windows.Forms.Button();
+            this.buttonBuyFodder = new System.Windows.Forms.Button();
+            this.labelFodder = new System.Windows.Forms.Label();
+            this.labelFodderText = new System.Windows.Forms.Label();
+            this.labelComfort = new System.Windows.Forms.Label();
+            this.labelComfortText = new System.Windows.Forms.Label();
+            this.labelWeight = new System.Windows.Forms.Label();
+            this.labelWeightText = new System.Windows.Forms.Label();
+            this.labelAge = new System.Windows.Forms.Label();
+            this.labelAgeText = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelNameText = new System.Windows.Forms.Label();
             this.labelTaskDone = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
             this.labelTasksDoneText = new System.Windows.Forms.Label();
@@ -45,20 +57,17 @@
             this.timerTime = new System.Windows.Forms.Timer(this.components);
             this.timerMove = new System.Windows.Forms.Timer(this.components);
             this.timerChangeDirection = new System.Windows.Forms.Timer(this.components);
-            this.labelNameText = new System.Windows.Forms.Label();
-            this.labelName = new System.Windows.Forms.Label();
-            this.labelAgeText = new System.Windows.Forms.Label();
-            this.labelAge = new System.Windows.Forms.Label();
-            this.labelWeightText = new System.Windows.Forms.Label();
-            this.labelWeight = new System.Windows.Forms.Label();
-            this.labelComfortText = new System.Windows.Forms.Label();
-            this.labelComfort = new System.Windows.Forms.Label();
+            this.timerWaitAfterOutOfBounds = new System.Windows.Forms.Timer(this.components);
             this.panelUserInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUserInfo
             // 
             this.panelUserInfo.BackColor = System.Drawing.Color.Silver;
+            this.panelUserInfo.Controls.Add(this.buttonDoTask);
+            this.panelUserInfo.Controls.Add(this.buttonBuyFodder);
+            this.panelUserInfo.Controls.Add(this.labelFodder);
+            this.panelUserInfo.Controls.Add(this.labelFodderText);
             this.panelUserInfo.Controls.Add(this.labelComfort);
             this.panelUserInfo.Controls.Add(this.labelComfortText);
             this.panelUserInfo.Controls.Add(this.labelWeight);
@@ -84,6 +93,111 @@
             this.panelUserInfo.Name = "panelUserInfo";
             this.panelUserInfo.Size = new System.Drawing.Size(1264, 100);
             this.panelUserInfo.TabIndex = 1;
+            // 
+            // buttonDoTask
+            // 
+            this.buttonDoTask.Location = new System.Drawing.Point(1016, 41);
+            this.buttonDoTask.Name = "buttonDoTask";
+            this.buttonDoTask.Size = new System.Drawing.Size(115, 23);
+            this.buttonDoTask.TabIndex = 20;
+            this.buttonDoTask.Text = "Do Task";
+            this.buttonDoTask.UseVisualStyleBackColor = true;
+            this.buttonDoTask.Click += new System.EventHandler(this.buttonDoTask_Click);
+            // 
+            // buttonBuyFodder
+            // 
+            this.buttonBuyFodder.Location = new System.Drawing.Point(1016, 12);
+            this.buttonBuyFodder.Name = "buttonBuyFodder";
+            this.buttonBuyFodder.Size = new System.Drawing.Size(115, 23);
+            this.buttonBuyFodder.TabIndex = 18;
+            this.buttonBuyFodder.Text = "Buy Fodder -100";
+            this.buttonBuyFodder.UseVisualStyleBackColor = true;
+            this.buttonBuyFodder.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // labelFodder
+            // 
+            this.labelFodder.AutoSize = true;
+            this.labelFodder.Location = new System.Drawing.Point(537, 12);
+            this.labelFodder.Name = "labelFodder";
+            this.labelFodder.Size = new System.Drawing.Size(0, 13);
+            this.labelFodder.TabIndex = 17;
+            // 
+            // labelFodderText
+            // 
+            this.labelFodderText.AutoSize = true;
+            this.labelFodderText.Location = new System.Drawing.Point(494, 12);
+            this.labelFodderText.Name = "labelFodderText";
+            this.labelFodderText.Size = new System.Drawing.Size(46, 13);
+            this.labelFodderText.TabIndex = 16;
+            this.labelFodderText.Text = "Fodder :";
+            // 
+            // labelComfort
+            // 
+            this.labelComfort.AutoSize = true;
+            this.labelComfort.Location = new System.Drawing.Point(392, 12);
+            this.labelComfort.Name = "labelComfort";
+            this.labelComfort.Size = new System.Drawing.Size(0, 13);
+            this.labelComfort.TabIndex = 15;
+            // 
+            // labelComfortText
+            // 
+            this.labelComfortText.AutoSize = true;
+            this.labelComfortText.Location = new System.Drawing.Point(347, 12);
+            this.labelComfortText.Name = "labelComfortText";
+            this.labelComfortText.Size = new System.Drawing.Size(49, 13);
+            this.labelComfortText.TabIndex = 14;
+            this.labelComfortText.Text = "Comfort :";
+            // 
+            // labelWeight
+            // 
+            this.labelWeight.AutoSize = true;
+            this.labelWeight.Location = new System.Drawing.Point(393, 39);
+            this.labelWeight.Name = "labelWeight";
+            this.labelWeight.Size = new System.Drawing.Size(0, 13);
+            this.labelWeight.TabIndex = 13;
+            // 
+            // labelWeightText
+            // 
+            this.labelWeightText.AutoSize = true;
+            this.labelWeightText.Location = new System.Drawing.Point(347, 39);
+            this.labelWeightText.Name = "labelWeightText";
+            this.labelWeightText.Size = new System.Drawing.Size(47, 13);
+            this.labelWeightText.TabIndex = 12;
+            this.labelWeightText.Text = "Weight :";
+            // 
+            // labelAge
+            // 
+            this.labelAge.AutoSize = true;
+            this.labelAge.Location = new System.Drawing.Point(248, 39);
+            this.labelAge.Name = "labelAge";
+            this.labelAge.Size = new System.Drawing.Size(0, 13);
+            this.labelAge.TabIndex = 11;
+            // 
+            // labelAgeText
+            // 
+            this.labelAgeText.AutoSize = true;
+            this.labelAgeText.Location = new System.Drawing.Point(219, 39);
+            this.labelAgeText.Name = "labelAgeText";
+            this.labelAgeText.Size = new System.Drawing.Size(32, 13);
+            this.labelAgeText.TabIndex = 10;
+            this.labelAgeText.Text = "Age :";
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(257, 12);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(0, 13);
+            this.labelName.TabIndex = 9;
+            // 
+            // labelNameText
+            // 
+            this.labelNameText.AutoSize = true;
+            this.labelNameText.Location = new System.Drawing.Point(219, 12);
+            this.labelNameText.Name = "labelNameText";
+            this.labelNameText.Size = new System.Drawing.Size(41, 13);
+            this.labelNameText.TabIndex = 2;
+            this.labelNameText.Text = "Name :";
             // 
             // labelTaskDone
             // 
@@ -214,73 +328,10 @@
             this.timerChangeDirection.Interval = 4000;
             this.timerChangeDirection.Tick += new System.EventHandler(this.timerChangeDirection_Tick);
             // 
-            // labelNameText
+            // timerWaitAfterOutOfBounds
             // 
-            this.labelNameText.AutoSize = true;
-            this.labelNameText.Location = new System.Drawing.Point(219, 12);
-            this.labelNameText.Name = "labelNameText";
-            this.labelNameText.Size = new System.Drawing.Size(41, 13);
-            this.labelNameText.TabIndex = 2;
-            this.labelNameText.Text = "Name :";
-            // 
-            // labelName
-            // 
-            this.labelName.AutoSize = true;
-            this.labelName.Location = new System.Drawing.Point(257, 12);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(0, 13);
-            this.labelName.TabIndex = 9;
-            // 
-            // labelAgeText
-            // 
-            this.labelAgeText.AutoSize = true;
-            this.labelAgeText.Location = new System.Drawing.Point(219, 39);
-            this.labelAgeText.Name = "labelAgeText";
-            this.labelAgeText.Size = new System.Drawing.Size(32, 13);
-            this.labelAgeText.TabIndex = 10;
-            this.labelAgeText.Text = "Age :";
-            // 
-            // labelAge
-            // 
-            this.labelAge.AutoSize = true;
-            this.labelAge.Location = new System.Drawing.Point(248, 39);
-            this.labelAge.Name = "labelAge";
-            this.labelAge.Size = new System.Drawing.Size(0, 13);
-            this.labelAge.TabIndex = 11;
-            // 
-            // labelWeightText
-            // 
-            this.labelWeightText.AutoSize = true;
-            this.labelWeightText.Location = new System.Drawing.Point(347, 39);
-            this.labelWeightText.Name = "labelWeightText";
-            this.labelWeightText.Size = new System.Drawing.Size(47, 13);
-            this.labelWeightText.TabIndex = 12;
-            this.labelWeightText.Text = "Weight :";
-            // 
-            // labelWeight
-            // 
-            this.labelWeight.AutoSize = true;
-            this.labelWeight.Location = new System.Drawing.Point(393, 39);
-            this.labelWeight.Name = "labelWeight";
-            this.labelWeight.Size = new System.Drawing.Size(0, 13);
-            this.labelWeight.TabIndex = 13;
-            // 
-            // labelComfortText
-            // 
-            this.labelComfortText.AutoSize = true;
-            this.labelComfortText.Location = new System.Drawing.Point(347, 12);
-            this.labelComfortText.Name = "labelComfortText";
-            this.labelComfortText.Size = new System.Drawing.Size(49, 13);
-            this.labelComfortText.TabIndex = 14;
-            this.labelComfortText.Text = "Comfort :";
-            // 
-            // labelComfort
-            // 
-            this.labelComfort.AutoSize = true;
-            this.labelComfort.Location = new System.Drawing.Point(392, 12);
-            this.labelComfort.Name = "labelComfort";
-            this.labelComfort.Size = new System.Drawing.Size(0, 13);
-            this.labelComfort.TabIndex = 15;
+            this.timerWaitAfterOutOfBounds.Interval = 1000;
+            this.timerWaitAfterOutOfBounds.Tick += new System.EventHandler(this.timerWaitAfterOutOfBounds_Tick);
             // 
             // CageForm
             // 
@@ -289,7 +340,8 @@
             this.BackColor = System.Drawing.Color.LimeGreen;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.panelUserInfo);
-            this.MinimizeBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
             this.Name = "CageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CageForm";
@@ -326,5 +378,10 @@
         private System.Windows.Forms.Label labelAgeText;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelNameText;
+        private System.Windows.Forms.Label labelFodder;
+        private System.Windows.Forms.Label labelFodderText;
+        private System.Windows.Forms.Button buttonBuyFodder;
+        private System.Windows.Forms.Timer timerWaitAfterOutOfBounds;
+        private System.Windows.Forms.Button buttonDoTask;
     }
 }

@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace University_Project
 {
+    /// <summary>
+    /// Form for selecting what cage to buy.
+    /// </summary>
     public partial class BuyCageForm : Form
     {
         /// <summary>

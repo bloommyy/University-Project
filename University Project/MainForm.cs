@@ -15,6 +15,9 @@ namespace University_Project
     /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Zoo/gamesave information. Main information.
+        /// </summary>
         public Zoo zoo = new Zoo("doesn't matter", DateTime.Now);
 
         /// <summary>
@@ -38,9 +41,7 @@ namespace University_Project
             labelMinutes.Text = zoo.Minute.ToString();
             labelMoney.Text = zoo.Money.ToString();
             DrawZoo(e.Graphics);
-            labelTasksDone.Text = "Will be added in 3rd Phase - LINQ";
-                                    
-
+            labelTasksDone.Text = zoo.GetTasksLeft();
         }
 
         /// <summary>
@@ -50,6 +51,7 @@ namespace University_Project
         /// <param name="e"></param>
         private void timerTime_Tick(object sender, EventArgs e)
         {
+            // Clock
             zoo.Minute++;
             if (zoo.Minute >= 60)
             {
@@ -57,7 +59,43 @@ namespace University_Project
                 if (zoo.Hour >= 21)
                     zoo.NextDay();
                 zoo.Minute = 0;
-            }  
+            }
+
+            // Animals eating
+            var animalCages = zoo.GetCages();
+            if (zoo.Hour % 6 == 0)
+            {
+                foreach(var cage in animalCages)
+                {
+                    foreach (var animal in cage.GetAnimals())
+                    {
+                        var cageFodder = cage.fodderState;
+                        if (cageFodder != 0)
+                        {
+                            cage.fodderState = animal.Eat(cageFodder);
+                            animal.IncreaseComfort();
+                        }
+                        else
+                        {
+                            labelError.Text = "Fodder low!";
+                            labelError.Visible = true;
+                            animal.LowerComfort();
+                        }
+                    }
+
+                    // Checking for uncomfortable animals
+                    var animals = cage.GetAnimals();
+                    for (int i = animals.Count - 1; i > 0; i--)
+                    {
+                        if (animals[i].GetComfort() == AnimalComfort.Uncomfortable)
+                        {
+                            labelError.Text = "An animal ran away!";
+                            labelError.Visible = true;
+                            cage.RemoveAnimal(animals[i]);
+                        }
+                    }
+                }
+            }        
             Invalidate();
         }
 
@@ -94,12 +132,14 @@ namespace University_Project
                 labelError.Visible = true;
                 return;
             }
+
             if(zoo.GetCages().Count == 2) // Checks if user already has 2 cages
             {
                 labelError.Text = "Cannot buy more than 2 cages!";
                 labelError.Visible = true;
                 return;
             }
+
             BuyCageForm bcf = new BuyCageForm();
             if(bcf.ShowDialog() == DialogResult.OK)
             {
@@ -161,7 +201,6 @@ namespace University_Project
                         animalCage = cage,
                         zoo = zoo
                     };
-                    
                     cf.Show();
                     timerTime.Enabled = false;
                     this.Hide();

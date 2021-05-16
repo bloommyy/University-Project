@@ -13,7 +13,7 @@ namespace University_Project
     class Elephant : Animal
     {
         /// <summary>
-        /// Moves animalImage using its location.
+        /// Moves animalImage using its location and direction.
         /// </summary>
         public override void Move()
         {

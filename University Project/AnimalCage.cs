@@ -13,8 +13,19 @@ namespace University_Project
     /// </summary>
     public enum FodderState
     {
+        /// <summary>
+        /// Fodder is empty. Animal may run away.
+        /// </summary>
         Empty = 0,
+
+        /// <summary>
+        /// Fodder is half ful.
+        /// </summary>
         HalfFull = 1,
+
+        /// <summary>
+        /// Fodder is full.
+        /// </summary>
         Full = 2
     }
 
@@ -23,7 +34,14 @@ namespace University_Project
     /// </summary>
     public enum CageType
     {
+        /// <summary>
+        /// Signifies the cage is for elephants.
+        /// </summary>
         Elephant = 0,
+
+        /// <summary>
+        /// Signifies the cage is for penguins.
+        /// </summary>
         Penguin = 1
     }
 
@@ -33,9 +51,25 @@ namespace University_Project
     public class AnimalCage
     {
         private List<Animal> _animals = new List<Animal>();
+
+        /// <summary>
+        /// Boolean showing if the daily task is done. If done - gives money, if not - reduces comfort.
+        /// </summary>
         public bool isTaskDone;
-        public FodderState FodderState;
+
+        /// <summary>
+        /// Shows the state of the fodder.
+        /// </summary>
+        public FodderState fodderState;
+
+        /// <summary>
+        /// The outlook of the cage in MainForm.
+        /// </summary>
         public AnimalCageImage cageImage;
+
+        /// <summary>
+        /// Shows that type the cage is.
+        /// </summary>
         public CageType cageType;
 
         /// <summary>
@@ -62,11 +96,12 @@ namespace University_Project
         /// <param name="g">Graphics used for drawing.</param>
         /// <param name="cagePos">Position of the cage.</param>
         /// <param name="formBounds">Bounds of the Form.</param>
+        /// <param name="ct">The type of the cage.</param>
         public AnimalCage(Graphics g, Rectangle formBounds, CagePosition cagePos, CageType ct)
         {
             cageImage = new AnimalCageImage(g, formBounds, cagePos);  
             isTaskDone = false;
-            FodderState = FodderState.HalfFull;
+            fodderState = FodderState.HalfFull;
             cageType = ct;
         }
 
@@ -77,6 +112,15 @@ namespace University_Project
         public List<Animal> GetAnimals()
         {
             return _animals;
+        }
+
+        /// <summary>
+        /// Increases the fodder.
+        /// </summary>
+        public void BuyFodder()
+        {
+            if ((int)fodderState < 2)
+                ++fodderState;
         }
     }
 }

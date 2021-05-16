@@ -18,6 +18,7 @@ namespace University_Project
         /// Left side of the screen.
         /// </summary>
         Left = 0,
+
         /// <summary>
         /// Right side of the screen.
         /// </summary>
@@ -36,17 +37,21 @@ namespace University_Project
         /// Used for x and y offset on both cages.
         /// </summary>
         private readonly int cageOffset = 5;
+
         /// <summary>
         /// The color of the fence. Black = selected.
         /// </summary>
         public Color fenceColor;
+
+        /// <summary>
+        /// A rectangle for the cage.
+        /// </summary>
         private Rectangle cageImage;
+
         /// <summary>
         /// The position of the cage. Can be Left or Right.
         /// </summary>
         public CagePosition cagePos;
-        
-
 
         /// <summary>
         /// Draws first or second cage - 2/5ths of the width of the screen. 

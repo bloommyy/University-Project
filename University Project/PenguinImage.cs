@@ -20,8 +20,8 @@ namespace University_Project
         /// </summary>
         protected override void DrawBody()
         {
-            bodyRectangle = new Rectangle(Location.X, Location.Y, Width, Height);
-            using(var pen = new Pen(Color.Black, 3))
+            bodyRectangle = new Rectangle(Location.X, Location.Y, BodyWidth, BodyHeight);
+            using(var pen = new Pen(Color.Black, base.outlineSize))
             {
                 base.graphics.DrawEllipse(pen, bodyRectangle);
             }
@@ -36,25 +36,26 @@ namespace University_Project
         /// </summary>
         protected override void DrawHead()
         {
-            headRectangle = new Rectangle(Location.X + 15, Location.Y - 50, Width - 25, Height - 50);
-            using (var pen = new Pen(Color.Black, 3))
+            headRectangle = new Rectangle(Location.X + 15, Location.Y - 50, BodyWidth - 25, BodyHeight - 50);
+            using (var pen = new Pen(Color.Black, base.outlineSize))
             {
-                //Head 
+                // Head 
                 base.graphics.DrawEllipse(pen, headRectangle);
             }
             using (var brush = new SolidBrush(Color.Gray))
             {
-                base.graphics.FillEllipse(brush, Location.X + 15, Location.Y - 50, Width - 25, Height - 50);     
+                // Head 
+                base.graphics.FillEllipse(brush, headRectangle);     
             }
             using (var brush = new SolidBrush(Color.White))
             {
-                // Eyes 
+                // Face 
                 base.graphics.FillEllipse(brush, Location.X + 25, Location.Y - 40, 25, 40);
                 base.graphics.FillEllipse(brush, Location.X + 55, Location.Y - 40, 25, 40);
             }
             using(var brush = new SolidBrush(Color.Black))
             {
-                // Eyeballs
+                // Eyes
                 base.graphics.FillEllipse(brush, Location.X + 32, Location.Y - 32, 7, 7);
                 base.graphics.FillEllipse(brush, Location.X + 62, Location.Y - 32, 7, 7);
             }
@@ -70,19 +71,19 @@ namespace University_Project
         /// </summary>
         protected override void DrawLegs()
         {
-            using (var pen = new Pen(Color.Black, 3))
+            using (var pen = new Pen(Color.Black, base.outlineSize))
             {
                 // Left foot
-                base.graphics.DrawEllipse(pen, Location.X + 15, Location.Y + Height - 12, 25, 15);
+                base.graphics.DrawEllipse(pen, Location.X + 15, Location.Y + BodyHeight - 12, 25, 15);
                 // Right foot
-                base.graphics.DrawEllipse(pen, Location.X + Width - 40, Location.Y + Height - 12, 25, 15);
+                base.graphics.DrawEllipse(pen, Location.X + BodyWidth - 40, Location.Y + BodyHeight - 12, 25, 15);
             }
             using (var brush = new SolidBrush(Color.Orange))
             {
                 // Left foot
-                base.graphics.FillEllipse(brush, Location.X + 15, Location.Y + Height - 12, 25, 15);
+                base.graphics.FillEllipse(brush, Location.X + 15, Location.Y + BodyHeight - 12, 25, 15);
                 // Right foot
-                base.graphics.FillEllipse(brush, Location.X + Width - 40, Location.Y + Height - 12, 25, 15);
+                base.graphics.FillEllipse(brush, Location.X + BodyWidth - 40, Location.Y + BodyHeight - 12, 25, 15);
             }
         }
 
@@ -94,17 +95,19 @@ namespace University_Project
             using (var brush = new SolidBrush(Color.White))
             {
                 // Stomach
-                base.graphics.FillEllipse(brush, Location.X + 10, Location.Y + 10, Width - 20, Height - 20);
+                base.graphics.FillEllipse(brush, Location.X + 10, Location.Y + 10, BodyWidth - 20, BodyHeight - 20);
             }
-            using (var pen = new Pen(Color.Black, 3))
+            using (var pen = new Pen(Color.Black, base.outlineSize))
             {
-                base.graphics.DrawEllipse(pen, Location.X + 5, Location.Y + 25, Width - 80, Height - 70);
-                base.graphics.DrawEllipse(pen, Location.X + Width - 25, Location.Y + 25, Width - 80, Height - 70);
+                // Wings
+                base.graphics.DrawEllipse(pen, Location.X + 5, Location.Y + 25, BodyWidth - 80, BodyHeight - 70);
+                base.graphics.DrawEllipse(pen, Location.X + BodyWidth - 25, Location.Y + 25, BodyWidth - 80, BodyHeight - 70);
             }
             using (var brush = new SolidBrush(Color.Gray))
             {
-                base.graphics.FillEllipse(brush, Location.X + 5, Location.Y + 25, Width - 80, Height - 70);
-                base.graphics.FillEllipse(brush, Location.X + Width - 25, Location.Y + 25, Width - 80, Height - 70);
+                // Wings
+                base.graphics.FillEllipse(brush, Location.X + 5, Location.Y + 25, BodyWidth - 80, BodyHeight - 70);
+                base.graphics.FillEllipse(brush, Location.X + BodyWidth - 25, Location.Y + 25, BodyWidth - 80, BodyHeight - 70);
             }
         }
 
@@ -113,9 +116,10 @@ namespace University_Project
         /// </summary>
         public PenguinImage()
         {
-            base.Location = new Point(400, 400);
-            base.Width = 100;
-            base.Height = 120;
+            base.Location = new Point(1000, 400);
+            base.BodyWidth = 100;
+            base.BodyHeight = 120;
+            base.ActualHeight = BodyHeight;
         }
 
         /// <summary>

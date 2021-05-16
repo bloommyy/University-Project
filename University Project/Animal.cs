@@ -16,10 +16,29 @@ namespace University_Project
     /// </summary>
     public enum AnimalComfort
     {
+        /// <summary>
+        /// Animal is uncomfortable. May run away.
+        /// </summary>
         Uncomfortable = 0,
+
+        /// <summary>
+        /// Animal is slightly uneasy.
+        /// </summary>
         SlightlyUneasy = 1,
+
+        /// <summary>
+        /// Animal's comfort is neutral.
+        /// </summary>
         Neutral = 2,
+
+        /// <summary>
+        /// Animal is satisfied.
+        /// </summary>
         Satisfied = 3,
+
+        /// <summary>
+        /// Animal is comfortable.
+        /// </summary>
         Comfortable = 4
     }
 
@@ -28,9 +47,24 @@ namespace University_Project
     /// </summary>
     public enum Direction
     {
+        /// <summary>
+        /// animalImage will move North.
+        /// </summary>
         North = 1,
+
+        /// <summary>
+        /// animalImage will move East.
+        /// </summary>
         East = 2,
+
+        /// <summary>
+        /// animalImage will move South.
+        /// </summary>
         South = 4,
+
+        /// <summary>
+        /// animalImage will move West.
+        /// </summary>
         West = 8
     }
 
@@ -39,15 +73,57 @@ namespace University_Project
     /// </summary>
     public abstract class Animal
     {
+        /// <summary>
+        /// The name of the animal.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// The age of the animal.
+        /// </summary>
         public int Age { get; set; }
+
+        /// <summary>
+        /// The weight of the animal.
+        /// </summary>
         public double Weight { get; set; }
 
-        public AnimalComfort comfort;
+        /// <summary>
+        /// Animal's comfort.
+        /// </summary>
+        protected AnimalComfort comfort;
+
+        /// <summary>
+        /// The walking speed of the animal.
+        /// </summary>
         protected int walkingSpeed;
+
+        /// <summary>
+        /// The outlook/drawing of the animal.
+        /// </summary>
         public AnimalImage animalImage;
-        protected Direction direction;
-        private static Random rnd = new Random();
+
+        /// <summary>
+        /// The direction the animal is going in.
+        /// </summary>
+        public Direction direction;
+        private static readonly Random rnd = new Random();
+        private Rectangle _cageFormBounds;
+
+        /// <summary>
+        /// The bounds of the cageForm.
+        /// </summary>
+        public Rectangle cageFormBounds { get { return _cageFormBounds; } set { _cageFormBounds = value; } }
+
+        /// <summary>
+        /// The height of the panel in cageForm.
+        /// </summary>
+        public int panelHeight;
+
+        /// <summary>
+        /// Boolean for check if an animal has been close to going out of the form.
+        /// </summary>
+        public bool hasBeenOutOfBounds = false;
 
         /// <summary>
         /// Method Eat that lowers the given FodderState by one, if Empty - it does nothing.
@@ -56,7 +132,7 @@ namespace University_Project
         /// <returns>FodderState</returns>
         public FodderState Eat(FodderState fodder)
         {
-            if(fodder > 0)
+            if (fodder > 0)
                 return --fodder;
 
             return fodder;
@@ -74,25 +150,25 @@ namespace University_Project
             Direction mask = Direction.East | Direction.North | Direction.South | Direction.West;
 
             // Removing West from possibilities
-            if (location.X <= 15)
+            if (location.X <= _cageFormBounds.Width / 10 + 9)
             {
                 mask &= (Direction.East | Direction.North | Direction.South);
             }
 
             // Removing East from possibilities
-            if (location.X >= 1200) // right side of form - hard coded when Forms are added.
+            if (location.X >= _cageFormBounds.Width - animalImage.BodyWidth - 50) 
             {
                 mask &= (Direction.West | Direction.North | Direction.South);
             }
 
             // Removing North from possibilities
-            if (location.Y <= 15)
+            if (location.Y <= 40)
             {
                 mask &= (Direction.East | Direction.West | Direction.South);
             }
 
             // Removing South from possibilities
-            if (location.Y >= 600) // bottom side of form - hard coded when Forms are added.
+            if (location.Y >= _cageFormBounds.Height - panelHeight - animalImage.ActualHeight - 40) 
             {
                 mask &= (Direction.East | Direction.North | Direction.West);
             }
@@ -146,7 +222,7 @@ namespace University_Project
             } while ((dir != 0) && (dir & mask) == 0);
 
             // Returns the validated Direction
-            direction = dir & mask; 
+            direction = dir & mask;
         }
 
         /// <summary>
@@ -156,15 +232,70 @@ namespace University_Project
         {
             int X = animalImage.Location.X;
             int Y = animalImage.Location.Y;
-            // Using bitwise AND to check which Direction to go in
+            // Using bitwise AND to move the location of the animalImage accordingly to its direction.
             if ((direction & Direction.North) == Direction.North)
-                animalImage.Location = new Point(X, Y - walkingSpeed); Y--;
+                animalImage.Location = new Point(X, Y-- - walkingSpeed);
             if ((direction & Direction.East) == Direction.East)
-                animalImage.Location = new Point(X + walkingSpeed, Y); X++;
+                animalImage.Location = new Point(X++ + walkingSpeed, Y);
             if ((direction & Direction.South) == Direction.South)
-                animalImage.Location = new Point(X, Y + walkingSpeed); Y++;
+                animalImage.Location = new Point(X, Y++ + walkingSpeed);
             if ((direction & Direction.West) == Direction.West)
-                animalImage.Location = new Point(X - walkingSpeed, Y); X--;
+                animalImage.Location = new Point(X-- - walkingSpeed, Y);
+        }
+
+        /// <summary>
+        /// Checking if the animalImage is not in the form.
+        /// </summary>
+        public void CheckForOutOfBounds()
+        {
+            var location = animalImage.Location;
+            if (location.X <= _cageFormBounds.Width / 10 + 9)
+            {
+                direction = Direction.East;
+                hasBeenOutOfBounds = true;
+            }
+            if (location.X >= _cageFormBounds.Width - animalImage.BodyWidth - 10)
+            {
+                direction = Direction.West;
+                hasBeenOutOfBounds = true;
+            }
+            if (location.Y <= 40)
+            {
+                direction = Direction.South;
+                hasBeenOutOfBounds = true;
+            }
+            if (location.Y >= _cageFormBounds.Height - panelHeight - animalImage.ActualHeight - 40)
+            {
+                direction = Direction.North;
+                hasBeenOutOfBounds = true;
+            }
+        }
+
+        /// <summary>
+        /// Returns the comfort of the animal.
+        /// </summary>
+        /// <returns></returns>
+        public AnimalComfort GetComfort()
+        {
+            return comfort;
+        }
+
+        /// <summary>
+        /// Lowers the animal's comfort.
+        /// </summary>
+        public void LowerComfort()
+        {
+            if((int)comfort > 0)
+                comfort--;
+        }
+
+        /// <summary>
+        /// Increases the animal's comfort.
+        /// </summary>
+        public void IncreaseComfort()
+        {
+            if ((int)comfort < 4)
+                comfort++;
         }
     }
 }

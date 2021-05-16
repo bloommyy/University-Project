@@ -44,6 +44,11 @@
             Moves animalImage using its location.
             </summary>
         </member>
+        <member name="M:University_Project.Animal.CheckForOutOfBounds">
+            <summary>
+            Checking if the animalImage is not in the form.
+            </summary>
+        </member>
         <member name="T:University_Project.FodderState">
             <summary>
             Enum for the state of the fodder.
@@ -84,6 +89,11 @@
             Returns the animals in the cage.
             </summary>
             <returns></returns>
+        </member>
+        <member name="M:University_Project.AnimalCage.BuyFodder">
+            <summary>
+            Increases the fodder.
+            </summary>
         </member>
         <member name="T:University_Project.CagePosition">
             <summary>
@@ -228,6 +238,12 @@
             </summary>
             <param name="e"></param>
         </member>
+        <member name="M:University_Project.CageForm.DrawCage(System.Drawing.Graphics)">
+            <summary>
+            Draws bonus things on the cage such as water, fodder, etc.
+            </summary>
+            <param name="g"></param>
+        </member>
         <member name="M:University_Project.CageForm.timerTime_Tick(System.Object,System.EventArgs)">
             <summary>
             Method that simulates a clock using the timer's tick.
@@ -263,6 +279,13 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
+        <member name="M:University_Project.CageForm.timerWaitAfterOutOfBounds_Tick(System.Object,System.EventArgs)">
+            <summary>
+            Timer responsible for the animals not going out of the form after they have returned to it.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
         <member name="M:University_Project.CageForm.CageForm_MouseClick(System.Object,System.Windows.Forms.MouseEventArgs)">
             <summary>
             Checks if user has clicked on an animal.
@@ -275,6 +298,13 @@
             Changes the values of the labels about animal info.
             </summary>
             <param name="animal"></param>
+        </member>
+        <member name="M:University_Project.CageForm.button1_Click(System.Object,System.EventArgs)">
+            <summary>
+            A button for buying fodder.
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
         </member>
         <member name="F:University_Project.CageForm.components">
             <summary>

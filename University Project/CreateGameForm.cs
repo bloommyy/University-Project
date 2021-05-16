@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace University_Project
 {
+    /// <summary>
+    /// A form for naming the game save.
+    /// </summary>
     public partial class CreateGameForm : Form
     {
         private string _name;
