@@ -1,24 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace University_Project
 {
+
     /// <summary>
     /// Class for game saves.
     /// </summary>
+    
     public class GameSaves
     {
         private List<Zoo> gameSaves = new List<Zoo>();
+        private IFormatter formatter = new BinaryFormatter();
 
         /// <summary>
         /// Saves the progress.
         /// </summary>
-        public void SaveGames()
+        public void SaveGames(Zoo zooToSave = null)
         {
-            // Saves game by writing in a file using Serialization - 3rd Phase
+            foreach(var zoo in gameSaves)
+            {
+                if(zoo == zooToSave)
+                {
+                    zoo.Date = DateTime.Now;
+                }
+            }
+            using (Stream stream = new FileStream("gamesaves.db", FileMode.Create, FileAccess.Write))
+            {
+                formatter.Serialize(stream, gameSaves);
+            }
         }
 
         /// <summary>
@@ -46,6 +62,15 @@ namespace University_Project
         public List<Zoo> GetZoos()
         {
             return gameSaves;
+        }
+
+        /// <summary>
+        /// Sets the zoos/gamesaves.
+        /// </summary>
+        /// <param name="listOfZoos"></param>
+        public void SetZoos(List<Zoo> listOfZoos)
+        {
+            gameSaves = listOfZoos;
         }
     }
 }

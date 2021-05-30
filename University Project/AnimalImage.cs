@@ -10,6 +10,7 @@ namespace University_Project
     /// <summary>
     /// Base class of AnimalImage.
     /// </summary>
+    [Serializable]
     public abstract class AnimalImage
     {
         private Point _location;
@@ -22,15 +23,17 @@ namespace University_Project
             set { _location = value; }
         }
 
+        private int _bodyWidth;
         /// <summary>
         /// The width of the animal.
         /// </summary>
-        public int BodyWidth { get; set; }
+        public int BodyWidth { get { return _bodyWidth; } set { _bodyWidth = value; } }
 
+        private int _bodyHeight;
         /// <summary>
         /// The height of the animal.
         /// </summary>
-        public int BodyHeight { get; set; }
+        public int BodyHeight { get { return _bodyHeight; } set { _bodyHeight = value; } }
 
         /// <summary>
         /// The actual height of the animal - body + head;
@@ -40,6 +43,7 @@ namespace University_Project
         /// <summary>
         /// The graphics needed to draw the animals.
         /// </summary>
+        [NonSerialized]
         protected Graphics graphics;
         
         private int _outlineSize = 3;
@@ -90,5 +94,11 @@ namespace University_Project
         /// <param name="point"></param>
         /// <returns></returns>
         public abstract bool Contains(Point point);
+
+        /// <summary>
+        /// Changes the height and the width according to the form's size.
+        /// </summary>
+        /// <param name="formBounds"></param>
+        public abstract void ScaleAnimalSize(Rectangle formBounds);
     }
 }

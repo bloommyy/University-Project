@@ -91,6 +91,7 @@
             this.Name = "StartMenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StartMenuForm";
+            this.Shown += new System.EventHandler(this.StartMenuForm_Shown);
             this.ResumeLayout(false);
 
         }

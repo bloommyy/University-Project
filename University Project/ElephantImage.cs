@@ -10,6 +10,7 @@ namespace University_Project
     /// <summary>
     /// Image for Elephant, inherits AnimalImage.
     /// </summary>
+    [Serializable]
     class ElephantImage : AnimalImage
     {
         private readonly int legWidth = 20; // Will be made scalable maybe
@@ -137,6 +138,11 @@ namespace University_Project
                 if (gp.IsVisible(point)) return true;
             }
             return false;
+        }
+
+        public override void ScaleAnimalSize(Rectangle formBounds)
+        {
+            throw new NotImplementedException();
         }
     }
 }

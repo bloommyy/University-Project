@@ -28,6 +28,7 @@ namespace University_Project
     /// <summary>
     /// Class for the outlook of the cage in Zoo.
     /// </summary>
+    [Serializable]
     public class AnimalCageImage
     {
         private int cageWidth;

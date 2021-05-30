@@ -48,6 +48,7 @@ namespace University_Project
     /// <summary>
     /// Class AnimalCage, holding a list of objects from type Animal.
     /// </summary>
+    [Serializable]
     public class AnimalCage
     {
         private List<Animal> _animals = new List<Animal>();

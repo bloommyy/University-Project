@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelUserInfo = new System.Windows.Forms.Panel();
+            this.buttonSaveGame = new System.Windows.Forms.Button();
             this.labelError = new System.Windows.Forms.Label();
             this.labelTasksDone = new System.Windows.Forms.Label();
             this.labelTasksDoneText = new System.Windows.Forms.Label();
@@ -49,6 +50,7 @@
             // panelUserInfo
             // 
             this.panelUserInfo.BackColor = System.Drawing.Color.Silver;
+            this.panelUserInfo.Controls.Add(this.buttonSaveGame);
             this.panelUserInfo.Controls.Add(this.labelError);
             this.panelUserInfo.Controls.Add(this.labelTasksDone);
             this.panelUserInfo.Controls.Add(this.labelTasksDoneText);
@@ -66,6 +68,15 @@
             this.panelUserInfo.Name = "panelUserInfo";
             this.panelUserInfo.Size = new System.Drawing.Size(1264, 100);
             this.panelUserInfo.TabIndex = 0;
+            // 
+            // buttonSaveGame
+            // 
+            this.buttonSaveGame.Location = new System.Drawing.Point(1136, 70);
+            this.buttonSaveGame.Name = "buttonSaveGame";
+            this.buttonSaveGame.Size = new System.Drawing.Size(115, 23);
+            this.buttonSaveGame.TabIndex = 9;
+            this.buttonSaveGame.Text = "Save Game";
+            this.buttonSaveGame.UseVisualStyleBackColor = true;
             // 
             // labelError
             // 
@@ -194,6 +205,7 @@
             this.Controls.Add(this.panelUserInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
@@ -221,5 +233,6 @@
         private System.Windows.Forms.Label labelTasksDone;
         private System.Windows.Forms.Label labelTasksDoneText;
         private System.Windows.Forms.Label labelError;
+        private System.Windows.Forms.Button buttonSaveGame;
     }
 }

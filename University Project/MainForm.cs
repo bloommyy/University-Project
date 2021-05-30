@@ -16,9 +16,14 @@ namespace University_Project
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Zoo/gamesave information. Main information.
+        /// Zoo/gamesave information. Main information for the chosen gamesave/zoo.
         /// </summary>
         public Zoo zoo = new Zoo("doesn't matter", DateTime.Now);
+
+        /// <summary>
+        /// Contains all the saves.
+        /// </summary>
+        public GameSaves gameSaves;
 
         /// <summary>
         /// Constructor of MainForm.
@@ -63,7 +68,7 @@ namespace University_Project
 
             // Animals eating
             var animalCages = zoo.GetCages();
-            if (zoo.Hour % 6 == 0)
+            if (zoo.Hour % 6 == 0 && zoo.Minute == 0)
             {
                 foreach(var cage in animalCages)
                 {
@@ -202,7 +207,6 @@ namespace University_Project
                         zoo = zoo
                     };
                     cf.Show();
-                    timerTime.Enabled = false;
                     this.Hide();
                     cf.FormClosed += (s, args) => { this.Show(); timerTime.Enabled = true; };
                 }

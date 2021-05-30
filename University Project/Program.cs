@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,7 +21,15 @@ namespace University_Project
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new StartMenuForm());
+            IFormatter formatter = new BinaryFormatter();
+            StartMenuForm smf = new StartMenuForm();
+            if(File.Exists("gamesaves.db"))
+                using (Stream stream = new FileStream("gamesaves.db", FileMode.Open, FileAccess.Read))
+                {
+                    var gameSavesArray = formatter.Deserialize(stream);
+                    smf.gameSaves.SetZoos((List<Zoo>)gameSavesArray);
+                }
+            Application.Run(smf);
         }
     }
 }

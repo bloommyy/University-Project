@@ -10,6 +10,7 @@ namespace University_Project
     /// <summary>
     /// Class Penguin that inherits class Animal.
     /// </summary>
+    [Serializable]
     class Penguin : Animal
     {
         private readonly int swimmingSpeed = 2;

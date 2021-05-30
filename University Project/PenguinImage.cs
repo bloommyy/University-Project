@@ -10,6 +10,7 @@ namespace University_Project
     /// <summary>
     /// Image for Penguin, inherits AnimalImage.
     /// </summary>
+    [Serializable]
     class PenguinImage : AnimalImage
     {
         private Rectangle bodyRectangle;
@@ -20,6 +21,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawBody()
         {
+     
             bodyRectangle = new Rectangle(Location.X, Location.Y, BodyWidth, BodyHeight);
             using(var pen = new Pen(Color.Black, base.outlineSize))
             {
@@ -149,6 +151,12 @@ namespace University_Project
                 if (gp.IsVisible(point)) return true;
             }
             return false;
+        }
+
+        public override void ScaleAnimalSize(Rectangle formBounds)
+        {
+            base.BodyWidth = (int)(formBounds.Width * 0.0781);
+            base.BodyHeight = (int)(formBounds.Height * 0.1666);
         }
     }
 }

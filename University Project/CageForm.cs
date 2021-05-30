@@ -74,6 +74,7 @@ namespace University_Project
             foreach(var animal in animalCage.GetAnimals())
             {
                 animal.animalImage.DrawAnimal(e.Graphics);
+                //animal.animalImage.ScaleAnimalSize(this.Bounds);
             }
         }
 
@@ -126,58 +127,6 @@ namespace University_Project
                     }
                 }
             }
-        }
-
-        /// <summary>
-        /// Method that simulates a clock using the timer's tick.
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void timerTime_Tick(object sender, EventArgs e)
-        {
-            // Clock
-            zoo.Minute++;
-            if (zoo.Minute >= 60)
-            {
-                zoo.Hour++;
-                if (zoo.Hour >= 21)
-                    zoo.NextDay();
-                zoo.Minute = 0;
-            }
-
-            // Timer for eating
-            if(zoo.Hour % 6 == 0 && zoo.Minute == 0)
-            {
-                foreach (var animal in animalCage.GetAnimals())
-                {
-                    var cageFodder = animalCage.fodderState;
-                    if (cageFodder != 0)
-                    {
-                        animalCage.fodderState = animal.Eat(cageFodder);
-                        animal.IncreaseComfort();
-                    }
-                    else
-                    {
-                        labelError.Text = "Fodder low!";
-                        labelError.Visible = true;
-                        animal.LowerComfort();
-                    }
-                }
-            }
-
-            // Check for uncomfortable animals.
-            var animals = animalCage.GetAnimals();
-            for(int i = animals.Count - 1; i >= 0; i--)
-            {
-                if(animals[i].GetComfort() == AnimalComfort.Uncomfortable)
-                {
-                    labelError.Text = "An animal ran away!";
-                    labelError.Visible = true;
-                    animalCage.RemoveAnimal(animals[i]);
-                    UpdateAnimalInfoLabels(null);
-                }
-            }
-            Invalidate();
         }
 
         /// <summary>

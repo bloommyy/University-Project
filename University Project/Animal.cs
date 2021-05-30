@@ -71,6 +71,7 @@ namespace University_Project
     /// <summary>
     /// This is the base class of Animal.
     /// </summary>
+    [Serializable]
     public abstract class Animal
     {
         /// <summary>

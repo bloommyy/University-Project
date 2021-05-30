@@ -54,7 +54,6 @@
             this.labelDayText = new System.Windows.Forms.Label();
             this.labelMoney = new System.Windows.Forms.Label();
             this.labelMoneyText = new System.Windows.Forms.Label();
-            this.timerTime = new System.Windows.Forms.Timer(this.components);
             this.timerMove = new System.Windows.Forms.Timer(this.components);
             this.timerChangeDirection = new System.Windows.Forms.Timer(this.components);
             this.timerWaitAfterOutOfBounds = new System.Windows.Forms.Timer(this.components);
@@ -310,12 +309,6 @@
             this.labelMoneyText.TabIndex = 0;
             this.labelMoneyText.Text = "Money :";
             // 
-            // timerTime
-            // 
-            this.timerTime.Enabled = true;
-            this.timerTime.Interval = 200;
-            this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
-            // 
             // timerMove
             // 
             this.timerMove.Enabled = true;
@@ -342,6 +335,7 @@
             this.Controls.Add(this.panelUserInfo);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "CageForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CageForm";
@@ -366,7 +360,6 @@
         private System.Windows.Forms.Label labelDayText;
         private System.Windows.Forms.Label labelMoney;
         private System.Windows.Forms.Label labelMoneyText;
-        private System.Windows.Forms.Timer timerTime;
         private System.Windows.Forms.Label labelTaskDone;
         private System.Windows.Forms.Timer timerMove;
         private System.Windows.Forms.Timer timerChangeDirection;

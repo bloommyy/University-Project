@@ -10,6 +10,7 @@ namespace University_Project
     /// <summary>
     /// Class Elephant that inherits class Animal.
     /// </summary>
+    [Serializable]
     class Elephant : Animal
     {
         /// <summary>

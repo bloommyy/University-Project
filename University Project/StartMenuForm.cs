@@ -15,8 +15,10 @@ namespace University_Project
     /// </summary>
     public partial class StartMenuForm : Form
     {
-
-        private GameSaves gameSaves = new GameSaves();
+        /// <summary>
+        /// Object containing all the game saves.
+        /// </summary>
+        public GameSaves gameSaves = new GameSaves();
 
         /// <summary>
         /// Constructor for StartMenuForm.
@@ -24,7 +26,7 @@ namespace University_Project
         public StartMenuForm()
         {
             InitializeComponent();
-            // Deserialization - Added in 3rd Phase.
+            RefreshListBoxGames();
         }
 
         /// <summary>
@@ -57,7 +59,10 @@ namespace University_Project
                 zoo = (Zoo)listBoxGames.SelectedItem
             };
             this.Hide();
-            mf.FormClosed += (s, args) => this.Close();
+            mf.FormClosed += (s, args) => {
+                gameSaves.SaveGames((Zoo)listBoxGames.SelectedItem);
+                this.Close(); 
+            };
             mf.Show();
         }
 
@@ -107,6 +112,11 @@ namespace University_Project
                 save.Name = cgf.Name;
                 save.Date = cgf.Date;
             }
+            RefreshListBoxGames();
+        }
+
+        private void StartMenuForm_Shown(object sender, EventArgs e)
+        {
             RefreshListBoxGames();
         }
     }

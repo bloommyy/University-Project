@@ -11,6 +11,7 @@ namespace University_Project
     /// <summary>
     /// Gamesave, holding all the data for one zoo.
     /// </summary>
+    [Serializable]
     public class Zoo
     {
         private List<AnimalCage> _cages = new List<AnimalCage>();
@@ -48,7 +49,8 @@ namespace University_Project
         /// <summary>
         /// The graphics used to draw the cages.
         /// </summary>
-        public Graphics Graphics { get; set; }
+        [NonSerialized]
+        public Graphics Graphics;
 
         /// <summary>
         /// Adds an AnimalCage to the Zoo.
@@ -116,7 +118,7 @@ namespace University_Project
         {
             Name = name;
             Date = date;
-            Day = 0;
+            Day = 1;
             Hour = 9;
             Minute = 0;
             Money = 800;
