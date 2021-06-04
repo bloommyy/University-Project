@@ -21,7 +21,6 @@ namespace University_Project
         /// </summary>
         protected override void DrawBody()
         {
-     
             bodyRectangle = new Rectangle(Location.X, Location.Y, BodyWidth, BodyHeight);
             using(var pen = new Pen(Color.Black, base.outlineSize))
             {

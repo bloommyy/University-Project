@@ -34,7 +34,7 @@ namespace University_Project
         public CageForm(CageType cageType)
         {
             InitializeComponent();
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw, true);
             Text = cageType + " Cage";
             buttonBuyAnimal.Text = (cageType == CageType.Elephant) ? "Buy Elephant -300" : "Buy Penguin -300";
             buttonSellAnimal.Text = (cageType == CageType.Elephant) ? "Sell Elephant +100" : "Sell Penguin +100";
@@ -52,13 +52,13 @@ namespace University_Project
             labelMinutes.Text = zoo.Minute.ToString();
             labelMoney.Text = zoo.Money.ToString();
             labelTaskDone.Text = animalCage.isTaskDone ? "Done" : "Not done";
-            foreach(var animal in animalCage.GetAnimals())
-            {
-                if(animal.animalImage.outlineSize == 6)
-                {
-                    UpdateAnimalInfoLabels(animal);
-                }
-            }
+
+            var animalCages = animalCage.GetAnimals();
+            var selectedAnimal = animalCages
+                .Where(a => a.animalImage.outlineSize == 6)
+                .SingleOrDefault();
+            if(selectedAnimal != default)
+                UpdateAnimalInfoLabels(selectedAnimal);
         }
 
         /// <summary>
@@ -161,15 +161,10 @@ namespace University_Project
         /// <param name="e"></param>
         private void buttonSellAnimal_Click(object sender, EventArgs e)
         {
-            var animals = animalCage.GetAnimals();
-            for(int i = animals.Count - 1; i >= 0; i--)
-            {
-                if (animals[i].animalImage.outlineSize == 6)
-                {
-                    animalCage.RemoveAnimal(animals[i]);
-                    zoo.Money += 100;
-                }
-            }
+            var selectedAnimal = animalCage.GetAnimals()
+                .Where(a => a.animalImage.outlineSize == 6)
+                .Single();
+            animalCage.RemoveAnimal(selectedAnimal);
             UpdateAnimalInfoLabels(null);
         }
 
@@ -201,18 +196,17 @@ namespace University_Project
             int randomTime = rnd.Next(1000, 3000); 
             timerChangeDirection.Interval = randomTime;
 
-            // Changing direction
-            foreach (var animal in animalCage.GetAnimals())
-            {
-                if (animal.hasBeenOutOfBounds)
-                {
-                    timerWaitAfterOutOfBounds.Enabled = true;
-                }
-                else
-                {
-                    animal.ChangeDirection();
-                }
-            }
+            var animals = animalCage.GetAnimals();
+
+            // Animals who have been close to going out trigger the timer
+            animals.Where(a => a.hasBeenCloseToOutOfBounds)
+                .ToList()
+                .ForEach(a => timerWaitAfterOutOfBounds.Enabled = true);
+
+            // Animals who haven't been close to going out, change direction
+            animals.Where(a => !a.hasBeenCloseToOutOfBounds)
+                .ToList()
+                .ForEach(a => a.ChangeDirection());
         }
 
         /// <summary>
@@ -222,15 +216,16 @@ namespace University_Project
         /// <param name="e"></param>
         private void timerWaitAfterOutOfBounds_Tick(object sender, EventArgs e)
         {
-            foreach(var animal in animalCage.GetAnimals())
-            {
-                if (animal.hasBeenOutOfBounds)
-                {
-                    animal.hasBeenOutOfBounds = false;
-                    animal.ChangeDirection();
-                    timerWaitAfterOutOfBounds.Enabled = false;
-                }
-            }
+            var beenCloseToOutOfBounds = animalCage.GetAnimals()
+                .Where(a => a.hasBeenCloseToOutOfBounds)
+                .ToList();
+
+            beenCloseToOutOfBounds.ForEach(a => 
+            { 
+                a.hasBeenCloseToOutOfBounds = false;
+                a.ChangeDirection();
+                timerWaitAfterOutOfBounds.Enabled = false;
+            });
         }
 
         /// <summary>
@@ -242,14 +237,18 @@ namespace University_Project
         {
             labelError.Visible = false;
             UpdateAnimalInfoLabels(null);
-            foreach (var animal in animalCage.GetAnimals())
+
+            var animals = animalCage.GetAnimals();
+
+            animals.ForEach(a => a.animalImage.outlineSize = 3);
+
+            var selectedAnimal = animals
+                .Where(a => a.animalImage.Contains(e.Location))
+                .LastOrDefault();
+            if(selectedAnimal != default)
             {
-                animal.animalImage.outlineSize = 3;
-                if (animal.animalImage.Contains(e.Location))
-                {
-                    animal.animalImage.outlineSize = 6;
-                    UpdateAnimalInfoLabels(animal);
-                }
+                selectedAnimal.animalImage.outlineSize = 6;
+                UpdateAnimalInfoLabels(selectedAnimal);
             }
         }
 

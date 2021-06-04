@@ -32,12 +32,12 @@ namespace University_Project
     public class AnimalCageImage
     {
         private int cageWidth;
-        private readonly int cageHeight = 570;
+        private int cageHeight = 570;
 
         /// <summary>
         /// Used for x and y offset on both cages.
         /// </summary>
-        private readonly int cageOffset = 5;
+        private int cageOffset = 5;
 
         /// <summary>
         /// The color of the fence. Black = selected.
@@ -86,11 +86,23 @@ namespace University_Project
         /// <param name="g">Graphics used for drawing.</param>
         /// <param name="formBounds">The bounds of the form.</param>
         /// <param name="_cagePos">The position of the cage.</param>
-        public AnimalCageImage(Graphics g, Rectangle formBounds, CagePosition _cagePos)
+        public AnimalCageImage(Rectangle formBounds, CagePosition _cagePos)
         {
             fenceColor = Color.Brown;
             cagePos = _cagePos;
             cageWidth = 2 * (formBounds.Width / 5);
+            cageImage = new Rectangle(((int)(cagePos) * 3 * (formBounds.Width / 5) + cageOffset), cageOffset, cageWidth, cageHeight);
+        }
+
+        /// <summary>
+        /// Updates the width and height of the cageImage.
+        /// </summary>
+        /// <param name="formBounds"></param>
+        /// <param name="panelInfoBounds"></param>
+        public void UpdateScale(Rectangle formBounds, Rectangle panelInfoBounds)
+        {
+            cageWidth = 2 * (formBounds.Width / 5) - 25;
+            cageHeight = formBounds.Height - panelInfoBounds.Height - 50;
             cageImage = new Rectangle(((int)(cagePos) * 3 * (formBounds.Width / 5) + cageOffset), cageOffset, cageWidth, cageHeight);
         }
     }

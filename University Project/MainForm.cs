@@ -31,7 +31,7 @@ namespace University_Project
         public MainForm()
         {
             InitializeComponent();
-            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.ResizeRedraw, true);
         }
 
         /// <summary>
@@ -70,36 +70,46 @@ namespace University_Project
             var animalCages = zoo.GetCages();
             if (zoo.Hour % 6 == 0 && zoo.Minute == 0)
             {
-                foreach(var cage in animalCages)
-                {
-                    foreach (var animal in cage.GetAnimals())
-                    {
-                        var cageFodder = cage.fodderState;
-                        if (cageFodder != 0)
-                        {
-                            cage.fodderState = animal.Eat(cageFodder);
-                            animal.IncreaseComfort();
-                        }
-                        else
-                        {
-                            labelError.Text = "Fodder low!";
-                            labelError.Visible = true;
-                            animal.LowerComfort();
-                        }
-                    }
+                var cagesWithoutFodder = animalCages
+                    .Where(c => c.fodderState == 0)
+                    .ToList();
 
-                    // Checking for uncomfortable animals
-                    var animals = cage.GetAnimals();
-                    for (int i = animals.Count - 1; i > 0; i--)
+                cagesWithoutFodder.ForEach(c =>
+                {
+                    var animals = c.GetAnimals();
+
+                    var uncomfortableAnimals = animals
+                    .Where(a => a.GetComfort() == AnimalComfort.Uncomfortable)
+                    .ToList();
+
+                    uncomfortableAnimals.ForEach(ua =>
                     {
-                        if (animals[i].GetComfort() == AnimalComfort.Uncomfortable)
-                        {
-                            labelError.Text = "An animal ran away!";
-                            labelError.Visible = true;
-                            cage.RemoveAnimal(animals[i]);
-                        }
-                    }
-                }
+                        labelError.Text = "An animal ran away!";
+                        labelError.Visible = true;
+                        c.RemoveAnimal(ua);
+                    });
+
+                    animals.ForEach(a =>
+                    {
+                        labelError.Text = "Fodder low!";
+                        labelError.Visible = true;
+                        a.LowerComfort();
+                    });
+                });
+
+                var cagesWithFodder = animalCages
+                        .Where(c => c.fodderState != 0)
+                        .ToList();
+
+                cagesWithFodder.ForEach(c =>
+                {
+                    var animals = c.GetAnimals();
+                    animals.ForEach(a =>
+                    {
+                        c.fodderState = a.Eat(c.fodderState);
+                        a.IncreaseComfort();
+                    });
+                });
             }        
             Invalidate();
         }
@@ -114,13 +124,15 @@ namespace University_Project
             // Goes through cages and draws them.
             foreach(var cage in zoo.GetCages())
             {
+                cage.cageImage.UpdateScale(this.Bounds, panelUserInfo.Bounds);
                 cage.cageImage.DrawCage(g);
             }
             
             // Path
             using(var brush = new SolidBrush(Color.DimGray))
             {
-                g.FillRectangle(brush, 15 + 2 * (float)(this.Bounds.Width / 5), 0, (float)(this.Bounds.Width / 5) - 20, 580);
+                g.FillRectangle(brush, 2 * (float)(this.Bounds.Width / 5), 0, (float)(this.Bounds.Width / 5) - 20,
+                    this.Bounds.Height - panelUserInfo.Bounds.Height);
             }
         }
 
@@ -162,14 +174,11 @@ namespace University_Project
         private void buttonSellCage_Click(object sender, EventArgs e)
         {
             var zooCages = zoo.GetCages();
-            for(int i = 0; i < zooCages.Count; i++)
-            {
-                if (zooCages[i].cageImage.fenceColor == Color.Black)
-                {
-                    zoo.RemoveCage(zooCages[i]);
-                    zoo.Money += 200;
-                }        
-            } 
+            var selectedCage = zooCages.Where(c => c.cageImage.fenceColor == Color.Black).SingleOrDefault();
+            if (selectedCage != default){
+                zoo.RemoveCage(selectedCage);
+                zoo.Money += 200;
+            }
         }
 
         /// <summary>
@@ -180,14 +189,16 @@ namespace University_Project
         private void MainForm_MouseClick(object sender, MouseEventArgs e)
         {
             labelError.Visible = false;
-            foreach(var cage in zoo.GetCages())
-            {
-                cage.cageImage.fenceColor = Color.Brown;
-                if (cage.cageImage.Contains(e.Location))
-                {
-                    cage.cageImage.fenceColor = Color.Black;
-                }
-            }
+            var cages = zoo.GetCages();
+
+            cages.ForEach(c => c.cageImage.fenceColor = Color.Brown);
+
+            var selectedCage = cages
+                .Where(c => c.cageImage.Contains(e.Location))
+                .SingleOrDefault();
+
+            if (selectedCage != default)
+                selectedCage.cageImage.fenceColor = Color.Black;
         }
 
         /// <summary>
@@ -197,19 +208,21 @@ namespace University_Project
         /// <param name="e"></param>
         private void MainForm_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            foreach(var cage in zoo.GetCages())
+            var cages = zoo.GetCages();
+            var selectedCage = cages
+                .Where(c => c.cageImage.fenceColor == Color.Black)
+                .SingleOrDefault();
+
+            if(selectedCage != default)
             {
-                if(cage.cageImage.fenceColor == Color.Black)
+                CageForm cf = new CageForm(selectedCage.cageType)
                 {
-                    CageForm cf = new CageForm(cage.cageType)
-                    {
-                        animalCage = cage,
-                        zoo = zoo
-                    };
-                    cf.Show();
-                    this.Hide();
-                    cf.FormClosed += (s, args) => { this.Show(); timerTime.Enabled = true; };
-                }
+                    animalCage = selectedCage,
+                    zoo = zoo
+                };
+                cf.Show();
+                this.Hide();
+                cf.FormClosed += (s, args) => { this.Show(); timerTime.Enabled = true; };
             }
         }
     }

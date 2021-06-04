@@ -44,18 +44,18 @@
             this.labelMoney = new System.Windows.Forms.Label();
             this.labelMoneyText = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
+            this.panelButtons = new System.Windows.Forms.Panel();
             this.panelUserInfo.SuspendLayout();
+            this.panelButtons.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUserInfo
             // 
             this.panelUserInfo.BackColor = System.Drawing.Color.Silver;
-            this.panelUserInfo.Controls.Add(this.buttonSaveGame);
+            this.panelUserInfo.Controls.Add(this.panelButtons);
             this.panelUserInfo.Controls.Add(this.labelError);
             this.panelUserInfo.Controls.Add(this.labelTasksDone);
             this.panelUserInfo.Controls.Add(this.labelTasksDoneText);
-            this.panelUserInfo.Controls.Add(this.buttonSellCage);
-            this.panelUserInfo.Controls.Add(this.buttonBuyCage);
             this.panelUserInfo.Controls.Add(this.labelMinutes);
             this.panelUserInfo.Controls.Add(this.labelHour);
             this.panelUserInfo.Controls.Add(this.labelTime);
@@ -71,7 +71,7 @@
             // 
             // buttonSaveGame
             // 
-            this.buttonSaveGame.Location = new System.Drawing.Point(1136, 70);
+            this.buttonSaveGame.Location = new System.Drawing.Point(3, 65);
             this.buttonSaveGame.Name = "buttonSaveGame";
             this.buttonSaveGame.Size = new System.Drawing.Size(115, 23);
             this.buttonSaveGame.TabIndex = 9;
@@ -109,7 +109,7 @@
             // 
             // buttonSellCage
             // 
-            this.buttonSellCage.Location = new System.Drawing.Point(1136, 41);
+            this.buttonSellCage.Location = new System.Drawing.Point(3, 36);
             this.buttonSellCage.Name = "buttonSellCage";
             this.buttonSellCage.Size = new System.Drawing.Size(115, 23);
             this.buttonSellCage.TabIndex = 7;
@@ -119,7 +119,7 @@
             // 
             // buttonBuyCage
             // 
-            this.buttonBuyCage.Location = new System.Drawing.Point(1136, 12);
+            this.buttonBuyCage.Location = new System.Drawing.Point(3, 7);
             this.buttonBuyCage.Name = "buttonBuyCage";
             this.buttonBuyCage.Size = new System.Drawing.Size(115, 23);
             this.buttonBuyCage.TabIndex = 1;
@@ -196,6 +196,17 @@
             this.timerTime.Interval = 200;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
             // 
+            // panelButtons
+            // 
+            this.panelButtons.Controls.Add(this.buttonSellCage);
+            this.panelButtons.Controls.Add(this.buttonSaveGame);
+            this.panelButtons.Controls.Add(this.buttonBuyCage);
+            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelButtons.Location = new System.Drawing.Point(1138, 0);
+            this.panelButtons.Name = "panelButtons";
+            this.panelButtons.Size = new System.Drawing.Size(126, 100);
+            this.panelButtons.TabIndex = 1;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -203,8 +214,6 @@
             this.BackColor = System.Drawing.Color.Lime;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.panelUserInfo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -213,6 +222,7 @@
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.MainForm_MouseDoubleClick);
             this.panelUserInfo.ResumeLayout(false);
             this.panelUserInfo.PerformLayout();
+            this.panelButtons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -234,5 +244,6 @@
         private System.Windows.Forms.Label labelTasksDoneText;
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.Button buttonSaveGame;
+        private System.Windows.Forms.Panel panelButtons;
     }
 }

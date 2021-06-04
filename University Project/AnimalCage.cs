@@ -98,9 +98,9 @@ namespace University_Project
         /// <param name="cagePos">Position of the cage.</param>
         /// <param name="formBounds">Bounds of the Form.</param>
         /// <param name="ct">The type of the cage.</param>
-        public AnimalCage(Graphics g, Rectangle formBounds, CagePosition cagePos, CageType ct)
+        public AnimalCage(Rectangle formBounds, CagePosition cagePos, CageType ct)
         {
-            cageImage = new AnimalCageImage(g, formBounds, cagePos);  
+            cageImage = new AnimalCageImage(formBounds, cagePos);  
             isTaskDone = false;
             fodderState = FodderState.HalfFull;
             cageType = ct;

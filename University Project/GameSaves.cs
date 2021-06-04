@@ -24,13 +24,10 @@ namespace University_Project
         /// </summary>
         public void SaveGames(Zoo zooToSave = null)
         {
-            foreach(var zoo in gameSaves)
-            {
-                if(zoo == zooToSave)
-                {
-                    zoo.Date = DateTime.Now;
-                }
-            }
+            var gameToSave = gameSaves.Where(z => z == zooToSave).SingleOrDefault();
+            if (gameToSave != default)
+                gameToSave.Date = DateTime.Now;
+
             using (Stream stream = new FileStream("gamesaves.db", FileMode.Create, FileAccess.Write))
             {
                 formatter.Serialize(stream, gameSaves);

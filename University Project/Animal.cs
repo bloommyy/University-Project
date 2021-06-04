@@ -124,7 +124,7 @@ namespace University_Project
         /// <summary>
         /// Boolean for check if an animal has been close to going out of the form.
         /// </summary>
-        public bool hasBeenOutOfBounds = false;
+        public bool hasBeenCloseToOutOfBounds = false;
 
         /// <summary>
         /// Method Eat that lowers the given FodderState by one, if Empty - it does nothing.
@@ -253,22 +253,22 @@ namespace University_Project
             if (location.X <= _cageFormBounds.Width / 10 + 9)
             {
                 direction = Direction.East;
-                hasBeenOutOfBounds = true;
+                hasBeenCloseToOutOfBounds = true;
             }
             if (location.X >= _cageFormBounds.Width - animalImage.BodyWidth - 10)
             {
                 direction = Direction.West;
-                hasBeenOutOfBounds = true;
+                hasBeenCloseToOutOfBounds = true;
             }
             if (location.Y <= 40)
             {
                 direction = Direction.South;
-                hasBeenOutOfBounds = true;
+                hasBeenCloseToOutOfBounds = true;
             }
             if (location.Y >= _cageFormBounds.Height - panelHeight - animalImage.ActualHeight - 40)
             {
                 direction = Direction.North;
-                hasBeenOutOfBounds = true;
+                hasBeenCloseToOutOfBounds = true;
             }
         }
 

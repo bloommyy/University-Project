@@ -22,7 +22,7 @@ namespace University_Project
         /// <returns>Result according to the animalImage's location.</returns>
         private bool CheckIfSwimming()
         {
-            if (base.animalImage.Location.X >= base.cageFormBounds.Width / 2) // Checks if in water (hard coded when forms are added)
+            if (base.animalImage.Location.X >= base.cageFormBounds.Width / 2) // Checks if in water
                 return true;
 
             return false;

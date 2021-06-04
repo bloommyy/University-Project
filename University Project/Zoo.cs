@@ -61,14 +61,27 @@ namespace University_Project
         {
             CagePosition availableCagePos = CagePosition.Left;
             // Checks if one of the cages is there, if it's there, put the other one as "available".
-            foreach(var cage in _cages)
+            if(_cages.Count > 0)
             {
-                if (cage.cageImage.cagePos == CagePosition.Left)
-                    availableCagePos = CagePosition.Right;
-                else if (cage.cageImage.cagePos == CagePosition.Right)
-                    availableCagePos = CagePosition.Left;
+                var posOfExistingCage = _cages
+                .Select(c => c.cageImage.cagePos)
+                .Single();
+
+                switch (posOfExistingCage)
+                {
+                    case CagePosition.Left:
+                        availableCagePos = CagePosition.Right;
+                        break;
+                    case CagePosition.Right:
+                        availableCagePos = CagePosition.Left;
+                        break;
+                    default:
+                        availableCagePos = CagePosition.Left;
+                        break;
+                }
             }
-            _cages.Add(new AnimalCage(Graphics, formBounds, availableCagePos, ct));
+            
+            _cages.Add(new AnimalCage(formBounds, availableCagePos, ct));
         }
 
         /// <summary>
@@ -89,26 +102,22 @@ namespace University_Project
             Hour = 9;
             Minute = 0;
             Money += 300;
-            foreach (var cage in _cages)
-            {
-                foreach(var animal in cage.GetAnimals())
-                {
-                    Money += 200; // Gives 200 money for each animal.
-                }
 
-                if (!cage.isTaskDone)
-                {
-                    foreach(var animal in cage.GetAnimals())
+            _cages.ForEach(c =>
+            {
+                var animals = c.GetAnimals();
+                animals.ForEach(a => Money += 200);
+                animals.ForEach(a => 
+                { 
+                    if (!c.isTaskDone) 
+                        a.LowerComfort();
+                    else
                     {
-                        animal.LowerComfort(); // If task isn't done, lower comfort on each animal in the cage.
+                        Money += 200;
+                        c.isTaskDone = false;
                     }
-                }
-                else
-                {
-                    Money += 200;
-                    cage.isTaskDone = false;
-                } 
-            }
+                });
+            });
         }
 
         /// <summary>
@@ -148,7 +157,9 @@ namespace University_Project
         /// <returns>A string of a number </returns>
         public string GetTasksLeft()
         {
-            return "Will be added in 3rd phase - LINQ";
+            return _cages.Select(c => c.isTaskDone)
+                                    .Count(t => t == false)
+                                    .ToString();
         }
     }
 }
