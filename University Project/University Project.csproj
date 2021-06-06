@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{7130AB91-B100-4CED-A1DC-1CD0F76545DF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>University_Project</RootNamespace>
+    <RootNamespace>Preslav.ZooGame</RootNamespace>
     <AssemblyName>University Project</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Preslav.ZooGame.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -48,10 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Animal.cs" />
-    <Compile Include="AnimalCage.cs" />
-    <Compile Include="AnimalCageImage.cs" />
-    <Compile Include="AnimalImage.cs" />
     <Compile Include="BuyCageForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,8 +69,6 @@
     <Compile Include="CreateGameForm.Designer.cs">
       <DependentUpon>CreateGameForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Elephant.cs" />
-    <Compile Include="ElephantImage.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,12 +81,8 @@
     <Compile Include="StartMenuForm.Designer.cs">
       <DependentUpon>StartMenuForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="GameSaves.cs" />
-    <Compile Include="Penguin.cs" />
-    <Compile Include="PenguinImage.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Zoo.cs" />
     <EmbeddedResource Include="BuyCageForm.resx">
       <DependentUpon>BuyCageForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -110,6 +103,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="StartMenuForm.resx">
       <DependentUpon>StartMenuForm.cs</DependentUpon>
@@ -126,6 +120,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClassLibraryZoo\ClassLibraryZoo.csproj">
+      <Project>{be8f09d3-391e-482c-9830-d47a25863e9f}</Project>
+      <Name>ClassLibraryZoo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

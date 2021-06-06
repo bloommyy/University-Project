@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Image for Penguin, inherits AnimalImage.
@@ -59,11 +55,11 @@ namespace University_Project
         /// </summary>
         protected override void DrawBody()
         {
-            using(var pen = new Pen(Color.Black, base.outlineSize))
+            using (var pen = new Pen(Color.Black, base.OutlineSize))
             {
                 base.graphics.DrawEllipse(pen, bodyRectangle);
             }
-            using(var brush = new SolidBrush(Color.Gray))
+            using (var brush = new SolidBrush(Color.Gray))
             {
                 base.graphics.FillEllipse(brush, bodyRectangle);
             }
@@ -74,7 +70,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawHead()
         {
-            using (var pen = new Pen(Color.Black, base.outlineSize))
+            using (var pen = new Pen(Color.Black, base.OutlineSize))
             {
                 // Head 
                 base.graphics.DrawEllipse(pen, headRectangle);
@@ -82,7 +78,7 @@ namespace University_Project
             using (var brush = new SolidBrush(Color.Gray))
             {
                 // Head 
-                base.graphics.FillEllipse(brush, headRectangle);     
+                base.graphics.FillEllipse(brush, headRectangle);
             }
             using (var brush = new SolidBrush(Color.White))
             {
@@ -90,9 +86,9 @@ namespace University_Project
                 base.graphics.FillEllipse(brush, Location.X + leftFaceCirclePositionOffsetX,
                     Location.Y - faceCirclePositionOffsetY, faceCircleWidth, faceCircleHeight);
                 base.graphics.FillEllipse(brush, Location.X + rightFaceCirclePositionOffsetX,
-                    Location.Y - faceCirclePositionOffsetY, faceCircleWidth, faceCircleHeight);       
+                    Location.Y - faceCirclePositionOffsetY, faceCircleWidth, faceCircleHeight);
             }
-            using(var brush = new SolidBrush(Color.Black))
+            using (var brush = new SolidBrush(Color.Black))
             {
                 // Eyes
                 base.graphics.FillEllipse(brush, Location.X + leftEyePositionOffsetX,
@@ -100,7 +96,7 @@ namespace University_Project
                 base.graphics.FillEllipse(brush, Location.X + rightEyePositionOffsetX,
                     Location.Y - eyesPositionOffsetY, eyeWidth, eyeHeight);
             }
-            using(var brush = new SolidBrush(Color.Orange))
+            using (var brush = new SolidBrush(Color.Orange))
             {
                 // Mouth
                 base.graphics.FillEllipse(brush, Location.X + mouthPositionOffsetX,
@@ -113,7 +109,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawLegs()
         {
-            using (var pen = new Pen(Color.Black, base.outlineSize))
+            using (var pen = new Pen(Color.Black, base.OutlineSize))
             {
                 // Left foot
                 base.graphics.DrawEllipse(pen, Location.X + leftFootPositionOffsetX,
@@ -144,7 +140,7 @@ namespace University_Project
                 base.graphics.FillEllipse(brush, Location.X + stomachPositionOffsetX,
                     Location.Y + stomachPositionOffsetY, stomachWidth, stomachHeight);
             }
-            using (var pen = new Pen(Color.Black, base.outlineSize))
+            using (var pen = new Pen(Color.Black, base.OutlineSize))
             {
                 // Wings
                 base.graphics.DrawEllipse(pen, Location.X + leftWingPositionOffsetX,
@@ -192,7 +188,7 @@ namespace University_Project
             mouthPositionOffsetX = 38;
             mouthWidth = 30;
             mouthHeight = 12;
-            
+
 
             leftFootPositionOffsetX = 15;
             rightFootPositionOffsetX = 60;
@@ -221,7 +217,7 @@ namespace University_Project
             graphics = g;
             DrawBody();
             DrawSpecials();
-            DrawLegs();            
+            DrawLegs();
             DrawHead();
         }
 
@@ -263,7 +259,7 @@ namespace University_Project
             faceCirclePositionOffsetY = (int)(formBounds.Height * 0.0555);
             faceCircleWidth = (int)(formBounds.Width * 0.0195);
             faceCircleHeight = (int)(formBounds.Height * 0.0555);
-            
+
             // Scaling eyes
             leftEyePositionOffsetX = (int)(formBounds.Width * 0.025);
             rightEyePositionOffsetX = (int)(formBounds.Width * 0.0484);
@@ -278,7 +274,7 @@ namespace University_Project
 
             // Scaling feet
             leftFootPositionOffsetX = (int)(formBounds.Width * 0.0117);
-            rightFootPositionOffsetX  = (int)(formBounds.Width * 0.0468);
+            rightFootPositionOffsetX = (int)(formBounds.Width * 0.0468);
             feetPositionOffsetY = (int)(formBounds.Height * 0.15);
             feetWidth = (int)(formBounds.Width * 0.0195);
             feetHeight = (int)(formBounds.Height * 0.0208);

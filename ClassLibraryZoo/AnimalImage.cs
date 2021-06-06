@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Base class of AnimalImage.
@@ -18,7 +14,8 @@ namespace University_Project
         /// <summary>
         /// The location of the animal's drawing.
         /// </summary>
-        public Point Location {
+        public Point Location
+        {
             get { return _location; }
             set { _location = value; }
         }
@@ -45,12 +42,12 @@ namespace University_Project
         /// </summary>
         [NonSerialized]
         protected Graphics graphics;
-        
+
         private int _outlineSize = 3;
         /// <summary>
         /// The size of the outline of the animal's drawing.
         /// </summary>
-        public int outlineSize
+        public int OutlineSize
         {
             get { return _outlineSize; }
             set { _outlineSize = value; }

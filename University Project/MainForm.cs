@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Preslav.ZooGame.ClassLibraryZoo;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace University_Project
+namespace Preslav.ZooGame
 {
     /// <summary>
     /// MainForm class - the form for zoo.
     /// </summary>
-    public partial class MainForm : Form
+    public partial class MainForm : Form, IDrawZoo
     {
         /// <summary>
         /// Zoo/gamesave information. Main information for the chosen gamesave/zoo.
@@ -24,6 +21,8 @@ namespace University_Project
         /// Contains all the saves.
         /// </summary>
         public GameSaves gameSaves;
+
+        private Graphics _onPaintGraphics;
 
         /// <summary>
         /// Constructor of MainForm.
@@ -41,12 +40,14 @@ namespace University_Project
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            _onPaintGraphics = e.Graphics;
             labelDay.Text = zoo.Day.ToString();
             labelHour.Text = zoo.Hour.ToString();
             labelMinutes.Text = zoo.Minute.ToString();
             labelMoney.Text = zoo.Money.ToString();
             DrawZoo(e.Graphics);
             labelTasksDone.Text = zoo.GetTasksLeft();
+            _onPaintGraphics = null;
         }
 
         /// <summary>
@@ -110,7 +111,7 @@ namespace University_Project
                         a.IncreaseComfort();
                     });
                 });
-            }        
+            }
             Invalidate();
         }
 
@@ -120,16 +121,16 @@ namespace University_Project
         /// <param name="g"></param>
         public void DrawZoo(Graphics g)
         {
-            zoo.Graphics = g;
+            //zoo.Graphics = g;
             // Goes through cages and draws them.
-            foreach(var cage in zoo.GetCages())
+            foreach (var cage in zoo.GetCages())
             {
                 cage.cageImage.UpdateScale(this.Bounds, panelUserInfo.Bounds);
-                cage.cageImage.DrawCage(g);
+                cage.cageImage.DrawCage(this);
             }
-            
+
             // Path
-            using(var brush = new SolidBrush(Color.DimGray))
+            using (var brush = new SolidBrush(Color.DimGray))
             {
                 g.FillRectangle(brush, 2 * (float)(this.Bounds.Width / 5), 0, (float)(this.Bounds.Width / 5) - 20,
                     this.Bounds.Height - panelUserInfo.Bounds.Height);
@@ -143,14 +144,14 @@ namespace University_Project
         /// <param name="e"></param>
         private void buttonBuyCage_Click(object sender, EventArgs e)
         {
-            if(zoo.Money < 400) // Checks if user has enough money
+            if (zoo.Money < 400) // Checks if user has enough money
             {
                 labelError.Text = "Not enough money!";
                 labelError.Visible = true;
                 return;
             }
 
-            if(zoo.GetCages().Count == 2) // Checks if user already has 2 cages
+            if (zoo.GetCages().Count == 2) // Checks if user already has 2 cages
             {
                 labelError.Text = "Cannot buy more than 2 cages!";
                 labelError.Visible = true;
@@ -158,12 +159,12 @@ namespace University_Project
             }
 
             BuyCageForm bcf = new BuyCageForm();
-            if(bcf.ShowDialog() == DialogResult.OK)
+            if (bcf.ShowDialog() == DialogResult.OK)
             {
                 var choice = (bcf.choice == "Elephant") ? CageType.Elephant : CageType.Penguin;
                 zoo.AddCage(this.Bounds, choice);
                 zoo.Money -= 400;
-            } 
+            }
         }
 
         /// <summary>
@@ -175,7 +176,8 @@ namespace University_Project
         {
             var zooCages = zoo.GetCages();
             var selectedCage = zooCages.Where(c => c.cageImage.fenceColor == Color.Black).SingleOrDefault();
-            if (selectedCage != default){
+            if (selectedCage != default)
+            {
                 zoo.RemoveCage(selectedCage);
                 zoo.Money += 200;
             }
@@ -204,7 +206,7 @@ namespace University_Project
             }
             else
                 labelSelectedCage.Text = "";
-                
+
         }
 
         /// <summary>
@@ -219,7 +221,7 @@ namespace University_Project
                 .Where(c => c.cageImage.fenceColor == Color.Black)
                 .SingleOrDefault();
 
-            if(selectedCage != default)
+            if (selectedCage != default)
             {
                 CageForm cf = new CageForm(selectedCage.cageType)
                 {
@@ -232,6 +234,26 @@ namespace University_Project
                 cf.Show();
                 this.Hide();
                 cf.FormClosed += (s, args) => { this.Show(); timerTime.Enabled = true; };
+            }
+        }
+
+        /// <summary>
+        /// Draws the cage.
+        /// </summary>
+        /// <param name="fenceColor"></param>
+        /// <param name="cageImageRectangle"></param>
+        public void DrawCage(Color fenceColor, Rectangle cageImageRectangle)
+        {
+            if (_onPaintGraphics == null)
+                return;
+
+            using (var pen = new Pen(fenceColor, 10))
+            {
+                _onPaintGraphics.DrawRectangle(pen, cageImageRectangle);
+            }
+            using (var brush = new SolidBrush(Color.LimeGreen))
+            {
+                _onPaintGraphics.FillRectangle(brush, cageImageRectangle);
             }
         }
     }

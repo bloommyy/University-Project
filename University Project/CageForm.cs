@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using Preslav.ZooGame.ClassLibraryZoo;
+using System;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace University_Project
+namespace Preslav.ZooGame
 {
     /// <summary>
     /// The form for the cage of an animal.
@@ -38,7 +35,7 @@ namespace University_Project
             Text = cageType + " Cage";
             buttonBuyAnimal.Text = (cageType == CageType.Elephant) ? "Buy Elephant -300" : "Buy Penguin -300";
             buttonSellAnimal.Text = (cageType == CageType.Elephant) ? "Sell Elephant +100" : "Sell Penguin +100";
-            
+
         }
 
         /// <summary>
@@ -55,9 +52,9 @@ namespace University_Project
 
             var animalCages = animalCage.GetAnimals();
             var selectedAnimal = animalCages
-                .Where(a => a.animalImage.outlineSize == 6)
+                .Where(a => a.animalImage.OutlineSize == 6)
                 .SingleOrDefault();
-            if(selectedAnimal != default)
+            if (selectedAnimal != default)
                 UpdateAnimalInfoLabels(selectedAnimal);
         }
 
@@ -71,7 +68,7 @@ namespace University_Project
             actualCageHeight = this.Bounds.Height - panelUserInfo.Height; // Used for scaling later on
             SetLabels();
             DrawCage(e.Graphics);
-            foreach(var animal in animalCage.GetAnimals())
+            foreach (var animal in animalCage.GetAnimals())
             {
                 animal.animalImage.ScaleAnimalSize(this.Bounds);
                 animal.animalImage.DrawAnimal(e.Graphics);
@@ -84,7 +81,7 @@ namespace University_Project
         /// <param name="g"></param>
         private void DrawCage(Graphics g)
         {
-            if(animalCage.cageType == CageType.Penguin)
+            if (animalCage.cageType == CageType.Penguin)
             {
                 using (var brush = new SolidBrush(Color.LightGray))
                 {
@@ -101,17 +98,17 @@ namespace University_Project
                     // Fodder holder
                     g.FillRectangle(brush, 0, 0, this.Bounds.Width / 10, actualCageHeight);
                 }
-                using(var brush = new SolidBrush(Color.LightSkyBlue))
+                using (var brush = new SolidBrush(Color.LightSkyBlue))
                 {
                     // Fodder
                     for (int i = 0; i < (int)animalCage.fodderState; i++)
                     {
-                        g.FillRectangle(brush, 9, 9 + (i * actualCageHeight / 2 + i * (-20)), this.Bounds.Width / 12, actualCageHeight / 2 - 35 );
+                        g.FillRectangle(brush, 9, 9 + (i * actualCageHeight / 2 + i * (-20)), this.Bounds.Width / 12, actualCageHeight / 2 - 35);
                     }
                 }
 
             }
-            else if(animalCage.cageType == CageType.Elephant)
+            else if (animalCage.cageType == CageType.Elephant)
             {
                 using (var brush = new SolidBrush(Color.SaddleBrown))
                 {
@@ -140,14 +137,14 @@ namespace University_Project
             {
                 labelError.Text = "Not enough money.";
                 labelError.Visible = true;
-                return; 
+                return;
             }
 
-            if(animalCage.cageType == CageType.Elephant)
+            if (animalCage.cageType == CageType.Elephant)
             {
                 animalCage.AddAnimal(new Elephant("Harry", 17, 8600));
             }
-            else if(animalCage.cageType == CageType.Penguin)
+            else if (animalCage.cageType == CageType.Penguin)
             {
                 animalCage.AddAnimal(new Penguin("Pengu", 5, 20));
             }
@@ -162,7 +159,7 @@ namespace University_Project
         private void buttonSellAnimal_Click(object sender, EventArgs e)
         {
             var selectedAnimal = animalCage.GetAnimals()
-                .Where(a => a.animalImage.outlineSize == 6)
+                .Where(a => a.animalImage.OutlineSize == 6)
                 .Single();
             animalCage.RemoveAnimal(selectedAnimal);
             UpdateAnimalInfoLabels(null);
@@ -177,7 +174,7 @@ namespace University_Project
         {
             foreach (var animal in animalCage.GetAnimals())
             {
-                animal.cageFormBounds = this.Bounds; // Used for scaling
+                animal.CageFormBounds = this.Bounds; // Used for scaling
                 animal.panelHeight = panelUserInfo.Height; // Used for scaling
                 animal.CheckForOutOfBounds();
                 animal.Move();
@@ -193,7 +190,7 @@ namespace University_Project
         private void timerChangeDirection_Tick(object sender, EventArgs e)
         {
             // Randomizing interval of timer
-            int randomTime = rnd.Next(1000, 3000); 
+            int randomTime = rnd.Next(1000, 3000);
             timerChangeDirection.Interval = randomTime;
 
             var animals = animalCage.GetAnimals();
@@ -220,8 +217,8 @@ namespace University_Project
                 .Where(a => a.hasBeenCloseToOutOfBounds)
                 .ToList();
 
-            beenCloseToOutOfBounds.ForEach(a => 
-            { 
+            beenCloseToOutOfBounds.ForEach(a =>
+            {
                 a.hasBeenCloseToOutOfBounds = false;
                 a.ChangeDirection();
                 timerWaitAfterOutOfBounds.Enabled = false;
@@ -240,14 +237,14 @@ namespace University_Project
 
             var animals = animalCage.GetAnimals();
 
-            animals.ForEach(a => a.animalImage.outlineSize = 3);
+            animals.ForEach(a => a.animalImage.OutlineSize = 3);
 
             var selectedAnimal = animals
                 .Where(a => a.animalImage.Contains(e.Location))
                 .LastOrDefault();
-            if(selectedAnimal != default)
+            if (selectedAnimal != default)
             {
-                selectedAnimal.animalImage.outlineSize = 6;
+                selectedAnimal.animalImage.OutlineSize = 6;
                 UpdateAnimalInfoLabels(selectedAnimal);
             }
         }
@@ -258,7 +255,7 @@ namespace University_Project
         /// <param name="animal"></param>
         private void UpdateAnimalInfoLabels(Animal animal)
         {
-            if(animal != null)
+            if (animal != null)
             {
                 labelName.Text = animal.Name;
                 labelAge.Text = animal.Age.ToString();
@@ -271,7 +268,7 @@ namespace University_Project
                 labelAge.Text = "";
                 labelWeight.Text = "";
                 labelComfort.Text = "";
-            }         
+            }
         }
 
         /// <summary>
@@ -281,13 +278,13 @@ namespace University_Project
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
-            if(zoo.Money < 100)
+            if (zoo.Money < 100)
             {
                 labelError.Text = "Not enough money to buy fodder!";
                 labelError.Visible = true;
                 return;
             }
-            if((int)animalCage.fodderState == 2)
+            if ((int)animalCage.fodderState == 2)
             {
                 labelError.Text = "Fodder is already full!";
                 labelError.Visible = true;

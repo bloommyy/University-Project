@@ -1,15 +1,12 @@
-﻿using System;
+﻿using Preslav.ZooGame.ClassLibraryZoo;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace University_Project
+namespace Preslav.ZooGame
 {
     static class Program
     {
@@ -23,7 +20,7 @@ namespace University_Project
             Application.SetCompatibleTextRenderingDefault(false);
             IFormatter formatter = new BinaryFormatter();
             StartMenuForm smf = new StartMenuForm();
-            if(File.Exists("gamesaves.db"))
+            if (File.Exists("gamesaves.db"))
                 using (Stream stream = new FileStream("gamesaves.db", FileMode.Open, FileAccess.Read))
                 {
                     var gameSavesArray = formatter.Deserialize(stream);

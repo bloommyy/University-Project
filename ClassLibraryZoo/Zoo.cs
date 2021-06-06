@@ -2,11 +2,8 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Gamesave, holding all the data for one zoo.
@@ -47,12 +44,6 @@ namespace University_Project
         public int Money { get; set; }
 
         /// <summary>
-        /// The graphics used to draw the cages.
-        /// </summary>
-        [NonSerialized]
-        public Graphics Graphics;
-
-        /// <summary>
         /// Adds an AnimalCage to the Zoo.
         /// </summary>
         /// <param name="formBounds">Bounds of the form.</param>
@@ -61,7 +52,7 @@ namespace University_Project
         {
             CagePosition availableCagePos = CagePosition.Left;
             // Checks if one of the cages is there, if it's there, put the other one as "available".
-            if(_cages.Count > 0)
+            if (_cages.Count > 0)
             {
                 var posOfExistingCage = _cages
                 .Select(c => c.cageImage.cagePos)
@@ -80,7 +71,7 @@ namespace University_Project
                         break;
                 }
             }
-            
+
             _cages.Add(new AnimalCage(formBounds, availableCagePos, ct));
         }
 
@@ -92,7 +83,7 @@ namespace University_Project
         {
             _cages.Remove(ac);
         }
-        
+
         /// <summary>
         /// Ends the day and starts a new one.
         /// </summary>
@@ -107,9 +98,9 @@ namespace University_Project
             {
                 var animals = c.GetAnimals();
                 animals.ForEach(a => Money += 200);
-                animals.ForEach(a => 
-                { 
-                    if (!c.isTaskDone) 
+                animals.ForEach(a =>
+                {
+                    if (!c.isTaskDone)
                         a.LowerComfort();
                     else
                     {

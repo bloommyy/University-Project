@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Class Elephant that inherits class Animal.
     /// </summary>
     [Serializable]
-    class Elephant : Animal
+    public class Elephant : Animal
     {
         /// <summary>
         /// Moves animalImage using its location and direction.

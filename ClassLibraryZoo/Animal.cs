@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Drawing.Text;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Enum for the comfort of the animal.
@@ -114,7 +106,7 @@ namespace University_Project
         /// <summary>
         /// The bounds of the cageForm.
         /// </summary>
-        public Rectangle cageFormBounds { get { return _cageFormBounds; } set { _cageFormBounds = value; } }
+        public Rectangle CageFormBounds { get { return _cageFormBounds; } set { _cageFormBounds = value; } }
 
         /// <summary>
         /// The height of the panel in cageForm.
@@ -157,7 +149,7 @@ namespace University_Project
             }
 
             // Removing East from possibilities
-            if (location.X >= _cageFormBounds.Width - animalImage.BodyWidth - 50) 
+            if (location.X >= _cageFormBounds.Width - animalImage.BodyWidth - 50)
             {
                 mask &= (Direction.West | Direction.North | Direction.South);
             }
@@ -169,7 +161,7 @@ namespace University_Project
             }
 
             // Removing South from possibilities
-            if (location.Y >= _cageFormBounds.Height - panelHeight - animalImage.ActualHeight - 40) 
+            if (location.Y >= _cageFormBounds.Height - panelHeight - animalImage.ActualHeight - 40)
             {
                 mask &= (Direction.East | Direction.North | Direction.West);
             }
@@ -286,7 +278,7 @@ namespace University_Project
         /// </summary>
         public void LowerComfort()
         {
-            if((int)comfort > 0)
+            if ((int)comfort > 0)
                 comfort--;
         }
 

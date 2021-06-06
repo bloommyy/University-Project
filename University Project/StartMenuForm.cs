@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using Preslav.ZooGame.ClassLibraryZoo;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace University_Project
+namespace Preslav.ZooGame
 {
     /// <summary>
     /// Form for choosing which save to load or create a new one.
@@ -37,7 +32,7 @@ namespace University_Project
         private void buttonCreateNewGame_Click(object sender, EventArgs e)
         {
             CreateGameForm cgf = new CreateGameForm();
-            if(cgf.ShowDialog() == DialogResult.OK)
+            if (cgf.ShowDialog() == DialogResult.OK)
             {
                 gameSaves.AddGame(new Zoo(cgf.Name, cgf.Date));
             }
@@ -59,9 +54,10 @@ namespace University_Project
                 zoo = (Zoo)listBoxGames.SelectedItem
             };
             this.Hide();
-            mf.FormClosed += (s, args) => {
+            mf.FormClosed += (s, args) =>
+            {
                 gameSaves.SaveGames((Zoo)listBoxGames.SelectedItem);
-                this.Close(); 
+                this.Close();
             };
             mf.Show();
         }
@@ -106,7 +102,7 @@ namespace University_Project
             CreateGameForm cgf = new CreateGameForm();
             cgf.Name = item.Name;
             cgf.Date = item.Date;
-            if(cgf.ShowDialog() == DialogResult.OK)
+            if (cgf.ShowDialog() == DialogResult.OK)
             {
                 var save = gameSaves.GetZoos().Single(zoo => zoo == item);
                 save.Name = cgf.Name;

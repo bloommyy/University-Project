@@ -4,16 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
 
     /// <summary>
     /// Class for game saves.
     /// </summary>
-    
+
     public class GameSaves
     {
         private List<Zoo> gameSaves = new List<Zoo>();

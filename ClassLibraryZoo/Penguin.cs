@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Class Penguin that inherits class Animal.
     /// </summary>
     [Serializable]
-    class Penguin : Animal
+    public class Penguin : Animal
     {
         private readonly int swimmingSpeed = 2;
         private bool isSwimming;
@@ -22,7 +18,7 @@ namespace University_Project
         /// <returns>Result according to the animalImage's location.</returns>
         private bool CheckIfSwimming()
         {
-            if (base.animalImage.Location.X >= base.cageFormBounds.Width / 2) // Checks if in water
+            if (base.animalImage.Location.X >= base.CageFormBounds.Width / 2) // Checks if in water
                 return true;
 
             return false;
@@ -42,7 +38,7 @@ namespace University_Project
                 int Y = base.animalImage.Location.Y;
                 if ((base.direction & Direction.North) == Direction.North)
                 {
-                    animalImage.Location = new Point(X, Y - swimmingSpeed); 
+                    animalImage.Location = new Point(X, Y - swimmingSpeed);
                     Y -= swimmingSpeed;
                 }
                 if ((base.direction & Direction.East) == Direction.East)
@@ -54,12 +50,12 @@ namespace University_Project
                 {
                     animalImage.Location = new Point(X, Y + swimmingSpeed);
                     Y += swimmingSpeed;
-                }   
+                }
                 if ((base.direction & Direction.West) == Direction.West)
                 {
-                    animalImage.Location = new Point(X - swimmingSpeed, Y); 
+                    animalImage.Location = new Point(X - swimmingSpeed, Y);
                     X -= swimmingSpeed;
-                }    
+                }
             }
         }
 

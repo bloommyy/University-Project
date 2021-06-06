@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Image for Elephant, inherits AnimalImage.
@@ -51,7 +47,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawBody()
         {
-            using (var pen = new Pen(Color.Black, base.outlineSize))
+            using (var pen = new Pen(Color.Black, base.OutlineSize))
             {
                 base.graphics.DrawEllipse(pen, bodyRectangle);
             }
@@ -66,7 +62,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawHead()
         {
-            using (var pen = new Pen(Color.Black, base.outlineSize))
+            using (var pen = new Pen(Color.Black, base.OutlineSize))
             {
                 base.graphics.DrawEllipse(pen, headRectangle);
             }
@@ -81,11 +77,11 @@ namespace University_Project
         /// </summary>
         protected override void DrawLegs()
         {
-            using (var pen = new Pen(Color.Black, base.outlineSize))
+            using (var pen = new Pen(Color.Black, base.OutlineSize))
             {
-                for(int i  = 0; i < legs.Length; i++)
+                for (int i = 0; i < legs.Length; i++)
                 {
-                    base.graphics.DrawRectangle(pen,legs[i]);
+                    base.graphics.DrawRectangle(pen, legs[i]);
                 }
             }
             using (var brush = new SolidBrush(Color.LightBlue))
@@ -102,7 +98,7 @@ namespace University_Project
         /// </summary>
         protected override void DrawSpecials()
         {
-            if (base.outlineSize == 6)
+            if (base.OutlineSize == 6)
                 trunkWidth /= 2;
 
             // Outline of trunk
@@ -162,12 +158,12 @@ namespace University_Project
         public override bool Contains(Point point)
         {
             // Checking if clicked on legs
-            for(int i = 0; i < legs.Length; i++)
+            for (int i = 0; i < legs.Length; i++)
             {
                 if (legs[i].Contains(point)) return true;
             }
             //Checking if clicked on head
-            using(var gp = new System.Drawing.Drawing2D.GraphicsPath())
+            using (var gp = new System.Drawing.Drawing2D.GraphicsPath())
             {
                 gp.AddEllipse(headRectangle);
                 gp.AddEllipse(bodyRectangle);

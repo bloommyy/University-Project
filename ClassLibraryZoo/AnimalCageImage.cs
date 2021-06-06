@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Enum showing which side the cage is on.
@@ -37,7 +31,7 @@ namespace University_Project
         /// <summary>
         /// Used for x and y offset on both cages.
         /// </summary>
-        private int cageOffset = 5;
+        private readonly int cageOffset = 5;
 
         /// <summary>
         /// The color of the fence. Black = selected.
@@ -47,7 +41,7 @@ namespace University_Project
         /// <summary>
         /// A rectangle for the cage.
         /// </summary>
-        private Rectangle cageImage;
+        public Rectangle cageImageRectangle;
 
         /// <summary>
         /// The position of the cage. Can be Left or Right.
@@ -58,26 +52,19 @@ namespace University_Project
         /// Draws first or second cage - 2/5ths of the width of the screen. 
         /// </summary>
         /// <param name="g"></param>
-        public void DrawCage(Graphics g) // Should find a way to improve for multiple cages.
+        public void DrawCage(IDrawZoo g)
         {
-            using(var pen = new Pen(fenceColor, 10))
-            {
-                g.DrawRectangle(pen, cageImage);
-            }
-            using (var brush = new SolidBrush(Color.LimeGreen))
-            {
-                g.FillRectangle(brush, cageImage);
-            }
+            g.DrawCage(fenceColor, cageImageRectangle);
         }
-       
+
         /// <summary>
-        /// Detemines if the point is in either of the cages.
+        /// Determines if the point is in either of the cages.
         /// </summary>
         /// <param name="p">Location of mouse.</param>
         /// <returns></returns>
         public bool Contains(Point p)
         {
-            return (cageImage.Contains(p));
+            return (cageImageRectangle.Contains(p));
         }
 
         /// <summary>
@@ -91,7 +78,7 @@ namespace University_Project
             fenceColor = Color.Brown;
             cagePos = _cagePos;
             cageWidth = 2 * (formBounds.Width / 5);
-            cageImage = new Rectangle(((int)(cagePos) * 3 * (formBounds.Width / 5) + cageOffset), cageOffset, cageWidth, cageHeight);
+            cageImageRectangle = new Rectangle(((int)(cagePos) * 3 * (formBounds.Width / 5) + cageOffset), cageOffset, cageWidth, cageHeight);
         }
 
         /// <summary>
@@ -103,7 +90,7 @@ namespace University_Project
         {
             cageWidth = 2 * (formBounds.Width / 5) - 25;
             cageHeight = formBounds.Height - panelInfoBounds.Height - 50;
-            cageImage = new Rectangle(((int)(cagePos) * 3 * (formBounds.Width / 5) + cageOffset), cageOffset, cageWidth, cageHeight);
+            cageImageRectangle = new Rectangle(((int)(cagePos) * 3 * (formBounds.Width / 5) + cageOffset), cageOffset, cageWidth, cageHeight);
         }
     }
 }

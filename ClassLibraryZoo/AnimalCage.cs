@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace University_Project
+namespace Preslav.ZooGame.ClassLibraryZoo
 {
     /// <summary>
     /// Enum for the state of the fodder.
@@ -100,7 +96,7 @@ namespace University_Project
         /// <param name="ct">The type of the cage.</param>
         public AnimalCage(Rectangle formBounds, CagePosition cagePos, CageType ct)
         {
-            cageImage = new AnimalCageImage(formBounds, cagePos);  
+            cageImage = new AnimalCageImage(formBounds, cagePos);
             isTaskDone = false;
             fodderState = FodderState.HalfFull;
             cageType = ct;

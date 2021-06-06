@@ -1,4 +1,4 @@
-﻿namespace University_Project
+﻿namespace Preslav.ZooGame
 {
     partial class BuyCageForm
     {
