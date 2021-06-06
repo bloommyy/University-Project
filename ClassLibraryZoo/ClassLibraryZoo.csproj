@@ -49,6 +49,7 @@
     <Compile Include="Elephant.cs" />
     <Compile Include="ElephantImage.cs" />
     <Compile Include="GameSaves.cs" />
+    <Compile Include="IDrawAnimal.cs" />
     <Compile Include="IDrawZoo.cs" />
     <Compile Include="Penguin.cs" />
     <Compile Include="PenguinImage.cs" />

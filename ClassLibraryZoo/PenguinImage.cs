@@ -9,154 +9,57 @@ namespace Preslav.ZooGame.ClassLibraryZoo
     [Serializable]
     class PenguinImage : AnimalImage
     {
-        private Rectangle bodyRectangle;
-        private Rectangle headRectangle;
+        public Rectangle? bodyRectangle;
 
+        public Rectangle? headRectangle;
         private int headPositionOffsetX;
         private int headPositionOffsetY;
         private int headWidth;
         private int headHeight;
 
+        public Rectangle? leftFaceCircle;
+        public Rectangle? rightFaceCircle;
         private int leftFaceCirclePositionOffsetX;
         private int rightFaceCirclePositionOffsetX;
         private int faceCirclePositionOffsetY;
         private int faceCircleWidth;
         private int faceCircleHeight;
 
+        public Rectangle? leftEye;
+        public Rectangle? rightEye;
         private int leftEyePositionOffsetX;
         private int rightEyePositionOffsetX;
         private int eyesPositionOffsetY;
         private int eyeWidth;
         private int eyeHeight;
 
+        public Rectangle? mouth;
         private int mouthPositionOffsetX;
         private int mouthWidth;
         private int mouthHeight;
 
+        public Rectangle? leftFoot;
+        public Rectangle? rightFoot;
         private int leftFootPositionOffsetX;
         private int rightFootPositionOffsetX;
         private int feetPositionOffsetY;
         private int feetWidth;
         private int feetHeight;
 
+        public Rectangle? stomach;
         private int stomachPositionOffsetX;
         private int stomachPositionOffsetY;
         private int stomachWidth;
         private int stomachHeight;
 
+        public Rectangle? leftWing;
+        public Rectangle? rightWing;
         private int leftWingPositionOffsetX;
         private int rightWingPositionOffsetX;
         private int wingsPositionOffsetY;
         private int wingsWidth;
         private int wingsHeight;
 
-        /// <summary>
-        /// Draws the body of Penguin.
-        /// </summary>
-        protected override void DrawBody()
-        {
-            using (var pen = new Pen(Color.Black, base.OutlineSize))
-            {
-                base.graphics.DrawEllipse(pen, bodyRectangle);
-            }
-            using (var brush = new SolidBrush(Color.Gray))
-            {
-                base.graphics.FillEllipse(brush, bodyRectangle);
-            }
-        }
-
-        /// <summary>
-        /// Draws the head of Penguin.
-        /// </summary>
-        protected override void DrawHead()
-        {
-            using (var pen = new Pen(Color.Black, base.OutlineSize))
-            {
-                // Head 
-                base.graphics.DrawEllipse(pen, headRectangle);
-            }
-            using (var brush = new SolidBrush(Color.Gray))
-            {
-                // Head 
-                base.graphics.FillEllipse(brush, headRectangle);
-            }
-            using (var brush = new SolidBrush(Color.White))
-            {
-                // Face 
-                base.graphics.FillEllipse(brush, Location.X + leftFaceCirclePositionOffsetX,
-                    Location.Y - faceCirclePositionOffsetY, faceCircleWidth, faceCircleHeight);
-                base.graphics.FillEllipse(brush, Location.X + rightFaceCirclePositionOffsetX,
-                    Location.Y - faceCirclePositionOffsetY, faceCircleWidth, faceCircleHeight);
-            }
-            using (var brush = new SolidBrush(Color.Black))
-            {
-                // Eyes
-                base.graphics.FillEllipse(brush, Location.X + leftEyePositionOffsetX,
-                    Location.Y - eyesPositionOffsetY, eyeWidth, eyeHeight);
-                base.graphics.FillEllipse(brush, Location.X + rightEyePositionOffsetX,
-                    Location.Y - eyesPositionOffsetY, eyeWidth, eyeHeight);
-            }
-            using (var brush = new SolidBrush(Color.Orange))
-            {
-                // Mouth
-                base.graphics.FillEllipse(brush, Location.X + mouthPositionOffsetX,
-                    Location.Y, mouthWidth, mouthHeight);
-            }
-        }
-
-        /// <summary>
-        /// Draws the legs of Penguin.
-        /// </summary>
-        protected override void DrawLegs()
-        {
-            using (var pen = new Pen(Color.Black, base.OutlineSize))
-            {
-                // Left foot
-                base.graphics.DrawEllipse(pen, Location.X + leftFootPositionOffsetX,
-                    Location.Y + feetPositionOffsetY, feetWidth, feetHeight);
-                // Right foot
-                base.graphics.DrawEllipse(pen, Location.X + rightFootPositionOffsetX,
-                    Location.Y + feetPositionOffsetY, feetWidth, feetHeight);
-            }
-            using (var brush = new SolidBrush(Color.Orange))
-            {
-                // Left foot
-                base.graphics.FillEllipse(brush, Location.X + leftFootPositionOffsetX,
-                    Location.Y + feetPositionOffsetY, feetWidth, feetHeight);
-                // Right foot
-                base.graphics.FillEllipse(brush, Location.X + rightFootPositionOffsetX,
-                    Location.Y + feetPositionOffsetY, feetWidth, feetHeight);
-            }
-        }
-
-        /// <summary>
-        /// Draws the special features of Penguin.
-        /// </summary>
-        protected override void DrawSpecials()
-        {
-            using (var brush = new SolidBrush(Color.White))
-            {
-                // Stomach
-                base.graphics.FillEllipse(brush, Location.X + stomachPositionOffsetX,
-                    Location.Y + stomachPositionOffsetY, stomachWidth, stomachHeight);
-            }
-            using (var pen = new Pen(Color.Black, base.OutlineSize))
-            {
-                // Wings
-                base.graphics.DrawEllipse(pen, Location.X + leftWingPositionOffsetX,
-                    Location.Y + wingsPositionOffsetY, wingsWidth, wingsHeight);
-                base.graphics.DrawEllipse(pen, Location.X + rightWingPositionOffsetX,
-                    Location.Y + wingsPositionOffsetY, wingsWidth, wingsHeight);
-            }
-            using (var brush = new SolidBrush(Color.Gray))
-            {
-                // Wings
-                base.graphics.FillEllipse(brush, Location.X + leftWingPositionOffsetX,
-                    Location.Y + wingsPositionOffsetY, wingsWidth, wingsHeight);
-                base.graphics.FillEllipse(brush, Location.X + rightWingPositionOffsetX,
-                    Location.Y + wingsPositionOffsetY, wingsWidth, wingsHeight);
-            }
-        }
 
         /// <summary>
         /// Constructor for PeinguinImage.
@@ -212,13 +115,12 @@ namespace Preslav.ZooGame.ClassLibraryZoo
         /// Draws the animal.
         /// </summary>
         /// <param name="g"></param>
-        public override void DrawAnimal(Graphics g)
+        public override void DrawAnimal(IDrawAnimal drawAnimal, Animal animal)
         {
-            graphics = g;
-            DrawBody();
-            DrawSpecials();
-            DrawLegs();
-            DrawHead();
+            drawAnimal.DrawBody(animal, OutlineSize, bodyRectangle);
+            drawAnimal.DrawSpecials(animal, OutlineSize, null, null, null, stomach, leftWing, rightWing);
+            drawAnimal.DrawLegs(animal, OutlineSize, null, leftFoot, rightFoot);
+            drawAnimal.DrawHead(animal, OutlineSize, headRectangle, leftFaceCircle, rightFaceCircle, leftEye, rightEye, mouth);
         }
 
         /// <summary>
@@ -230,8 +132,8 @@ namespace Preslav.ZooGame.ClassLibraryZoo
         {
             using (var gp = new System.Drawing.Drawing2D.GraphicsPath())
             {
-                gp.AddEllipse(bodyRectangle);
-                gp.AddEllipse(headRectangle);
+                gp.AddEllipse((Rectangle)bodyRectangle);
+                gp.AddEllipse((Rectangle)headRectangle);
                 if (gp.IsVisible(point)) return true;
             }
             return false;
@@ -259,6 +161,10 @@ namespace Preslav.ZooGame.ClassLibraryZoo
             faceCirclePositionOffsetY = (int)(formBounds.Height * 0.0555);
             faceCircleWidth = (int)(formBounds.Width * 0.0195);
             faceCircleHeight = (int)(formBounds.Height * 0.0555);
+            leftFaceCircle = new Rectangle(Location.X + leftFaceCirclePositionOffsetX,
+                    Location.Y - faceCirclePositionOffsetY, faceCircleWidth, faceCircleHeight);
+            rightFaceCircle = new Rectangle(Location.X + rightFaceCirclePositionOffsetX,
+                    Location.Y - faceCirclePositionOffsetY, faceCircleWidth, faceCircleHeight);
 
             // Scaling eyes
             leftEyePositionOffsetX = (int)(formBounds.Width * 0.025);
@@ -266,11 +172,17 @@ namespace Preslav.ZooGame.ClassLibraryZoo
             eyesPositionOffsetY = (int)(formBounds.Height * 0.0444);
             eyeWidth = (int)(formBounds.Width * 0.0054);
             eyeHeight = (int)(formBounds.Height * 0.0097);
+            leftEye = new Rectangle(Location.X + leftEyePositionOffsetX,
+                    Location.Y - eyesPositionOffsetY, eyeWidth, eyeHeight);
+            rightEye = new Rectangle(Location.X + rightEyePositionOffsetX,
+                    Location.Y - eyesPositionOffsetY, eyeWidth, eyeHeight);
 
             // Scaling mouth
             mouthPositionOffsetX = (int)(formBounds.Width * 0.0296);
             mouthWidth = (int)(formBounds.Width * 0.0234);
             mouthHeight = (int)(formBounds.Height * 0.0166);
+            mouth = new Rectangle(Location.X + mouthPositionOffsetX,
+                    Location.Y, mouthWidth, mouthHeight);
 
             // Scaling feet
             leftFootPositionOffsetX = (int)(formBounds.Width * 0.0117);
@@ -278,12 +190,18 @@ namespace Preslav.ZooGame.ClassLibraryZoo
             feetPositionOffsetY = (int)(formBounds.Height * 0.15);
             feetWidth = (int)(formBounds.Width * 0.0195);
             feetHeight = (int)(formBounds.Height * 0.0208);
+            leftFoot = new Rectangle(Location.X + leftFootPositionOffsetX,
+                    Location.Y + feetPositionOffsetY, feetWidth, feetHeight);
+            rightFoot = new Rectangle(Location.X + rightFootPositionOffsetX,
+                    Location.Y + feetPositionOffsetY, feetWidth, feetHeight);
 
             // Scaling stomach
             stomachPositionOffsetX = (int)(formBounds.Width * 0.0078);
             stomachPositionOffsetY = (int)(formBounds.Height * 0.0138);
             stomachWidth = (int)(formBounds.Width * 0.0625);
             stomachHeight = (int)(formBounds.Height * 0.1388);
+            stomach = new Rectangle(Location.X + stomachPositionOffsetX,
+                    Location.Y + stomachPositionOffsetY, stomachWidth, stomachHeight);
 
             // Scaling wings
             leftWingPositionOffsetX = (int)(formBounds.Width * 0.0039);
@@ -291,6 +209,10 @@ namespace Preslav.ZooGame.ClassLibraryZoo
             wingsPositionOffsetY = (int)(formBounds.Height * 0.0347);
             wingsWidth = (int)(formBounds.Width * 0.0156);
             wingsHeight = (int)(formBounds.Height * 0.0694);
+            leftWing = new Rectangle(Location.X + leftWingPositionOffsetX,
+                    Location.Y + wingsPositionOffsetY, wingsWidth, wingsHeight);
+            rightWing = new Rectangle(Location.X + rightWingPositionOffsetX,
+                    Location.Y + wingsPositionOffsetY, wingsWidth, wingsHeight);
         }
     }
 }

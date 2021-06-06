@@ -9,9 +9,9 @@ namespace Preslav.ZooGame.ClassLibraryZoo
     [Serializable]
     class ElephantImage : AnimalImage
     {
-        private Rectangle bodyRectangle;
+        public Rectangle bodyRectangle;
 
-        private Rectangle headRectangle;
+        public Rectangle headRectangle;
         private int headPositionOffsetX;
         private int headPositionOffsetY;
         private int headWidth;
@@ -26,7 +26,7 @@ namespace Preslav.ZooGame.ClassLibraryZoo
         private int legWidth;
         private int legHeight;
 
-        private Point[] curvePoints;
+        public Point[] curvePoints;
         private int trunkContour;
         private int trunkWidth;
         private int firstTrunkOffsetX;
@@ -40,77 +40,17 @@ namespace Preslav.ZooGame.ClassLibraryZoo
         private int sixthTrunkOffsetX;
         private int sixthTrunkOffsetY;
 
-
-
         /// <summary>
-        /// Draws the body of Elephant.
+        /// Calls all the methods to draw the animal.
         /// </summary>
-        protected override void DrawBody()
+        /// <param name="drawAnimal"></param>
+        /// <param name="animal"></param>
+        public override void DrawAnimal(IDrawAnimal drawAnimal, Animal animal)
         {
-            using (var pen = new Pen(Color.Black, base.OutlineSize))
-            {
-                base.graphics.DrawEllipse(pen, bodyRectangle);
-            }
-            using (var brush = new SolidBrush(Color.LightBlue))
-            {
-                base.graphics.FillEllipse(brush, bodyRectangle);
-            }
-        }
-
-        /// <summary>
-        /// Draws the head of Elephant.
-        /// </summary>
-        protected override void DrawHead()
-        {
-            using (var pen = new Pen(Color.Black, base.OutlineSize))
-            {
-                base.graphics.DrawEllipse(pen, headRectangle);
-            }
-            using (var brush = new SolidBrush(Color.LightBlue))
-            {
-                base.graphics.FillEllipse(brush, headRectangle);
-            }
-        }
-
-        /// <summary>
-        /// Draws the legs of Elephant.
-        /// </summary>
-        protected override void DrawLegs()
-        {
-            using (var pen = new Pen(Color.Black, base.OutlineSize))
-            {
-                for (int i = 0; i < legs.Length; i++)
-                {
-                    base.graphics.DrawRectangle(pen, legs[i]);
-                }
-            }
-            using (var brush = new SolidBrush(Color.LightBlue))
-            {
-                for (int i = 0; i < legs.Length; i++)
-                {
-                    base.graphics.FillRectangle(brush, legs[i]);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Draws the special features of Elephant.
-        /// </summary>
-        protected override void DrawSpecials()
-        {
-            if (base.OutlineSize == 6)
-                trunkWidth /= 2;
-
-            // Outline of trunk
-            using (var pen = new Pen(Color.Black, trunkContour)) // trunk
-            {
-                base.graphics.DrawCurve(pen, curvePoints);
-            }
-            // Drawing trunk
-            using (var pen = new Pen(Color.LightBlue, trunkWidth)) // trunk
-            {
-                base.graphics.DrawCurve(pen, curvePoints);
-            }
+            drawAnimal.DrawLegs(animal, OutlineSize, legs, null, null);
+            drawAnimal.DrawBody(animal, OutlineSize, bodyRectangle);
+            drawAnimal.DrawHead(animal, OutlineSize, headRectangle, null, null, null, null, null);
+            drawAnimal.DrawSpecials(animal, OutlineSize, trunkContour, trunkWidth, curvePoints, null, null, null);
         }
 
         /// <summary>
@@ -121,7 +61,7 @@ namespace Preslav.ZooGame.ClassLibraryZoo
             base.Location = new Point(400, 400);
             base.BodyWidth = 150;
             base.BodyHeight = 100;
-            base.ActualHeight = BodyHeight + legHeight;
+            base.ActualHeight = BodyHeight + legHeight + 80;
 
             headPositionOffsetX = 120;
             headPositionOffsetY = 10;

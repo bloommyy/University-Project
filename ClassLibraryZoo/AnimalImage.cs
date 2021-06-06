@@ -37,12 +37,6 @@ namespace Preslav.ZooGame.ClassLibraryZoo
         /// </summary>
         public int ActualHeight { get; set; }
 
-        /// <summary>
-        /// The graphics needed to draw the animals.
-        /// </summary>
-        [NonSerialized]
-        protected Graphics graphics;
-
         private int _outlineSize = 3;
         /// <summary>
         /// The size of the outline of the animal's drawing.
@@ -54,36 +48,10 @@ namespace Preslav.ZooGame.ClassLibraryZoo
         }
 
         /// <summary>
-        /// Draws the body of the animal.
-        /// </summary>
-        protected abstract void DrawBody();
-
-        /// <summary>
-        /// Draws the head of the animal.
-        /// </summary>
-        protected abstract void DrawHead();
-
-        /// <summary>
-        /// Draws the legs of the animal.
-        /// </summary>
-        protected abstract void DrawLegs();
-
-        /// <summary>
-        /// Draws the special features of the animal.
-        /// </summary>
-        protected abstract void DrawSpecials();
-
-        /// <summary>
         /// Draws the Animal using Graphics.Draw.
         /// </summary>
-        public virtual void DrawAnimal(Graphics g)
-        {
-            graphics = g;
-            DrawLegs();
-            DrawBody();
-            DrawHead();
-            DrawSpecials();
-        }
+        public abstract void DrawAnimal(IDrawAnimal drawAnimal, Animal animal);
+
 
         /// <summary>
         ///  Method for checking if the cursor is over the animalImage.

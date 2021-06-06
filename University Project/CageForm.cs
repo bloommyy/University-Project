@@ -10,8 +10,10 @@ namespace Preslav.ZooGame
     /// <summary>
     /// The form for the cage of an animal.
     /// </summary>
-    public partial class CageForm : Form
+    public partial class CageForm : Form, IDrawAnimal
     {
+        private Graphics _onPaintGraphics;
+
         /// <summary>
         /// Contains information about the cage.
         /// </summary>
@@ -65,14 +67,16 @@ namespace Preslav.ZooGame
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
+            _onPaintGraphics = e.Graphics;
             actualCageHeight = this.Bounds.Height - panelUserInfo.Height; // Used for scaling later on
             SetLabels();
             DrawCage(e.Graphics);
             foreach (var animal in animalCage.GetAnimals())
             {
                 animal.animalImage.ScaleAnimalSize(this.Bounds);
-                animal.animalImage.DrawAnimal(e.Graphics);
+                animal.animalImage.DrawAnimal(this, animal);
             }
+            _onPaintGraphics = null;
         }
 
         /// <summary>
@@ -302,6 +306,193 @@ namespace Preslav.ZooGame
         private void buttonDoTask_Click(object sender, EventArgs e)
         {
             animalCage.isTaskDone = true;
+        }
+
+        /// <summary>
+        /// Draws the head of the animal.
+        /// </summary>
+        /// <param name="animal"></param>
+        /// <param name="outlineSize"></param>
+        /// <param name="headRectangle"></param>
+        /// <param name="leftFaceCircle"></param>
+        /// <param name="rightFaceCircle"></param>
+        /// <param name="leftEye"></param>
+        /// <param name="rightEye"></param>
+        /// <param name="mouth"></param>
+        public void DrawHead(Animal animal, int outlineSize, Rectangle? headRectangle,
+            Rectangle? leftFaceCircle, Rectangle? rightFaceCircle, Rectangle? leftEye, Rectangle? rightEye, Rectangle? mouth)
+        {
+            if(animal.GetType().Name == "Elephant")
+            {
+                using (var pen = new Pen(Color.Black, outlineSize))
+                {
+                    _onPaintGraphics.DrawEllipse(pen, (Rectangle)headRectangle);
+                }
+                using (var brush = new SolidBrush(Color.LightBlue))
+                {
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)headRectangle);
+                }
+            }else if(animal.GetType().Name == "Penguin")
+            {
+                using (var pen = new Pen(Color.Black, outlineSize))
+                {
+                    // Head 
+                     _onPaintGraphics.DrawEllipse(pen, (Rectangle)headRectangle);
+                }
+                using (var brush = new SolidBrush(Color.Gray))
+                {
+                    // Head 
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)headRectangle);
+                }
+                using (var brush = new SolidBrush(Color.White))
+                {
+                    // Face 
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)leftFaceCircle);
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)rightFaceCircle);
+                }
+                using (var brush = new SolidBrush(Color.Black))
+                {
+                    // Eyes
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)leftEye);
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)rightEye);
+                }
+                using (var brush = new SolidBrush(Color.Orange))
+                {
+                    // Mouth
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)mouth);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws the body of the animal.
+        /// </summary>
+        /// <param name="animal"></param>
+        /// <param name="outlineSize"></param>
+        /// <param name="bodyRectangle"></param>
+        public void DrawBody(Animal animal, int outlineSize, Rectangle? bodyRectangle)
+        {
+            if(animal.GetType().Name == "Elephant")
+            {
+                using (var pen = new Pen(Color.Black, outlineSize))
+                {
+                    _onPaintGraphics.DrawEllipse(pen, (Rectangle)bodyRectangle);
+                }
+                using (var brush = new SolidBrush(Color.LightBlue))
+                {
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)bodyRectangle);
+                }
+            }else if(animal.GetType().Name == "Penguin")
+            {
+                using (var pen = new Pen(Color.Black, outlineSize))
+                {
+                    _onPaintGraphics.DrawEllipse(pen, (Rectangle)bodyRectangle);
+                }
+                using (var brush = new SolidBrush(Color.Gray))
+                {
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)bodyRectangle);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws the legs of the animal.
+        /// </summary>
+        /// <param name="animal"></param>
+        /// <param name="outlineSize"></param>
+        /// <param name="legs"></param>
+        /// <param name="leftPenguinLeg"></param>
+        /// <param name="rightPenguinLeg"></param>
+        public void DrawLegs(Animal animal, int outlineSize,
+            Rectangle[] legs,
+            Rectangle? leftPenguinLeg, Rectangle? rightPenguinLeg)
+        {
+            if(animal.GetType().Name == "Elephant")
+            {
+                using (var pen = new Pen(Color.Black, outlineSize))
+                {
+                    for (int i = 0; i < legs.Length; i++)
+                    {
+                        _onPaintGraphics.DrawRectangle(pen, (Rectangle)legs[i]);
+                    }
+                }
+                using (var brush = new SolidBrush(Color.LightBlue))
+                {
+                    for (int i = 0; i < legs.Length; i++)
+                    {
+                        _onPaintGraphics.FillRectangle(brush, (Rectangle)legs[i]);
+                    }
+                }
+            }else if(animal.GetType().Name == "Penguin")
+            {
+                using (var pen = new Pen(Color.Black, outlineSize))
+                {
+                    // Left foot
+                    _onPaintGraphics.DrawEllipse(pen, (Rectangle)leftPenguinLeg);
+                    // Right foot
+                    _onPaintGraphics.DrawEllipse(pen, (Rectangle)rightPenguinLeg);
+                }
+                using (var brush = new SolidBrush(Color.Orange))
+                {
+                    // Left foot
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)leftPenguinLeg);
+                    // Right foot
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)rightPenguinLeg);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Draws the special features of the animal.
+        /// </summary>
+        /// <param name="animal"></param>
+        /// <param name="outlineSize"></param>
+        /// <param name="trunkContour"></param>
+        /// <param name="trunkWidth"></param>
+        /// <param name="curvePoints"></param>
+        /// <param name="stomach"></param>
+        /// <param name="leftWing"></param>
+        /// <param name="rightWing"></param>
+        public void DrawSpecials(Animal animal, int outlineSize,
+            int? trunkContour, int? trunkWidth, Point[] curvePoints,
+            Rectangle? stomach, Rectangle? leftWing, Rectangle? rightWing)
+        {
+            if(animal.GetType().Name == "Elephant")
+            {
+                if(outlineSize == 6)
+                trunkWidth /= 2;
+
+                // Outline of trunk
+                using (var pen = new Pen(Color.Black, (int)trunkContour)) // trunk
+                {
+                    _onPaintGraphics.DrawCurve(pen, curvePoints);
+                }
+                // Drawing trunk
+                using (var pen = new Pen(Color.LightBlue, (int)trunkWidth)) // trunk
+                {
+                    _onPaintGraphics.DrawCurve(pen, curvePoints);
+                }
+            }
+            else if(animal.GetType().Name == "Penguin")
+            {
+                using (var brush = new SolidBrush(Color.White))
+                {
+                    // Stomach
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)stomach);
+                }
+                using (var pen = new Pen(Color.Black, outlineSize))
+                {
+                    // Wings
+                    _onPaintGraphics.DrawEllipse(pen, (Rectangle)leftWing);
+                    _onPaintGraphics.DrawEllipse(pen, (Rectangle)rightWing);
+                }
+                using (var brush = new SolidBrush(Color.Gray))
+                {
+                    // Wings
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)leftWing);
+                    _onPaintGraphics.FillEllipse(brush, (Rectangle)rightWing);
+                }
+            }
         }
     }
 }
