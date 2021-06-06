@@ -30,8 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelUserInfo = new System.Windows.Forms.Panel();
-            this.buttonDoTask = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.buttonBuyFodder = new System.Windows.Forms.Button();
+            this.buttonDoTask = new System.Windows.Forms.Button();
+            this.buttonBuyAnimal = new System.Windows.Forms.Button();
+            this.buttonSellAnimal = new System.Windows.Forms.Button();
             this.labelFodder = new System.Windows.Forms.Label();
             this.labelFodderText = new System.Windows.Forms.Label();
             this.labelComfort = new System.Windows.Forms.Label();
@@ -45,8 +48,6 @@
             this.labelTaskDone = new System.Windows.Forms.Label();
             this.labelError = new System.Windows.Forms.Label();
             this.labelTasksDoneText = new System.Windows.Forms.Label();
-            this.buttonSellAnimal = new System.Windows.Forms.Button();
-            this.buttonBuyAnimal = new System.Windows.Forms.Button();
             this.labelMinutes = new System.Windows.Forms.Label();
             this.labelHour = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
@@ -58,13 +59,13 @@
             this.timerChangeDirection = new System.Windows.Forms.Timer(this.components);
             this.timerWaitAfterOutOfBounds = new System.Windows.Forms.Timer(this.components);
             this.panelUserInfo.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelUserInfo
             // 
             this.panelUserInfo.BackColor = System.Drawing.Color.Silver;
-            this.panelUserInfo.Controls.Add(this.buttonDoTask);
-            this.panelUserInfo.Controls.Add(this.buttonBuyFodder);
+            this.panelUserInfo.Controls.Add(this.panel1);
             this.panelUserInfo.Controls.Add(this.labelFodder);
             this.panelUserInfo.Controls.Add(this.labelFodderText);
             this.panelUserInfo.Controls.Add(this.labelComfort);
@@ -78,8 +79,6 @@
             this.panelUserInfo.Controls.Add(this.labelTaskDone);
             this.panelUserInfo.Controls.Add(this.labelError);
             this.panelUserInfo.Controls.Add(this.labelTasksDoneText);
-            this.panelUserInfo.Controls.Add(this.buttonSellAnimal);
-            this.panelUserInfo.Controls.Add(this.buttonBuyAnimal);
             this.panelUserInfo.Controls.Add(this.labelMinutes);
             this.panelUserInfo.Controls.Add(this.labelHour);
             this.panelUserInfo.Controls.Add(this.labelTime);
@@ -93,9 +92,31 @@
             this.panelUserInfo.Size = new System.Drawing.Size(1264, 100);
             this.panelUserInfo.TabIndex = 1;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.buttonBuyFodder);
+            this.panel1.Controls.Add(this.buttonDoTask);
+            this.panel1.Controls.Add(this.buttonBuyAnimal);
+            this.panel1.Controls.Add(this.buttonSellAnimal);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(1019, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(245, 100);
+            this.panel1.TabIndex = 21;
+            // 
+            // buttonBuyFodder
+            // 
+            this.buttonBuyFodder.Location = new System.Drawing.Point(3, 9);
+            this.buttonBuyFodder.Name = "buttonBuyFodder";
+            this.buttonBuyFodder.Size = new System.Drawing.Size(115, 23);
+            this.buttonBuyFodder.TabIndex = 18;
+            this.buttonBuyFodder.Text = "Buy Fodder -100";
+            this.buttonBuyFodder.UseVisualStyleBackColor = true;
+            this.buttonBuyFodder.Click += new System.EventHandler(this.button1_Click);
+            // 
             // buttonDoTask
             // 
-            this.buttonDoTask.Location = new System.Drawing.Point(1016, 41);
+            this.buttonDoTask.Location = new System.Drawing.Point(3, 38);
             this.buttonDoTask.Name = "buttonDoTask";
             this.buttonDoTask.Size = new System.Drawing.Size(115, 23);
             this.buttonDoTask.TabIndex = 20;
@@ -103,15 +124,25 @@
             this.buttonDoTask.UseVisualStyleBackColor = true;
             this.buttonDoTask.Click += new System.EventHandler(this.buttonDoTask_Click);
             // 
-            // buttonBuyFodder
+            // buttonBuyAnimal
             // 
-            this.buttonBuyFodder.Location = new System.Drawing.Point(1016, 12);
-            this.buttonBuyFodder.Name = "buttonBuyFodder";
-            this.buttonBuyFodder.Size = new System.Drawing.Size(115, 23);
-            this.buttonBuyFodder.TabIndex = 18;
-            this.buttonBuyFodder.Text = "Buy Fodder -100";
-            this.buttonBuyFodder.UseVisualStyleBackColor = true;
-            this.buttonBuyFodder.Click += new System.EventHandler(this.button1_Click);
+            this.buttonBuyAnimal.Location = new System.Drawing.Point(124, 9);
+            this.buttonBuyAnimal.Name = "buttonBuyAnimal";
+            this.buttonBuyAnimal.Size = new System.Drawing.Size(115, 23);
+            this.buttonBuyAnimal.TabIndex = 1;
+            this.buttonBuyAnimal.Text = "Buy Animal -300";
+            this.buttonBuyAnimal.UseVisualStyleBackColor = true;
+            this.buttonBuyAnimal.Click += new System.EventHandler(this.buttonBuyAnimal_Click);
+            // 
+            // buttonSellAnimal
+            // 
+            this.buttonSellAnimal.Location = new System.Drawing.Point(124, 38);
+            this.buttonSellAnimal.Name = "buttonSellAnimal";
+            this.buttonSellAnimal.Size = new System.Drawing.Size(115, 23);
+            this.buttonSellAnimal.TabIndex = 7;
+            this.buttonSellAnimal.Text = "Sell Animal +100";
+            this.buttonSellAnimal.UseVisualStyleBackColor = true;
+            this.buttonSellAnimal.Click += new System.EventHandler(this.buttonSellAnimal_Click);
             // 
             // labelFodder
             // 
@@ -222,29 +253,9 @@
             this.labelTasksDoneText.AutoSize = true;
             this.labelTasksDoneText.Location = new System.Drawing.Point(116, 39);
             this.labelTasksDoneText.Name = "labelTasksDoneText";
-            this.labelTasksDoneText.Size = new System.Drawing.Size(42, 13);
+            this.labelTasksDoneText.Size = new System.Drawing.Size(37, 13);
             this.labelTasksDoneText.TabIndex = 1;
-            this.labelTasksDoneText.Text = "Tasks :";
-            // 
-            // buttonSellAnimal
-            // 
-            this.buttonSellAnimal.Location = new System.Drawing.Point(1137, 41);
-            this.buttonSellAnimal.Name = "buttonSellAnimal";
-            this.buttonSellAnimal.Size = new System.Drawing.Size(115, 23);
-            this.buttonSellAnimal.TabIndex = 7;
-            this.buttonSellAnimal.Text = "Sell Animal +100";
-            this.buttonSellAnimal.UseVisualStyleBackColor = true;
-            this.buttonSellAnimal.Click += new System.EventHandler(this.buttonSellAnimal_Click);
-            // 
-            // buttonBuyAnimal
-            // 
-            this.buttonBuyAnimal.Location = new System.Drawing.Point(1137, 12);
-            this.buttonBuyAnimal.Name = "buttonBuyAnimal";
-            this.buttonBuyAnimal.Size = new System.Drawing.Size(115, 23);
-            this.buttonBuyAnimal.TabIndex = 1;
-            this.buttonBuyAnimal.Text = "Buy Animal -300";
-            this.buttonBuyAnimal.UseVisualStyleBackColor = true;
-            this.buttonBuyAnimal.Click += new System.EventHandler(this.buttonBuyAnimal_Click);
+            this.labelTasksDoneText.Text = "Task :";
             // 
             // labelMinutes
             // 
@@ -333,15 +344,14 @@
             this.BackColor = System.Drawing.Color.LimeGreen;
             this.ClientSize = new System.Drawing.Size(1264, 681);
             this.Controls.Add(this.panelUserInfo);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(1280, 720);
             this.Name = "CageForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "CageForm";
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CageForm_MouseClick);
             this.panelUserInfo.ResumeLayout(false);
             this.panelUserInfo.PerformLayout();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -376,5 +386,6 @@
         private System.Windows.Forms.Button buttonBuyFodder;
         private System.Windows.Forms.Timer timerWaitAfterOutOfBounds;
         private System.Windows.Forms.Button buttonDoTask;
+        private System.Windows.Forms.Panel panel1;
     }
 }

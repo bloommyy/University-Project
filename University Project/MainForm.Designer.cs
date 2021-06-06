@@ -30,12 +30,14 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelUserInfo = new System.Windows.Forms.Panel();
-            this.buttonSaveGame = new System.Windows.Forms.Button();
+            this.labelSelectedCage = new System.Windows.Forms.Label();
+            this.labelSelectedCageText = new System.Windows.Forms.Label();
+            this.panelButtons = new System.Windows.Forms.Panel();
+            this.buttonSellCage = new System.Windows.Forms.Button();
+            this.buttonBuyCage = new System.Windows.Forms.Button();
             this.labelError = new System.Windows.Forms.Label();
             this.labelTasksDone = new System.Windows.Forms.Label();
             this.labelTasksDoneText = new System.Windows.Forms.Label();
-            this.buttonSellCage = new System.Windows.Forms.Button();
-            this.buttonBuyCage = new System.Windows.Forms.Button();
             this.labelMinutes = new System.Windows.Forms.Label();
             this.labelHour = new System.Windows.Forms.Label();
             this.labelTime = new System.Windows.Forms.Label();
@@ -44,7 +46,6 @@
             this.labelMoney = new System.Windows.Forms.Label();
             this.labelMoneyText = new System.Windows.Forms.Label();
             this.timerTime = new System.Windows.Forms.Timer(this.components);
-            this.panelButtons = new System.Windows.Forms.Panel();
             this.panelUserInfo.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.SuspendLayout();
@@ -52,6 +53,8 @@
             // panelUserInfo
             // 
             this.panelUserInfo.BackColor = System.Drawing.Color.Silver;
+            this.panelUserInfo.Controls.Add(this.labelSelectedCage);
+            this.panelUserInfo.Controls.Add(this.labelSelectedCageText);
             this.panelUserInfo.Controls.Add(this.panelButtons);
             this.panelUserInfo.Controls.Add(this.labelError);
             this.panelUserInfo.Controls.Add(this.labelTasksDone);
@@ -69,47 +72,36 @@
             this.panelUserInfo.Size = new System.Drawing.Size(1264, 100);
             this.panelUserInfo.TabIndex = 0;
             // 
-            // buttonSaveGame
+            // labelSelectedCage
             // 
-            this.buttonSaveGame.Location = new System.Drawing.Point(3, 65);
-            this.buttonSaveGame.Name = "buttonSaveGame";
-            this.buttonSaveGame.Size = new System.Drawing.Size(115, 23);
-            this.buttonSaveGame.TabIndex = 9;
-            this.buttonSaveGame.Text = "Save Game";
-            this.buttonSaveGame.UseVisualStyleBackColor = true;
+            this.labelSelectedCage.AutoSize = true;
+            this.labelSelectedCage.Location = new System.Drawing.Point(91, 70);
+            this.labelSelectedCage.Name = "labelSelectedCage";
+            this.labelSelectedCage.Size = new System.Drawing.Size(0, 13);
+            this.labelSelectedCage.TabIndex = 10;
             // 
-            // labelError
+            // labelSelectedCageText
             // 
-            this.labelError.AutoSize = true;
-            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelError.ForeColor = System.Drawing.Color.Red;
-            this.labelError.Location = new System.Drawing.Point(490, 63);
-            this.labelError.Name = "labelError";
-            this.labelError.Size = new System.Drawing.Size(0, 37);
-            this.labelError.TabIndex = 1;
-            this.labelError.Visible = false;
+            this.labelSelectedCageText.AutoSize = true;
+            this.labelSelectedCageText.Location = new System.Drawing.Point(12, 70);
+            this.labelSelectedCageText.Name = "labelSelectedCageText";
+            this.labelSelectedCageText.Size = new System.Drawing.Size(82, 13);
+            this.labelSelectedCageText.TabIndex = 9;
+            this.labelSelectedCageText.Text = "Selected cage :";
             // 
-            // labelTasksDone
+            // panelButtons
             // 
-            this.labelTasksDone.AutoSize = true;
-            this.labelTasksDone.Location = new System.Drawing.Point(191, 39);
-            this.labelTasksDone.Name = "labelTasksDone";
-            this.labelTasksDone.Size = new System.Drawing.Size(99, 13);
-            this.labelTasksDone.TabIndex = 8;
-            this.labelTasksDone.Text = "label for tasks done";
-            // 
-            // labelTasksDoneText
-            // 
-            this.labelTasksDoneText.AutoSize = true;
-            this.labelTasksDoneText.Location = new System.Drawing.Point(116, 39);
-            this.labelTasksDoneText.Name = "labelTasksDoneText";
-            this.labelTasksDoneText.Size = new System.Drawing.Size(59, 13);
-            this.labelTasksDoneText.TabIndex = 1;
-            this.labelTasksDoneText.Text = "Tasks left :";
+            this.panelButtons.Controls.Add(this.buttonSellCage);
+            this.panelButtons.Controls.Add(this.buttonBuyCage);
+            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panelButtons.Location = new System.Drawing.Point(1138, 0);
+            this.panelButtons.Name = "panelButtons";
+            this.panelButtons.Size = new System.Drawing.Size(126, 100);
+            this.panelButtons.TabIndex = 1;
             // 
             // buttonSellCage
             // 
-            this.buttonSellCage.Location = new System.Drawing.Point(3, 36);
+            this.buttonSellCage.Location = new System.Drawing.Point(3, 60);
             this.buttonSellCage.Name = "buttonSellCage";
             this.buttonSellCage.Size = new System.Drawing.Size(115, 23);
             this.buttonSellCage.TabIndex = 7;
@@ -126,6 +118,35 @@
             this.buttonBuyCage.Text = "Buy Cage -400";
             this.buttonBuyCage.UseVisualStyleBackColor = true;
             this.buttonBuyCage.Click += new System.EventHandler(this.buttonBuyCage_Click);
+            // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelError.ForeColor = System.Drawing.Color.Red;
+            this.labelError.Location = new System.Drawing.Point(490, 63);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 37);
+            this.labelError.TabIndex = 1;
+            this.labelError.Visible = false;
+            // 
+            // labelTasksDone
+            // 
+            this.labelTasksDone.AutoSize = true;
+            this.labelTasksDone.Location = new System.Drawing.Point(181, 39);
+            this.labelTasksDone.Name = "labelTasksDone";
+            this.labelTasksDone.Size = new System.Drawing.Size(99, 13);
+            this.labelTasksDone.TabIndex = 8;
+            this.labelTasksDone.Text = "label for tasks done";
+            // 
+            // labelTasksDoneText
+            // 
+            this.labelTasksDoneText.AutoSize = true;
+            this.labelTasksDoneText.Location = new System.Drawing.Point(116, 39);
+            this.labelTasksDoneText.Name = "labelTasksDoneText";
+            this.labelTasksDoneText.Size = new System.Drawing.Size(59, 13);
+            this.labelTasksDoneText.TabIndex = 1;
+            this.labelTasksDoneText.Text = "Tasks left :";
             // 
             // labelMinutes
             // 
@@ -157,7 +178,7 @@
             // labelDay
             // 
             this.labelDay.AutoSize = true;
-            this.labelDay.Location = new System.Drawing.Point(44, 52);
+            this.labelDay.Location = new System.Drawing.Point(44, 41);
             this.labelDay.Name = "labelDay";
             this.labelDay.Size = new System.Drawing.Size(13, 13);
             this.labelDay.TabIndex = 3;
@@ -166,7 +187,7 @@
             // labelDayText
             // 
             this.labelDayText.AutoSize = true;
-            this.labelDayText.Location = new System.Drawing.Point(12, 52);
+            this.labelDayText.Location = new System.Drawing.Point(12, 41);
             this.labelDayText.Name = "labelDayText";
             this.labelDayText.Size = new System.Drawing.Size(32, 13);
             this.labelDayText.TabIndex = 2;
@@ -195,17 +216,6 @@
             this.timerTime.Enabled = true;
             this.timerTime.Interval = 200;
             this.timerTime.Tick += new System.EventHandler(this.timerTime_Tick);
-            // 
-            // panelButtons
-            // 
-            this.panelButtons.Controls.Add(this.buttonSellCage);
-            this.panelButtons.Controls.Add(this.buttonSaveGame);
-            this.panelButtons.Controls.Add(this.buttonBuyCage);
-            this.panelButtons.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelButtons.Location = new System.Drawing.Point(1138, 0);
-            this.panelButtons.Name = "panelButtons";
-            this.panelButtons.Size = new System.Drawing.Size(126, 100);
-            this.panelButtons.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -243,7 +253,8 @@
         private System.Windows.Forms.Label labelTasksDone;
         private System.Windows.Forms.Label labelTasksDoneText;
         private System.Windows.Forms.Label labelError;
-        private System.Windows.Forms.Button buttonSaveGame;
         private System.Windows.Forms.Panel panelButtons;
+        private System.Windows.Forms.Label labelSelectedCage;
+        private System.Windows.Forms.Label labelSelectedCageText;
     }
 }

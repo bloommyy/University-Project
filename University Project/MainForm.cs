@@ -198,7 +198,13 @@ namespace University_Project
                 .SingleOrDefault();
 
             if (selectedCage != default)
+            {
                 selectedCage.cageImage.fenceColor = Color.Black;
+                labelSelectedCage.Text = selectedCage.cageType.ToString();
+            }
+            else
+                labelSelectedCage.Text = "";
+                
         }
 
         /// <summary>
@@ -220,6 +226,9 @@ namespace University_Project
                     animalCage = selectedCage,
                     zoo = zoo
                 };
+                cf.Size = this.Size;
+                cf.Location = this.Location;
+                cf.StartPosition = FormStartPosition.Manual;
                 cf.Show();
                 this.Hide();
                 cf.FormClosed += (s, args) => { this.Show(); timerTime.Enabled = true; };

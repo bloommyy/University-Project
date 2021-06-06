@@ -73,8 +73,8 @@ namespace University_Project
             DrawCage(e.Graphics);
             foreach(var animal in animalCage.GetAnimals())
             {
+                animal.animalImage.ScaleAnimalSize(this.Bounds);
                 animal.animalImage.DrawAnimal(e.Graphics);
-                //animal.animalImage.ScaleAnimalSize(this.Bounds);
             }
         }
 
